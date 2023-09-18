@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Notepad</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <section>
+      <!---->
+      <div style="display: none;">
+        <label for="title">
+          <b>Title: </b>
+        </label>
+      </div>
+      <!---->
+      <div>
+        <input id="title" name="title" placeholder="Title" onkeyup="setTitle()">
+      </div>
+      <div>
+        <button style="margin: 0;" onclick="document.querySelector(`input[type='file']#readfile`).click()">Read File</button>
+      </div>
+      <div>
+        <button onclick="go()">Download</button>
+      </div>
+      <div>
+        <button onclick="reset()">Reset</button>
+      </div>
+<!--      <div>
+        <button onclick="checkHTML()">Enable HTML Preview</button>
+      </div>      -->
+<!--            <div>
+        <button onclick="undo()">Undo</button>
+      </div>            -->
+<!--            <div>
+        <button onclick="redo()">Redo</button>
+      </div>            -->
+      <div>
+        <input id="replacethis" placeholder="Replace This"/>
+      </div>
+      <div>
+        <input id="withthis" placeholder="With This" />
+      </div>
+      <div>
+        <button onclick="replace('single')">Single Occurrence</button>
+      </div>
+      <div>
+        <button onclick="replace('all')">All Occurrences</button>
+      </div>
+      <div>
+        <input id="readfile" type="file" style="opacity: 0; width: 85px;" name="readfile" accept="text/*,html/*,.mht,js/*,css/*,.scss,.sass,json/*,.md,.bat,.cmd,.🗿">
+      </div>
+    </section>
+    <main>
+      <textarea></textarea>
+      <span style="display: none;"></span>
+      <iframe id="preview" src="  " style="display: none;"></iframe>
+    </main>
+    <a id="downloader"></a>
+    <script src="script.js"></script>
+    <script src="sectionWidth.js"></script>
+  
+    <!--
+      This script places a badge on your repl's full-browser view back to your repl's cover page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green, teal, blue, blurple, magenta, pink!
+    -->
+    <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script>
+    <script>
+      //javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+    </script>
+  </body>
+</html>
