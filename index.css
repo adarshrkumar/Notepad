@@ -1,4 +1,4 @@
 .grid-row {
     display: grid;
-    grid-auto-flow: row;
+    grid-auto-flow: column;
 }
