@@ -3,6 +3,10 @@
     grid-auto-flow: column;
 }
 
+.grid-row img {
+    aspect-ratio: 1;
+}
+
 .grid-row h2 {
     text-align: center;
 }
