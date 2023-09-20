@@ -4,7 +4,7 @@
 }
 
 .grid-row img {
-    width: 100%;
+    min-width: 64px;
     aspect-ratio: 1;
 }
 
