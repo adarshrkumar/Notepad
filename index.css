@@ -3,12 +3,17 @@
     grid-auto-flow: column;
 }
 
-.grid-row img {
-    margin-inline: auto;
+.grid.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid-item img {
     width: 64px;
     aspect-ratio: 1;
 }
 
-.grid-row h2 {
-    text-align: center;
+.grid-item h2 {
+    width: fit-content;
 }
