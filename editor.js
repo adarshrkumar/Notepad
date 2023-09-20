@@ -1,5 +1,4 @@
 localStorage.removeItem('code')
-var badge = document.querySelector('a#replit-badge')
 var history = ['']
 var histI = 0
 var histIsM = true
@@ -123,7 +122,6 @@ function checkHTML() {
         value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
         value = value.split('</html>')[0]
       }
-      moveReplitBadge('left')
       isPreview = true
       if (!!theAlert === false) {
         theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
@@ -144,7 +142,6 @@ function checkHTML() {
     span.style.display = 'none'
     preview.src = `/preview.html`
     textarea.style = ''
-    moveReplitBadge('reset')
     hasShown = false
     document.getElementsByTagName('textarea')[0].removeAttribute('id')
   }
@@ -173,20 +170,6 @@ function replace(cmd) {
   checkHTML()
 }
 
-function moveReplitBadge(dir) {
-  let badge = document.querySelector('a#replit-badge')
-  if (dir === 'reset') {
-    badge.removeAttribute('style')
-  }
-  else if (dir === 'top') {
-    badge.style = 'bottom: 0; top: 16px;'
-  }
-  else if (dir === 'left') {
-    badge.style = 'right: 0; left: 16px;'
-  }
-  badge.style.width = '158px'
-}
-
 function undo() {
   if (histI > 0) {
     histI--
@@ -210,3 +193,22 @@ function redo() {
 }
 
 checkHTML()
+
+
+
+if (!!go) go.addEventListener('click', go)
+if (!!reset) reset.addEventListener('click', reset)
+
+if (!!undo) undo.addEventListener('click', undo)
+if (!!redo) redo.addEventListener('click', redo)
+
+if (!!replaceThis) replaceThis.addEventListener('click', function(e) { replace('single', e) })
+if (!!replaceAll) replaceAll.addEventListener('click', function(e) { replace('all', e) })
+
+if (!!takeFile) {
+  takeFile.addEventListener('click', function(e) {
+    document.querySelector(`input[type='file']#readfile`).click()
+  })
+}
+
+if (!!enableHTML) enableHTML.addEventListener('click', checkHTML)
