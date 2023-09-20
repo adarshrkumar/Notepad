@@ -4,11 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Notepad</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <header></header>
     <main>
-      <a href="editor">Go to Editor</a>
+      <section id="actions" class="grid-row">
+        <a class="grid-item" href="editor?action=new">
+          <img src="" alt="" />
+          <h2>New File</h2>
+        </a>
+        <a class="grid-item" href="editor?action=existing">
+          <img src="" alt="" />
+          <h2>Open Existing File</h2>
+        </a>
+        <a class="grid-item" href="editor?action=upload">
+          <img src="" alt="" />
+          <h2>Upload From Computer</h2>
+        </a>
+      </section>
     </main>
+    <footer></footer>
+    <script>
+      javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+    </script>
   </body>
 </html>
