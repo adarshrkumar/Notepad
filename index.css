@@ -4,6 +4,7 @@
 }
 
 .grid-row img {
+    margin-inline: auto;
     width: 64px;
     aspect-ratio: 1;
 }
