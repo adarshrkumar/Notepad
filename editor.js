@@ -222,7 +222,7 @@ function saveToLocalStorage(e) {
   localStorage.setItem('files', JSON.stringify(filesObj))
 }
 
-document.getElementsByTagName('textarea').addEventListener(saveToLocalStorage)
+document.getElementsByTagName('textarea').addEventListener('keypress', saveToLocalStorage)
 
 
 
