@@ -24,5 +24,7 @@
 }
 
 .grid-item h2 {
+    word-wrap: break-word;
+    text-wrap: balance;
     width: fit-content;
 }
