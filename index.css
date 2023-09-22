@@ -19,7 +19,7 @@
     gap: var(--grid-gap);
 
     &:hover, &:is(:focus-within, :has(:focus-visible)) {
-        border-radius: calc(var(--grid-gap)/5);
+        border-radius: calc(var(--grid-gap)/2.5);
     }
 }
 
