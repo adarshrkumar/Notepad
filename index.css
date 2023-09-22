@@ -18,6 +18,8 @@
     padding: var(--grid-gap);
     gap: var(--grid-gap);
 
+    transition: border-radius 0.5s ease;
+
     &:hover, &:is(:focus-within, :has(:focus-visible)) {
         border-radius: calc(var(--grid-gap)/2.5);
     }
