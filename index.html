@@ -9,27 +9,29 @@
   <body>
     <header></header>
     <main>
-      <section id="actions" class="grid-row">
-        <a class="grid-item" href=""></a>
-        <a class="grid-item" href="editor?action=new">
-          <img src="icons/plus.svg" alt="" />
-          <div class="title-parent">
-            <h2 class="title">New File</h2>
-          </div>
-        </a>
-        <a class="grid-item" href="editor?action=existing">
-          <img src="" alt="" />
-          <div class="title-parent">
-            <h2 class="title">Open Existing File</h2>
-          </div>
-        </a>
-        <a class="grid-item" href="editor?action=upload">
-          <img src="" alt="" />
-          <div class="title-parent">
-            <h2 class="title">Upload From Computer</h2>
-          </div>
-        </a>
-        <a class="grid-item" href=""></a>
+      <section id="actions">
+        <sidebar></sidebar>
+        <content class="grid-row">
+          <a class="grid-item" href="editor?action=new">
+            <img src="icons/plus.svg" alt="" />
+            <div class="title-parent">
+              <h2 class="title">New File</h2>
+            </div>
+          </a>
+          <a class="grid-item" href="editor?action=existing">
+            <img src="" alt="" />
+            <div class="title-parent">
+              <h2 class="title">Open Existing File</h2>
+            </div>
+          </a>
+          <a class="grid-item" href="editor?action=upload">
+            <img src="" alt="" />
+            <div class="title-parent">
+              <h2 class="title">Upload From Computer</h2>
+            </div>
+          </a>
+          <a class="grid-item" href=""></a>
+        </content>
       </section>
     </main>
     <footer></footer>
