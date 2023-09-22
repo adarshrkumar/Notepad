@@ -1,4 +1,3 @@
-localStorage.removeItem('code')
 var history = ['']
 var histI = 0
 var histIsM = true
@@ -114,7 +113,6 @@ function checkHTML() {
     setTimeout(function() {
 //      alert(true)
       let value = document.querySelector('textarea').value
-      localStorage.setItem('code', value)
       preview.style.display = ''
       span.style.display = ''
       textarea.style = 'border-right: none;'
@@ -193,6 +191,38 @@ function redo() {
 }
 
 checkHTML()
+
+function saveToLocalStorage(e) {
+  let value = e.target.value
+  let dTitle = title.value
+  let d = new Date()
+  let json = {
+    title: title, 
+    content: value, 
+    author: '', 
+    dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
+  }
+  localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
+  let filesObj = localStorage.getItem('files')
+  if (!!filesObj) {
+    filesObj = JSON.parse(filesObj)
+  }
+  else {
+    filesObj = []
+  }
+  let hasFile = false
+  filesObj.forEach(function(f, i) {
+    if (f === dTitle) {
+      hasFile = true
+    }
+  })
+  if (hasFile === false) {
+    filesObj.push(dTitle)
+  }
+  localStorage.setItem('files', JSON.stringify(filesObj))
+}
+
+document.getElementsByTagName('textarea').addEventListener(saveToLocalStorage)
 
 
 

@@ -2,7 +2,7 @@
     --grid-gap: 25px;
 }
 
-#actions {
+.sidebar-content {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
 }

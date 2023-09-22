@@ -11,12 +11,14 @@
 <script>
   var bodyHTML = document.body.innerHTML
   
-  var code = String(!!localStorage.getItem('code')).replace('false', '').replace('true', localStorage.getItem('code'))
+  var code = String(!!parent.document.getElementsByTagName('textarea').value)
+  code.replace('false', '').replace('true', code)
   var lastCode = ''
   addCode()
   setInterval(addCode, 1)
   function addCode() {
-    var code = String(!!localStorage.getItem('code')).replace('false', '').replace('true', localStorage.getItem('code'))
+    var code = String(!!parent.document.getElementsByTagName('textarea').value)
+    code.replace('false', '').replace('true', code)
     if (!!code) {
       if (code !== lastCode) {
          if (code.endsWith('<')) {
