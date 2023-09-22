@@ -34,5 +34,6 @@
     margin-block: 0;
     word-wrap: break-word;
     text-wrap: balance;
+    text-align: center;
     width: fit-content;
 }
