@@ -16,6 +16,7 @@
     border: solid 1px black;
     border-radius: var(--grid-gap);
     padding: var(--grid-gap);
+    gap: var(--grid-gap);
 }
 
 .grid-item img {
@@ -24,6 +25,7 @@
 }
 
 .grid-item h2 {
+    margin-block: 0;
     word-wrap: break-word;
     text-wrap: balance;
     width: fit-content;
