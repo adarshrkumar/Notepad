@@ -1,5 +1,14 @@
 <html></html>
 <script>
+  console.log('To re-run the code just type "Run()" in the Eruda JavaScript console.')
+  function run() {
+    Run()
+  }
+  function Run() {
+    location.reload()
+  }
+</script>
+<script>
   var bodyHTML = document.body.innerHTML
   
   var code = String(!!localStorage.getItem('code')).replace('false', '').replace('true', localStorage.getItem('code'))
