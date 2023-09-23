@@ -202,10 +202,8 @@ function saveToLocalStorage(e) {
   }
   localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
   let filesObj = localStorage.getItem('files')
-  if (!!filesObj) {
-    filesObj = JSON.parse(filesObj)
-  }
-  else {
+  filesObj = JSON.parse(filesObj)
+  if (!!filesObj === false) {
     filesObj = []
   }
   let hasFile = false
