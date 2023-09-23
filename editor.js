@@ -227,10 +227,10 @@ document.getElementsByTagName('textarea')[0].addEventListener('keypress', saveTo
 
 
 if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)
-if (!!reset) reset.addEventListener('click', reset)
+if (!!document.getElementById('reset')) document.getElementById('reset').addEventListener('click', reset)
 
-if (!!undo) undo.addEventListener('click', undo)
-if (!!redo) redo.addEventListener('click', redo)
+if (!!document.getElementById('undo')) document.getElementById('undo').addEventListener('click', undo)
+if (!!document.getElementById('redo')) document.getElementById('redo').addEventListener('click', redo)
 
 if (!!replaceThis) replaceThis.addEventListener('click', function(e) { replace('single', e) })
 if (!!replaceAll) replaceAll.addEventListener('click', function(e) { replace('all', e) })
