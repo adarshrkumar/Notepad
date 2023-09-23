@@ -146,7 +146,6 @@ function checkHTML() {
   histI++
   history[histI + 1] = false
   history[histI] = document.getElementsByTagName('textarea')[0].value
-  console.log(history)
 }
 
 function replace(cmd) {
@@ -227,7 +226,7 @@ document.getElementsByTagName('textarea')[0].addEventListener('keypress', saveTo
 
 
 
-if (!!go) go.addEventListener('click', go)
+if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)
 if (!!reset) reset.addEventListener('click', reset)
 
 if (!!undo) undo.addEventListener('click', undo)
