@@ -193,7 +193,6 @@ checkHTML()
 
 function saveToLocalStorage(e) {
   let value = document.getElementsByTagName('textarea')[0]
-  let dTitle = title.value
   let d = new Date()
   let json = {
     title: title, 
@@ -211,12 +210,12 @@ function saveToLocalStorage(e) {
   }
   let hasFile = false
   filesObj.forEach(function(f, i) {
-    if (f === dTitle) {
+    if (f === title) {
       hasFile = true
     }
   })
   if (hasFile === false) {
-    filesObj.push(dTitle)
+    filesObj.push(title)
   }
   console.log(filesObj)
   localStorage.setItem('files', JSON.stringify(filesObj))
