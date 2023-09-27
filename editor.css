@@ -50,7 +50,7 @@ main {
 main > textarea {
   flex: 2;
   resize: horizontal;
-  height: 100%;
+  height: calc(100% - 32px);
 }
 
 main > textarea.code {
@@ -65,7 +65,7 @@ main > span {
 
 main > iframe {
   flex: 1;
-  height: 100%;
+  height: calc(100% - 32px);
   border: solid 0.5px gray;
   border-left: none;
 }
@@ -96,7 +96,7 @@ a#downloader {
   display: none;
 }
 
-input:not(input[type='file']), input[type='file']#readfile {
+input:not(input[type='file']) {
   max-width: 150px;
 }
 
@@ -108,12 +108,6 @@ input:not(input[type='file']), input[type='file']#readfile {
   display: normal;
 }
 
-a#replit-badge {
-  outline: none;
-}
-
-a#replit-badge:focus svg {
-  color: black;
-  outline: solid 2px black;
-  border-radius: 10px;
+#readfile {
+  z-index: -1;
 }
