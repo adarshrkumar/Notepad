@@ -41,7 +41,7 @@ body {
 }
 
 main {
-  height: calc(100% - 34px);
+  height: calc(100% - 16px);
   display: flex;
   flex-direction: row;
   overflow-y: hidden;
@@ -49,12 +49,15 @@ main {
 
 main > textarea {
   flex: 2;
-  resize: horizontal;
   height: calc(100% - 16px);
+  &:not(.code) {
+    resize: none;
+  }
 }
 
 main > textarea.code {
   outline: none;
+  resize: horizontal;
 }
 
 main > span {
