@@ -49,10 +49,11 @@ main {
 
 main > textarea {
   flex: 2;
+  resize: horizontal;
   height: 100%;
 }
 
-main > textarea#code {
+main > textarea.code {
   outline: none;
 }
 

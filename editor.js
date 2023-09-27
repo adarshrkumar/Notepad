@@ -132,7 +132,7 @@ function checkHTML() {
         preview.src = `/preview.html`
         hasUpdatedPreview = true
       }
-      document.getElementsByTagName('textarea')[0].id = 'code'
+      document.getElementsByTagName('textarea')[0].classList.add('code')
     }, 1)
   }
   else if (isPreview === true) {
