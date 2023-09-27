@@ -1,3 +1,5 @@
+alert(document.querySelector('section').clientHeight) 
+
 var history = ['']
 var histI = 0
 var histIsM = true
