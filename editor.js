@@ -117,6 +117,7 @@ function checkHTML() {
     setTimeout(function() {
 //      alert(true)
       let value = document.querySelector('textarea').value
+      textarea = document.querySelector('textarea')
       preview.style.display = ''
       preview.style.width = '75%'
       span.style.display = ''
