@@ -9,9 +9,10 @@ var hasUpdatedPreview = false
 var isPreview = false
 var alertShown = false
 var theAlert = false
+var textarea = main.querySelector('textarea')
 
 function go() {
-  let input = document.getElementsByTagName('textarea')[0].value;
+  let input = document.querySelector('textarea').value;
 
   // create a new Blob object with the content you want to assign
   let blob = new Blob([input], {type: "text/plain"});
@@ -43,7 +44,7 @@ function go() {
 }
 
 function reset() {
-  document.getElementsByTagName('textarea')[0].value = '';
+  document.querySelector('textarea').value = '';
   document.title = dtitle
   title = 'New Text File'
   document.querySelector('input#title').value = ''
@@ -80,7 +81,7 @@ readfile.onchange = object => {
 
    // here we tell the reader what to do when it's done reading...
    reader.onload = readerEvent => {
-      document.getElementsByTagName('textarea')[0].value = readerEvent.target.result; // this is the content!
+      document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
    }
   let fname = readfile.value.split('\\')[readfile.value.split('\\').length - 1]
   let ftitle = ''
@@ -102,13 +103,12 @@ readfile.onchange = object => {
   checkHTML()
 }
 
-document.getElementsByTagName('textarea')[0].addEventListener('keyup', checkHTML)
+textarea.addEventListener('keyup', checkHTML)
 
 function checkHTML() {
   var main = document.querySelector('main')
   var preview = main.querySelector('iframe#preview')
   var span = main.querySelector('span')
-  var textarea = main.querySelector('textarea')
   if (ext === 'html' || ext === 'htm' || ext === 'mht') {
     setTimeout(function() {
 //      alert(true)
@@ -133,7 +133,7 @@ function checkHTML() {
         preview.src = `/preview.html`
         hasUpdatedPreview = true
       }
-      document.getElementsByTagName('textarea')[0].classList.add('code')
+      document.querySelector('textarea').classList.add('code')
     }, 1)
   }
   else if (isPreview === true) {
@@ -142,17 +142,25 @@ function checkHTML() {
     preview.src = `/preview.html`
     textarea.style = ''
     hasShown = false
-    document.getElementsByTagName('textarea')[0].removeAttribute('id')
+    document.querySelector('textarea').removeAttribute('id')
   }
   histI++
   history[histI + 1] = false
-  history[histI] = document.getElementsByTagName('textarea')[0].value
+  history[histI] = document.querySelector('textarea').value
 }
+
+function outputsize() {
+  if (document.querySelector('textarea').clientWidth < 150) {
+    textarea.style.width = `${150}px`
+  }
+}
+outputsize()
+ 
+new ResizeObserver(outputsize).observe(textarea) 
 
 function replace(cmd) {
   let main = document.querySelector('main')
-  let textarea = main.querySelector('textarea')
-  let value = textarea.value
+  let value = document.querySelector('textarea').value
   let section = document.querySelector('section')
   let value1 = section.querySelector('input#replacethis').value
   let value2 = section.querySelector('input#withthis').value
@@ -174,7 +182,7 @@ function undo() {
     while (history[histI] === false) {
       histI--
     }
-    document.getElementsByTagName('textarea')[0].value = history[histI]
+    document.querySelector('textarea').value = history[histI]
   }
   checkHTML()
 }
@@ -185,7 +193,7 @@ function redo() {
     while (history[histI] === false) {
       histI++
     }
-    document.getElementsByTagName('textarea')[0].value = history[histI]
+    document.querySelector('textarea').value = history[histI]
   }
   checkHTML()
 }
@@ -193,7 +201,7 @@ function redo() {
 checkHTML()
 
 function saveToLocalStorage(e) {
-  let value = document.getElementsByTagName('textarea')[0]
+  let value = document.querySelector('textarea').value
   let d = new Date()
   let json = {
     title: title, 
@@ -220,7 +228,7 @@ function saveToLocalStorage(e) {
   localStorage.setItem('files', JSON.stringify(filesObj))
 }
 
-document.getElementsByTagName('textarea')[0].addEventListener('keypress', saveToLocalStorage)
+textarea.addEventListener('keypress', saveToLocalStorage)
 
 
 
