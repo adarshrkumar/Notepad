@@ -150,6 +150,7 @@ function checkHTML() {
 }
 
 function outputsize() {
+  alert(document.querySelector('textarea').clientWidth)
   if (document.querySelector('textarea').clientWidth < 150) {
     textarea.style.width = `${150}px`
   }
