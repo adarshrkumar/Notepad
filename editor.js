@@ -1,3 +1,7 @@
+javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.documentElement.appendChild(script); script.onload = function () { eruda.init() } })();
+
+
+
 var history = ['']
 var histI = 0
 var histIsM = true
