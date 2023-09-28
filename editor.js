@@ -114,6 +114,7 @@ function checkHTML() {
 //      alert(true)
       let value = document.querySelector('textarea').value
       preview.style.display = ''
+      preview.style.width = '75%'
       span.style.display = ''
       textarea.style = 'border-right: none;'
       if (value.includes('<html')) {

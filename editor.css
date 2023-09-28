@@ -50,9 +50,11 @@ main {
 }
 
 main > textarea {
-  flex: 2;
+  width: 100%;
   height: 100%;
+  box-sizing: border-box;
   &:not(.code) {
+    border-right: none;
     resize: none;
   }
 }
@@ -68,11 +70,12 @@ main > span {
   background-color: gray;
 }
 
-main > iframe {
+main > #preview {
   flex: 1;
   height: 100%;
   border: solid 0.5px gray;
   border-left: none;
+  box-sizing: border-box;
 }
 
 section {
