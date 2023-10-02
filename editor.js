@@ -240,6 +240,9 @@ function getShareLink() {
   prompt('This is the link to share!', fLink)
 }
 
+function editFile(fName) {
+  location.href = `${location.pathname}?action=open&file=${fName}`
+}
 
 if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)
 if (!!document.getElementById('reset')) document.getElementById('reset').addEventListener('click', reset)
