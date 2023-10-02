@@ -61,7 +61,7 @@ else if (action === 'filelink') {
     editBtn.style.fontWeight = 'bold'
 
     editEle.appendChild(editBtn)
-    titleEle.after(editEle)
+    titleEle.parentNode.after(editEle)
 
     editBtn.onclick = editFile
 }
