@@ -98,10 +98,6 @@ section > div {
   justify-content: center;
 }
 
-button {
-  /* font-weight: bold; */
-}
-
 a#downloader {
   display: none;
 }
