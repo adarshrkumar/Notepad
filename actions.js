@@ -54,8 +54,8 @@ else if (action = 'filelink') {
     disabledEles.forEach(function(ele, i) {
         ele.setAttribute('disabled', '')  
         ele.style.cursor = 'pointer'
-        ele.addEventListener('click', function(e) {
+        ele.onclick = function(e) {
             location.href = `${location.pathname}?action=open&file=${fName}`
-        }, {once: true})
+        }
     })
 }
