@@ -9,6 +9,7 @@ var hasUpdatedPreview = false
 var isPreview = false
 var alertShown = false
 var theAlert = false
+var main = document.querySelector('main')
 var textarea = main.querySelector('textarea')
 
 function go() {
@@ -106,7 +107,6 @@ readfile.onchange = object => {
 textarea.addEventListener('keyup', checkHTML)
 
 function checkHTML() {
-  var main = document.querySelector('main')
   var preview = main.querySelector('iframe#preview')
   var span = main.querySelector('span')
   if (ext === 'html' || ext === 'htm' || ext === 'mht') {
@@ -161,8 +161,7 @@ outputsize()
 new ResizeObserver(outputsize).observe(textarea) 
 
 function replace(cmd) {
-  let main = document.querySelector('main')
-  let value = document.querySelector('textarea').value
+  let value = main.querySelector('textarea').value
   let section = document.querySelector('section')
   let value1 = section.querySelector('input#replacethis').value
   let value2 = section.querySelector('input#withthis').value
