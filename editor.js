@@ -231,6 +231,15 @@ function saveToLocalStorage(e) {
 textarea.addEventListener('keypress', saveToLocalStorage)
 
 
+function getShareLink() {
+  let fName = document.getElementById('title').value
+  let fContent = document.querySelector('main textarea').value
+  fContent = btoa(fContent)
+  let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
+  let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fName}&content=${fContent}`
+  prompt('This is the link to share!', fLink)
+}
+
 
 if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)
 if (!!document.getElementById('reset')) document.getElementById('reset').addEventListener('click', reset)
@@ -240,6 +249,8 @@ if (!!document.getElementById('redo')) document.getElementById('redo').addEventL
 
 if (!!replaceThis) replaceThis.addEventListener('click', function(e) { replace('single', e) })
 if (!!replaceAll) replaceAll.addEventListener('click', function(e) { replace('all', e) })
+
+if (!!shareLink) shareLink.addEventListener('click', getShareLink)
 
 if (!!takeFile) {
   takeFile.addEventListener('click', function(e) {

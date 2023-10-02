@@ -5,7 +5,7 @@ var action = urlParams.get('action')
 if (action === 'upload') {
     document.getElementById('takeFile').click()
 }
-else if (action === 'open') {
+else if (action === 'openfile') {
     var fName = urlParams.get('file')
     var file = localStorage.getItem(`FILEDATA://${fName}`)
     alert(file)
@@ -35,4 +35,7 @@ else if (action === 'open') {
 
     document.getElementById('title').value = fName
     textarea.value = file.content
+}
+else if (action = 'filelink') {
+    
 }

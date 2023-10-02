@@ -17,7 +17,7 @@ filesObj.forEach(function(fileName, i) {
     let dateModofied = file.dateModofied
 
     let fileElement = document.createElement('a')
-    fileElement.href =  `editor?action=open&file=${title}`
+    fileElement.href =  `editor?action=openfile&file=${title}`
 
     let titleElement = document.createElement('h2')
     titleElement.textContent = title
