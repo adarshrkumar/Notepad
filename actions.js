@@ -19,13 +19,18 @@ else if (action === 'open') {
     //     dateModofied: file.dateModofied, 
     // }
 
-    fName = file.title
+    var fName = file.title
     if (fName.includes('.')) {
         nFName = fName.split('.')
         nFName = nFName[nFName.length-1]
         if (fName === 'txt') {
             fName = fName.substring(fName.split('').length-4)
         }
+    }
+
+    var fContent = file.content
+    if (!!fContent === false) {
+        fContent = 'File Content Not Found or Corrupted'
     }
 
     document.getElementById('title').value = fName
