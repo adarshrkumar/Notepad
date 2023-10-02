@@ -8,7 +8,6 @@ if (action === 'upload') {
 else if (action === 'openfile') {
     var fName = urlParams.get('file')
     var file = localStorage.getItem(`FILEDATA://${fName}`)
-    alert(file)
     file = JSON.parse(file)
 
     let textarea = document.querySelector('main textarea')
