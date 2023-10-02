@@ -49,7 +49,12 @@ main {
   overflow-y: hidden;
 }
 
-main > textarea {
+main > div#textarea {
+  width: fit-content;
+  height: 100%;
+}
+
+main textarea {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -59,7 +64,7 @@ main > textarea {
   }
 }
 
-main > textarea.code {
+main textarea.code {
   outline: none;
   resize: horizontal;
 }
@@ -70,7 +75,7 @@ main > span {
   background-color: gray;
 }
 
-main > #preview {
+main #preview {
   flex: 1;
   height: 100%;
   border: solid 0.5px gray;
@@ -93,11 +98,8 @@ section > div {
   justify-content: center;
 }
 
-button, input[type='file'] {
+button {
   font-weight: bold;
-}
-button:not(section > div > button), input[type='file']:not(section > div > input[type='file']) {
-  margin: 8px;
 }
 
 a#downloader {
@@ -112,7 +114,7 @@ input:not(input[type='file']) {
   cursor: pointer;
 }
 
-*[style='display: none;']:focus {
+[style='display: none;']:focus {
   display: normal;
 }
 
