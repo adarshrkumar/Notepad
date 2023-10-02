@@ -55,6 +55,12 @@ else if (action === 'filelink') {
         ele.style.cursor = 'pointer'
     })
 
+    let i = 5
+    while(i < 10) {
+        document.querySelector(`section > div:nth-child(${i})`).remove()
+        i++
+    }
+
     let editEle = document.createElement('div')
     let editBtn = document.createElement('button')
     editBtn.textContent = 'Edit File'
@@ -64,4 +70,5 @@ else if (action === 'filelink') {
     titleEle.parentNode.after(editEle)
 
     editBtn.onclick = editFile
+
 }
