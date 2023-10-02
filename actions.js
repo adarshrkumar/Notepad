@@ -60,8 +60,9 @@ else if (action === 'filelink') {
 
         newParent.appendChild(newEle)
         newEle.style.display = ''
+        ele.removeAttribute('disabled')  
         ele.after(newParent)
 
-        newParent.onclick = function(e) { editFile(fName) }
+        newEle.onkeyup = function(e) { editFile(fName) }
     })
 }
