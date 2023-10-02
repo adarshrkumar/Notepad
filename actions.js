@@ -61,6 +61,14 @@ else if (action === 'filelink') {
         i++
     }
 
+    document.getElementById('takeFile').onclick = function(e) {
+        location.href = `${location.pathname}?action=upload`
+    }
+
+    document.getElementById('reset').onclick = function(e) {
+        location.href = `${location.pathname}?action=new`
+    }
+
     let editEle = document.createElement('div')
     let editBtn = document.createElement('button')
     editBtn.textContent = 'Edit File'

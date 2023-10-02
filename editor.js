@@ -247,20 +247,20 @@ function editFile(fName) {
 }
 
 if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)
-if (!!document.getElementById('reset')) document.getElementById('reset').addEventListener('click', reset)
+if (!!document.getElementById('reset')) document.getElementById('reset').onclick = reset
 
 if (!!document.getElementById('undo')) document.getElementById('undo').addEventListener('click', undo)
 if (!!document.getElementById('redo')) document.getElementById('redo').addEventListener('click', redo)
 
-if (!!replaceThis) replaceThis.addEventListener('click', function(e) { replace('single', e) })
-if (!!replaceAll) replaceAll.addEventListener('click', function(e) { replace('all', e) })
+if (!!document.getElementById('replaceThis')) document.getElementById('replaceThis').addEventListener('click', function(e) { replace('single', e) })
+if (!!document.getElementById('replaceAll')) document.getElementById('replaceAll').addEventListener('click', function(e) { replace('all', e) })
 
-if (!!shareLink) shareLink.addEventListener('click', getShareLink)
+if (!!document.getElementById('shareLink')) document.getElementById('shareLink').addEventListener('click', getShareLink)
 
-if (!!takeFile) {
-  takeFile.addEventListener('click', function(e) {
+if (!!document.getElementById('takeFile')) {
+  document.getElementById('takeFile').onclick = function(e) {
     document.querySelector(`input[type='file']#readfile`).click()
-  })
+  }
 }
 
-if (!!enableHTML) enableHTML.addEventListener('click', checkHTML)
+if (!!document.getElementById('enableHTML')) document.getElementById('enableHTML').addEventListener('click', checkHTML)
