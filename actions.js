@@ -41,6 +41,21 @@ else if (action = 'filelink') {
     let fContent = urlParams.get('content')
     fContent = atob(fContent)
 
-    document.getElementById('title').value = fName
-    document.querySelector('main textarea').value = fContent
+    let disabledEles = []
+
+    let titleEle = document.getElementById('title')
+    titleEle.value = fName
+    disabledEles.push(titleEle)  
+
+    let textAreaEle = document.querySelector('main textarea')
+    textAreaEle.value = fContent
+    disabledEles.push(textAreaEle)
+
+    disabledEles.forEach(function(ele, i) {
+        ele.setAttribute('disabled', '')  
+        ele.style.cursor = 'pointer'
+        ele.addEventListener('click', function(e) {
+            location.href = `${location.pathname}?action=open&file=${fName}`
+        }, {once: true})
+    })
 }
