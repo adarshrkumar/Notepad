@@ -53,16 +53,16 @@ else if (action === 'filelink') {
     disabledEles.forEach(function(ele, i) {
         ele.setAttribute('disabled', '')  
         ele.style.cursor = 'pointer'
-        ele.style.display = 'none'
 
-        let newParent = document.createElement('div')   
-        let newEle = ele.cloneNode()
 
-        newParent.appendChild(newEle)
-        newEle.style.display = ''
-        ele.removeAttribute('disabled')  
-        ele.after(newParent)
+        let editEle = document.createElement('div')
+        let editBtn = document.createElement('button')
+        editBtn.textContent = 'Edit File'
+        editBtn.style.fontWeight = 'bold'
 
-        newEle.onkeyup = function(e) { editFile(fName) }
+        editEle.appendChild(editBtn)
+        titleEle.after(editEle)
+
+        editBtn.onclick = editFile
     })
 }

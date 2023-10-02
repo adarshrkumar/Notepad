@@ -241,7 +241,7 @@ function getShareLink() {
 }
 
 function editFile(fName) {
-  location.href = `${location.pathname}?action=open&file=${fName}`
+  location.href = `${location.pathname}?action=open&file=${urlParams.get('file')}`
 }
 
 if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)

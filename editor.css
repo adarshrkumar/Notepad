@@ -99,7 +99,7 @@ section > div {
 }
 
 button {
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 a#downloader {
