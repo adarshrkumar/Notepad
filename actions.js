@@ -35,7 +35,7 @@ else if (action === 'openfile') {
     document.getElementById('title').value = fName
     textarea.value = file.content
 }
-else if (action = 'filelink') {
+else if (action === 'filelink') {
     let fName = urlParams.get('file')
     let fContent = urlParams.get('content')
     fContent = atob(fContent)
