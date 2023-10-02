@@ -13,7 +13,7 @@ else if (action === 'open') {
     let textarea = document.querySelector('main textarea')
     // json = {
     //     title: file.title, 
-    //     content: file.value, 
+    //     content: file.content, 
     //     author: file.author, 
     //     dateModofied: file.dateModofied, 
     // }
@@ -28,5 +28,5 @@ else if (action === 'open') {
     }
 
     document.getElementById('title').value = fName
-    textarea.value = file.value
+    textarea.value = file.content
 }
