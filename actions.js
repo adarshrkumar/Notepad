@@ -3,7 +3,7 @@ var urlParams = new URLSearchParams(queryString);
 var action = urlParams.get('action')
 
 if (action === 'upload') {
-    document.querySelector(`input[type='file']#readfile`).click()
+    document.getElementById('takeFile').click()
 }
 else if (action === 'open') {
     var fName = urlParams.get('file')
