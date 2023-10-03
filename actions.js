@@ -72,7 +72,7 @@ else if (action === 'filelink') {
         }
         if (!!element) {
             element.tabIndex = '-1'
-            element.parentNode.setAttribute('hidden')
+            element.parentNode.setAttribute('hidden', '')
         }
     })
 
