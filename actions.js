@@ -63,14 +63,16 @@ else if (action === 'filelink') {
         i++
     }
 
-    document.getElementById('takeFile').onclick = function(e) {
-        location.href = `${location.pathname}?action=upload`
-    }
+    document.getElementById('takeFile').onclick = function(e) {}
+    document.getElementById('takeFile').parentNode.id = 'fileParent'
+    replaceTag('#fileParent', a)
+    document.getElementById('fileParent').href = `${location.pathname}?action=upload`
 
-    document.getElementById('reset').onclick = function(e) {
-        location.href = `${location.pathname}?action=new`
-    }
-
+    document.getElementById('reset').onclick = function() {}
+    document.getElementById('reset').parentNode.id = 'resetParent'
+    replaceTag('#resetParent', a)
+    document.getElementById('fileParent').href = `${location.pathname}?action=new`
+    
     let editEle = document.createElement('div')
     let editBtn = document.createElement('button')
     editBtn.textContent = 'Edit File'
@@ -81,4 +83,15 @@ else if (action === 'filelink') {
 
     editBtn.onclick = editFile
 
+}
+
+function replaceTag(selector, tag) {
+    var orig = document.querySelector(selector);
+
+    var newe = document.createElement(tag);
+    newe.outerHTML = orig.outerHTML
+    newe.setAttribute('id', orig.getAttribute('id'));
+    
+    orig.after(newe);
+    orig.remove()
 }
