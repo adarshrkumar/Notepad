@@ -70,8 +70,10 @@ else if (action === 'filelink') {
         if (!!element === false) {
             element = document.getElementById(e)
         }
-        element.tabIndex = '-1'
-        element.parentNode.setAttribute('hidden')
+        if (!!element) {
+            element.tabIndex = '-1'
+            element.parentNode.setAttribute('hidden')
+        }
     })
 
     document.getElementById('takeFile').onclick = function(e) {}
