@@ -59,10 +59,10 @@ else if (action === 'filelink') {
         'enableHTML', 
         'undo', 
         'redo', 
-        'input#replacethis', 
-        'input#withthis', 
-        'button#replaceThis', 
-        'button#replaceAll', 
+        'replacethis', 
+        'withthis', 
+        'replaceThis', 
+        'replaceAll', 
     ]
 
     removeEles.forEach(function(e, i) {
