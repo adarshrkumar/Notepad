@@ -56,8 +56,10 @@ else if (action === 'filelink') {
     })
 
     let i = 5
-    while(i < 10) {
-        document.querySelector(`section > div:nth-child(${i})`).remove()
+    while (i < 10) {
+        if (!!document.querySelector(`section > div:nth-child(${i})`)) {
+            document.querySelector(`section > div:nth-child(${i})`).remove()
+        }
         i++
     }
 
