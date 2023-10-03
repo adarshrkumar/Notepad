@@ -94,6 +94,7 @@ section {
 }
 
 section > :is(div, a) {
+  text-decoration: none;
   display: flex;
   justify-content: center;
 }
