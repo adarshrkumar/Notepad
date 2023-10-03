@@ -55,34 +55,24 @@ else if (action === 'filelink') {
         ele.style.cursor = 'pointer'
     })
 
-    let i = 5
-    while (i < 10) {
-        if (!!document.querySelector(`section > div:nth-child(${i})`)) {
-            document.querySelector(`section > div:nth-child(${i})`).remove()
+    let i = 6
+    let max = 11
+    while (i < max) {
+        if (!!document.querySelector(`section > :nth-child(${i})`)) {
+            document.querySelector(`section > :nth-child(${i})`).remove()
         }
         i++
     }
 
     document.getElementById('takeFile').onclick = function(e) {}
-    document.getElementById('takeFile').parentNode.id = 'fileParent'
-    replaceTag('#fileParent', 'a')
-    document.getElementById('fileParent').href = `${location.pathname}?action=upload`
+    document.getElementById('takeFile').parentNode.href = `${location.pathname}?action=upload`
 
     document.getElementById('reset').onclick = function() {}
-    document.getElementById('reset').parentNode.id = 'resetParent'
-    replaceTag('#resetParent', 'a')
-    document.getElementById('fileParent').href = `${location.pathname}?action=new`
+    document.getElementById('reset').parentNode.href = `${location.pathname}?action=new`
 
-    let editEle = document.createElement('div')
-    let editBtn = document.createElement('button')
-    editBtn.textContent = 'Edit File'
-    editBtn.style.fontWeight = 'bold'
-
-    editEle.appendChild(editBtn)
-    titleEle.parentNode.after(editEle)
-
-    editBtn.onclick = editFile
-
+    let editBtn = document.getElementById('editFile')
+    editBtn.tabIndex = 1
+    editBtn.parentElement.removeAttribute('hidden')
 }
 
 function replaceTag(selector, tag) {

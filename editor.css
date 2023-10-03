@@ -93,7 +93,7 @@ section {
   gap: 8px;
 }
 
-section > div {
+section > :is(div, a) {
   display: flex;
   justify-content: center;
 }

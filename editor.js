@@ -10,7 +10,7 @@ var theAlert = false
 var main = document.querySelector('main')
 var textarea = main.querySelector('textarea')
 
-function go() {
+function download() {
   let input = document.querySelector('textarea').value;
 
   // create a new Blob object with the content you want to assign
@@ -237,7 +237,9 @@ function editFile(fName) {
   location.href = `${location.pathname}?action=open&file=${fName}`
 }
 
-if (!!document.getElementById('go')) document.getElementById('go').addEventListener('click', go)
+if (!!document.getElementById('editBtn')) document.getElementById('editBtn').addEventListener('click', editFile)
+
+if (!!document.getElementById('download')) document.getElementById('download').addEventListener('click', download)
 if (!!document.getElementById('reset')) document.getElementById('reset').onclick = reset
 
 if (!!document.getElementById('undo')) document.getElementById('undo').addEventListener('click', undo)
@@ -253,5 +255,6 @@ if (!!document.getElementById('takeFile')) {
     document.querySelector(`input[type='file']#readfile`).click()
   }
 }
+
 
 if (!!document.getElementById('enableHTML')) document.getElementById('enableHTML').addEventListener('click', checkHTML)
