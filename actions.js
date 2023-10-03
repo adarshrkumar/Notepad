@@ -55,14 +55,24 @@ else if (action === 'filelink') {
         ele.style.cursor = 'pointer'
     })
 
-    let i = 6
-    let max = 11
-    while (i < max) {
-        if (!!document.querySelector(`section > :nth-child(${i})`)) {
-            document.querySelector(`section > :nth-child(${i})`).remove()
+    let removeEles = [
+        'enableHTML', 
+        'undo', 
+        'redo', 
+        'input#replacethis', 
+        'input#withthis', 
+        'button#replaceThis', 
+        'button#replaceAll', 
+    ]
+
+    removeEles.forEach(function(e, i) {
+        let element = document.querySelector(e)
+        if (!!element === false) {
+            element = document.getElementById(e)
         }
-        i++
-    }
+        element.tabIndex = '-1'
+        element.parentNode.setAttribute('hidden')
+    })
 
     document.getElementById('takeFile').onclick = function(e) {}
     document.getElementById('takeFile').parentNode.href = `${location.pathname}?action=upload`
