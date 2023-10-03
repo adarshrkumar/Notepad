@@ -65,14 +65,14 @@ else if (action === 'filelink') {
 
     document.getElementById('takeFile').onclick = function(e) {}
     document.getElementById('takeFile').parentNode.id = 'fileParent'
-    replaceTag('#fileParent', a)
+    replaceTag('#fileParent', 'a')
     document.getElementById('fileParent').href = `${location.pathname}?action=upload`
 
     document.getElementById('reset').onclick = function() {}
     document.getElementById('reset').parentNode.id = 'resetParent'
-    replaceTag('#resetParent', a)
+    replaceTag('#resetParent', 'a')
     document.getElementById('fileParent').href = `${location.pathname}?action=new`
-    
+
     let editEle = document.createElement('div')
     let editBtn = document.createElement('button')
     editBtn.textContent = 'Edit File'
