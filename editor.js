@@ -3,8 +3,6 @@ var histI = 0
 var histIsM = true
 var histIsP = true
 var dtitle = document.title
-var title = 'New Text File'
-var ext = 'txt'
 var hasUpdatedPreview = false
 var isPreview = false
 var alertShown = false
@@ -32,13 +30,19 @@ function go() {
 
   let link = document.querySelector('a#downloader');
   link.href = window.URL.createObjectURL(blob);
+  let title = document.getElementById('title').value
+  if (!!title === false) title = 'New Text File'
+  let ext = ''
+  if (title.includes('.')) {
+    ext = ext.split('.')[1]
+  }
   if (ext === 'txt') {
     link.download = `${title}.txt`  ;
   }
   else {
     link.download = `${title}`  ;
   }
-  if (Boolean(document.querySelector('textarea').value) || Boolean(title)) {
+  if (Boolean(document.querySelector('textarea').value) || !!title) {
     link.click();
   }
   checkHTML()
@@ -47,25 +51,7 @@ function go() {
 function reset() {
   document.querySelector('textarea').value = '';
   document.title = dtitle
-  title = 'New Text File'
-  document.querySelector('input#title').value = ''
-  checkHTML()
-}
-
-function setTitle() {
-  let ftitle = document.querySelector('input#title').value
-  if (ftitle.split('').length <= 0) {
-    document.title = dtitle
-    title = 'New Text File'
-  }
-  else {
-    if (ftitle.includes('.')) {
-      ext = ''
-    }
-    document.title = `${ftitle} | ${dtitle}`
-  }
-  ext = ftitle.split('.')[ftitle.split('.').length - 1]
-  title = ftitle
+  document.getElementById('title').value = ''
   checkHTML()
 }
 
@@ -91,7 +77,6 @@ readfile.onchange = object => {
   }
   else {
     ftitle = fname
-    ext = fname.split('.')[fname.split('.').length - 1]
   }
   if (ftitle.split('').length <= 0) {
     document.title = dtitle
@@ -100,7 +85,7 @@ readfile.onchange = object => {
     document.title = `${ftitle} | ${dtitle}`
   }
   document.querySelector('input#title').value = ftitle
-  title = ftitle
+  document.getElementById('title').value = ftitle
   checkHTML()
 }
 
@@ -109,6 +94,12 @@ textarea.addEventListener('keyup', checkHTML)
 function checkHTML() {
   var preview = main.querySelector('iframe#preview')
   var span = main.querySelector('span')
+  let title = document.getElementById('title').value
+  let ext = ''
+  if (title.includes('.')) {
+    ext = title.split('.')[1]
+  }
+
   if (ext === 'html' || ext === 'htm' || ext === 'mht') {
     setTimeout(function() {
 //      alert(true)
@@ -209,7 +200,7 @@ function saveToLocalStorage(e) {
     author: '', 
     dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
   }
-  localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
+  localStorage.setItem(`FILEDATA://${document.getElementById('title').value}`, JSON.stringify(json))
   let filesObj = localStorage.getItem('files')
   filesObj = JSON.parse(filesObj)
   if (!!filesObj === false) {
@@ -217,12 +208,12 @@ function saveToLocalStorage(e) {
   }
   let hasFile = false
   filesObj.forEach(function(f, i) {
-    if (f === title) {
+    if (f === document.getElementById('title').value) {
       hasFile = true
     }
   })
   if (hasFile === false) {
-    filesObj.push(title)
+    filesObj.push(document.getElementById('title').value)
   }
   console.log(filesObj)
   localStorage.setItem('files', JSON.stringify(filesObj))
