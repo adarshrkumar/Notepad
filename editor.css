@@ -118,3 +118,13 @@ input:not(input[type='file']) {
 #readfile {
   z-index: -1;
 }
+
+[hidden] {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  & * {
+    pointer-events: none;
+  }
+}
