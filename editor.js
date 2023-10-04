@@ -246,8 +246,10 @@ function getShareLink() {
   prompt('This is the link to share!', fLink)
 }
 
-function editFile(fileName) {
-  let fileName = urlParams.get('file')
+function editFile(fileName=false) {
+  if (!!fileName === false) {
+    fileName = urlParams.get('file')
+  }
   saveToLocalStorage(fileName)
   location.href = `${location.pathname}?action=open&file=${fileName}`
 }
