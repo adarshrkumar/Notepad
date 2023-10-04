@@ -55,6 +55,23 @@ function reset() {
   checkHTML()
 }
 
+function setTitle() {
+  let ftitle = document.querySelector('input#title').value
+  if (ftitle.split('').length <= 0) {
+    document.title = dtitle
+    title = 'New Text File'
+  }
+  else {
+    if (ftitle.includes('.')) {
+      ext = ''
+    }
+    document.title = `${ftitle} | ${dtitle}`
+  }
+  ext = ftitle.split('.')[ftitle.split('.').length - 1]
+  title = ftitle
+  checkHTML()
+}
+
 var readfile = document.querySelector("input[type='file']#readfile");
 
 readfile.onchange = object => { 
