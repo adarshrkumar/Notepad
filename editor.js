@@ -238,18 +238,18 @@ textarea.addEventListener('keypress', saveToLocalStorage)
 
 
 function getShareLink() {
-  let fName = document.getElementById('title').value
+  let fileName = document.getElementById('title').value
   let fContent = document.querySelector('main textarea').value
   fContent = btoa(fContent)
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
-  let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fName}&content=${fContent}`
+  let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
   prompt('This is the link to share!', fLink)
 }
 
-function editFile(fName) {
-  let fName = urlParams.get('file')
-  saveToLocalStorage(fName)
-  location.href = `${location.pathname}?action=open&file=${fName}`
+function editFile(fileName) {
+  let fileName = urlParams.get('file')
+  saveToLocalStorage(fileName)
+  location.href = `${location.pathname}?action=open&file=${fileName}`
 }
 
 
