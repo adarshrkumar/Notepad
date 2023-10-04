@@ -59,7 +59,6 @@ function setTitle() {
   let ftitle = document.querySelector('input#title').value
   if (ftitle.split('').length <= 0) {
     document.title = dtitle
-    title = 'New Text File'
   }
   else {
     if (ftitle.includes('.')) {
@@ -68,7 +67,6 @@ function setTitle() {
     document.title = `${ftitle} | ${dtitle}`
   }
   ext = ftitle.split('.')[ftitle.split('.').length - 1]
-  title = ftitle
   checkHTML()
 }
 
