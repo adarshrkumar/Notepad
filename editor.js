@@ -256,45 +256,58 @@ function editFile(fName) {
 let functions = [
   {
     id: 'editBtn', 
+    event: 'click', 
     function: editFile, 
   }, 
   {
     id: 'download', 
+    event: 'click', 
     function: download, 
   }, 
   {
     id: 'reset',
+    event: 'onclick', 
     function: reset,  
-    method: 'on', 
   }, 
   {
     id: 'undo',
+    event: 'click', 
     function: undo,  
   }, 
   {
     id: 'redo',
+    event: 'click', 
     function: redo,  
   }, 
   {
     id: 'replaceThis', 
+    event: 'click', 
     function: function(e) { replace('single', e) }, 
   }, 
   {
     id: 'replaceAll', 
+    event: 'click', 
     function: function(e) { replace('all', e) }, 
   }, 
   {
     id: 'shareLink', 
+    event: 'click', 
     function: getShareLink, 
   }, 
   {
     id: 'takeFile', 
+    event: 'onclick', 
     function: function(e) { document.querySelector(`input[type='file']#readfile`).click() }, 
-    method: 'on', 
   }, 
   {
     id: 'enableHTML', 
+    event: 'click', 
     function: checkHTML, 
+  }, 
+  {
+    id: 'title', 
+    event: 'keyup', 
+    function: setTitle, 
   }, 
 ]
 let needsToDo = []
@@ -320,18 +333,19 @@ addEventListeners()
 
 function addListener(f) {
   let id = f.id
+  let event = f.event
   let func = f.function
   if (!!document.getElementById(id)) {
     if (!!method) {
-      if (method === 'on') {
-        document.getElementById(id).onclick = func
+      if (method.startsWith('on')) {
+        document.getElementById(id)[event] = func
       }
       else {
-        document.getElementById(id).addEventListener('click', func)
+        document.getElementById(id).addEventListener(event, func)
       }
     }
     else {
-      document.getElementById(id).addEventListener('click', func)
+      document.getElementById(id).addEventListener(event, func)
     }
   }
   else {
