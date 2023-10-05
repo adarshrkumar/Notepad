@@ -254,6 +254,10 @@ function editFile(fileName=false) {
   location.href = `${location.pathname}?action=open&file=${fileName}`
 }
 
+function clickUploadElement() {
+  document.querySelector(`input[type='file']#readfile`).click()
+}
+
 
 let functions = [
   {
@@ -299,7 +303,7 @@ let functions = [
   {
     id: 'takeFile', 
     event: 'onclick', 
-    function: function(e) { document.querySelector(`input[type='file']#readfile`).click() }, 
+    function: clickUploadElement, 
   }, 
   {
     id: 'enableHTML', 
