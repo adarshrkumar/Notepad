@@ -258,12 +258,12 @@ function editFile(fileName=false) {
 let functions = [
   {
     id: 'editBtn', 
-    event: 'click', 
+    event: 'onclick', 
     function: editFile, 
   }, 
   {
     id: 'download', 
-    event: 'click', 
+    event: 'onclick', 
     function: download, 
   }, 
   {
@@ -273,27 +273,27 @@ let functions = [
   }, 
   {
     id: 'undo',
-    event: 'click', 
+    event: 'onclick', 
     function: undo,  
   }, 
   {
     id: 'redo',
-    event: 'click', 
+    event: 'onclick', 
     function: redo,  
   }, 
   {
     id: 'replaceThis', 
-    event: 'click', 
+    event: 'onclick', 
     function: function(e) { replace('single', e) }, 
   }, 
   {
     id: 'replaceAll', 
-    event: 'click', 
+    event: 'onclick', 
     function: function(e) { replace('all', e) }, 
   }, 
   {
     id: 'shareLink', 
-    event: 'click', 
+    event: 'onclick', 
     function: getShareLink, 
   }, 
   {
@@ -303,12 +303,12 @@ let functions = [
   }, 
   {
     id: 'enableHTML', 
-    event: 'click', 
+    event: 'onclick', 
     function: checkHTML, 
   }, 
   {
     id: 'title', 
-    event: 'keyup', 
+    event: 'onkeyup', 
     function: setTitle, 
   }, 
 ]
