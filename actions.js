@@ -18,7 +18,7 @@ else if (action === 'openfile') {
     //     dateModofied: file.dateModofied, 
     // }
 
-    var fName = file.title
+    var fName = String(file.title)
     if (fName.includes('.')) {
         nFName = fName.split('.')
         nFName = nFName[nFName.length-1]
