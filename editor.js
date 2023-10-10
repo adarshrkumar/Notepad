@@ -207,7 +207,7 @@ function redo() {
 checkHTML()
 
 function saveToLocalStorage(e) {
-  let title = deocument,getElementById('title').value
+  let title = deocument.getElementById('title').value
   let value = document.querySelector('textarea').value
   let d = new Date()
   let json = {
@@ -216,7 +216,7 @@ function saveToLocalStorage(e) {
     author: '', 
     dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
   }
-  localStorage.setItem(`FILEDATA://${document.getElementById('title').value}`, JSON.stringify(json))
+  localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
   let filesObj = localStorage.getItem('files')
   filesObj = JSON.parse(filesObj)
   if (!!filesObj === false) {
@@ -224,12 +224,12 @@ function saveToLocalStorage(e) {
   }
   let hasFile = false
   filesObj.forEach(function(f, i) {
-    if (f === document.getElementById('title').value) {
+    if (f === title) {
       hasFile = true
     }
   })
   if (hasFile === false) {
-    filesObj.push(document.getElementById('title').value)
+    filesObj.push(title)
   }
   console.log(filesObj)
   localStorage.setItem('files', JSON.stringify(filesObj))
