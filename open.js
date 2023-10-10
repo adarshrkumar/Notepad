@@ -12,7 +12,6 @@ filesObj.forEach(function(fileName, i) {
     let file = localStorage.getItem(`FILEDATA://${fileName}`)
     file = JSON.parse(file)
     let title = file.title
-    console.log(title)
     let content = file.content
     let author = file.author
     let dateModofied = file.dateModofied
