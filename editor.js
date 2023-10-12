@@ -336,11 +336,11 @@ function addListener(f) {
   let func = f.function
   if (!!document.getElementById(id)) {
     if (!!method) {
-      if (method.startsWith('on')) {
+      if (method.startsWith('on') || (method === 'attribute' || method === 'setAttribute')) {
         document.getElementById(id).setAttribute(event, func)
         // document.getElementById(id)[event] = func
       }
-      else if (method === 'elementProperty') {
+      else if (method === 'property' || method === 'elementProperty') {
         document.getElementById(id)[event] = func
       }
       else {
