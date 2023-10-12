@@ -340,6 +340,9 @@ function addListener(f) {
         document.getElementById(id).setAttribute(event, func)
         // document.getElementById(id)[event] = func
       }
+      else if (method === 'elementProperty') {
+        document.getElementById(id)[event] = func
+      }
       else {
         document.getElementById(id).addEventListener(event, func)
       }
