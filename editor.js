@@ -337,7 +337,8 @@ function addListener(f) {
   if (!!document.getElementById(id)) {
     if (!!method) {
       if (method.startsWith('on')) {
-        document.getElementById(id)[event] = func
+        document.getElementById(id).setAttribute(event, func)
+        // document.getElementById(id)[event] = func
       }
       else {
         document.getElementById(id).addEventListener(event, func)
