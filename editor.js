@@ -260,31 +260,41 @@ function clickUploadElement() {
 }
 
 
-let functions = [
+var functions = [
+  {
+    id: 'title', 
+    event: 'onkeyup', 
+    function: function(e) { setTitle(e) }, 
+  }, 
   {
     id: 'editBtn', 
     event: 'onclick', 
-    function: editFile, 
+    function: function(e) { editFile(e) }, 
+  }, 
+  {
+    id: 'takeFile', 
+    event: 'onclick', 
+    function: function(e) { clickUploadElement(e) }, 
   }, 
   {
     id: 'download', 
     event: 'onclick', 
-    function: download, 
+    function: function(e) { download(e) }, 
   }, 
   {
     id: 'reset',
     event: 'onclick', 
-    function: reset,  
+    function: function(e) { reset(e) },  
   }, 
   {
     id: 'undo',
     event: 'onclick', 
-    function: undo,  
+    function: function(e) { undo(e) },  
   }, 
   {
     id: 'redo',
     event: 'onclick', 
-    function: redo,  
+    function: function(e) { redo(e) },  
   }, 
   {
     id: 'replaceThis', 
@@ -299,39 +309,20 @@ let functions = [
   {
     id: 'shareLink', 
     event: 'onclick', 
-    function: getShareLink, 
-  }, 
-  {
-    id: 'takeFile', 
-    event: 'onclick', 
-    function: clickUploadElement, 
+    function: function(e) { getShareLink(e) }, 
   }, 
   {
     id: 'enableHTML', 
     event: 'onclick', 
-    function: checkHTML, 
-  }, 
-  {
-    id: 'title', 
-    event: 'onkeyup', 
-    function: setTitle, 
+    function: function(e) { checkHTML(e) }, 
   }, 
 ]
-let needsToDo = []
-
 
 function addEventListeners() {
   functions.forEach(function(f, i) {
     let id = f.id
     let isNeeds = false
-    needsToDo.forEach(function(n, i) {
-      if (id === n) {
-        addListener(f)
-      }
-    })
-    if (needsToDo.length === 0) {
-      addListener(f)
-    }
+    addListener(f)
   })
 }
 
@@ -341,6 +332,7 @@ addEventListeners()
 function addListener(f) {
   let id = f.id
   let event = f.event
+  let method = f.method
   let func = f.function
   if (!!document.getElementById(id)) {
     if (!!method) {
@@ -354,8 +346,5 @@ function addListener(f) {
     else {
       document.getElementById(id).addEventListener(event, func)
     }
-  }
-  else {
-    needsToDo.push(id)
   }
 }
