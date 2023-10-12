@@ -334,11 +334,17 @@ function addListener(f) {
   let event = f.event
   let method = f.method
   let func = f.function
+  if (!!event) {
+    if (!!event.startsWith('on') && !!method === false) method = 'none'
+  }
   if (!!document.getElementById(id)) {
     if (!!method) {
-      if (method.startsWith('on') || (method === 'attribute' || method === 'setAttribute')) {
-        document.getElementById(id).setAttribute(event, func)
-        // document.getElementById(id)[event] = func
+      if (event.startsWith('on')) {
+        // document.getElementById(id).setAttribute(event, func)
+        document.getElementById(id)[event] = func
+      }
+      else if (method === 'attribute' || method === 'setAttribute') {
+        document.getElementById(id)[event] = func
       }
       else if (method === 'property' || method === 'elementProperty') {
         document.getElementById(id)[event] = func
