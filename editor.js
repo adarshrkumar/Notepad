@@ -206,8 +206,8 @@ function redo() {
 
 checkHTML()
 
-function saveToLocalStorage(e) {
-  let title = document.getElementById('title').value
+function saveToLocalStorage(title=false) {
+  if (!!title === false) title = document.getElementById('title').value
   let value = document.querySelector('textarea').value
   let d = new Date()
   let json = {
@@ -235,7 +235,9 @@ function saveToLocalStorage(e) {
   localStorage.setItem('files', JSON.stringify(filesObj))
 }
 
-textarea.addEventListener('keypress', saveToLocalStorage)
+textarea.addEventListener('keypress', function(e) {
+  saveToLocalStorage()
+})
 
 
 function getShareLink() {
