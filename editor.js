@@ -207,7 +207,7 @@ function redo() {
 checkHTML()
 
 function saveToLocalStorage(e) {
-  let title = deocument.getElementById('title').value
+  let title = document.getElementById('title').value
   let value = document.querySelector('textarea').value
   let d = new Date()
   let json = {
