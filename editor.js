@@ -260,8 +260,8 @@ function editFile(fileName=false) {
   disabledEles.push(textAreaEle)
 
   disabledEles.forEach(function(ele, i) {
-      ele.removeAttribute('disabled', '')  
-      ele.style.cursor = 'auto'
+    ele.removeAttribute('disabled', '')  
+    ele.style.cursor = 'auto'
   })
 }
 
