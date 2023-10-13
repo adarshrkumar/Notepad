@@ -254,11 +254,9 @@ function editFile(fileName=false) {
   let disabledEles = []
 
   let titleEle = document.getElementById('title')
-  titleEle.value = fName
   disabledEles.push(titleEle)  
 
   let textAreaEle = document.querySelector('main textarea')
-  textAreaEle.value = fContent
   disabledEles.push(textAreaEle)
 
   disabledEles.forEach(function(ele, i) {
