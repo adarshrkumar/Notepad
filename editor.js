@@ -206,8 +206,8 @@ function redo() {
 
 checkHTML()
 
-function saveToLocalStorage(title=false) {
-  if (!!title === false) title = document.getElementById('title').value
+function saveToLocalStorage(e) {
+  let title = document.getElementById('title').value
   let value = document.querySelector('textarea').value
   let d = new Date()
   let json = {
@@ -235,9 +235,7 @@ function saveToLocalStorage(title=false) {
   localStorage.setItem('files', JSON.stringify(filesObj))
 }
 
-textarea.addEventListener('keypress', function(e) {
-  saveToLocalStorage()
-})
+textarea.addEventListener('keypress', saveToLocalStorage)
 
 
 function getShareLink() {
@@ -253,8 +251,20 @@ function editFile(fileName=false) {
   if (!!fileName === false) {
     fileName = urlParams.get('file')
   }
-  saveToLocalStorage(fileName)
-  location.href = `${location.pathname}?action=open&file=${fileName}`
+  let disabledEles = []
+
+  let titleEle = document.getElementById('title')
+  titleEle.value = fName
+  disabledEles.push(titleEle)  
+
+  let textAreaEle = document.querySelector('main textarea')
+  textAreaEle.value = fContent
+  disabledEles.push(textAreaEle)
+
+  disabledEles.forEach(function(ele, i) {
+      ele.removeAttribute('disabled', '')  
+      ele.style.cursor = 'auto'
+  })
 }
 
 function clickUploadElement() {

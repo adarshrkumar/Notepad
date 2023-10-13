@@ -11,12 +11,6 @@ else if (action === 'openfile') {
     file = JSON.parse(file)
 
     let textarea = document.querySelector('main textarea')
-    // json = {
-    //     title: file.title, 
-    //     content: file.content, 
-    //     author: file.author, 
-    //     dateModofied: file.dateModofied, 
-    // }
 
     var fName = String(file.title)
     if (fName.includes('.')) {
