@@ -370,7 +370,6 @@ function addListener(f) {
 }
 
 var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
-
 if (isUpload) {
     addEventListener('DOMContentLoaded', clickUploadElement)
     clickUploadElement()
