@@ -7,6 +7,7 @@ switch(action) {
         addEventListener('DOMContentLoaded', clickUploadElement)
         clickUploadElement()
         break;
+        return;
     case 'openfile':
         var fName = urlParams.get('file')
         var file = localStorage.getItem(`FILEDATA://${fName}`)
@@ -31,6 +32,7 @@ switch(action) {
         document.getElementById('title').value = fName
         textarea.value = file.content
         break;
+        return;
     case 'filelink':
         let fName = urlParams.get('file')
         let fContent = urlParams.get('content')
@@ -80,6 +82,7 @@ switch(action) {
         let editBtn = document.getElementById('editFile')
         editBtn.parentNode.removeAttribute('hidden')
         break;
+        return;
     default:
       
 }
