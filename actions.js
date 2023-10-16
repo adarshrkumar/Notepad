@@ -76,5 +76,5 @@ else if (action === 'filelink') {
     editBtn.parentNode.removeAttribute('hidden')
 }
 else {
-
+    document.body.setAttribute('hidden', '')
 }
