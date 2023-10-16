@@ -2,11 +2,7 @@ var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var action = urlParams.get('action')
 
-if (action === 'upload') {
-    addEventListener('DOMContentLoaded', clickUploadElement)
-    clickUploadElement()
-}
-else if (action === 'openfile') {
+if (action === 'openfile') {
     var fName = urlParams.get('file')
     var file = localStorage.getItem(`FILEDATA://${fName}`)
     file = JSON.parse(file)
