@@ -265,7 +265,7 @@ function editFile(fileName=false) {
   })
 }
 
-function clickUploadElement() {
+function upload() {
   document.querySelector(`input[type='file']#readfile`).click()
 }
 
@@ -282,9 +282,9 @@ var functions = [
     function: function(e) { editFile(e) }, 
   }, 
   {
-    id: 'takeFile', 
+    id: 'upload', 
     event: 'onclick', 
-    function: function(e) { clickUploadElement(e) }, 
+    function: function(e) { upload(e) }, 
   }, 
   {
     id: 'download', 
@@ -371,6 +371,6 @@ function addListener(f) {
 
 var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
 if (isUpload) {
-    addEventListener('DOMContentLoaded', clickUploadElement)
-    clickUploadElement()
+    addEventListener('DOMContentLoaded', upload)
+    upload()
 }
