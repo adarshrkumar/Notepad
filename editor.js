@@ -209,11 +209,13 @@ checkHTML()
 function saveToLocalStorage(e) {
   let title = document.getElementById('title').value
   let value = document.querySelector('textarea').value
+  let author = localStorage.getItem('username')
+  if (!!author === false) author = ''
   let d = new Date()
   let json = {
     title: title, 
     content: value, 
-    author: '', 
+    author: author, 
     dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
   }
   localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
