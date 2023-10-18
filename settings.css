@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    min-height: 100dvh;
+}
+
+.sidebar-content {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.content {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+.content section {
+    height: 100%;
+}
