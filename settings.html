@@ -16,8 +16,11 @@
         </nav>
       </sidebar>
       <content class="grid-row" class="content">
-        <section id="user">
-
+        <section id="user" class="grid-area">
+          <div>
+            <label for="username">Your Name (used as author): </label>
+            <input type="text" id="username" name="username">
+          </div>
         </section>
         <section id="editor">
 
@@ -26,6 +29,7 @@
       <sidebar></sidebar>
     </main>
     <footer></footer>
+    <script src="settings.js"></script>
     <script>
       javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
     </script>
