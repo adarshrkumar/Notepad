@@ -21,6 +21,7 @@ main {
 .content {
     height: 100dvh;
     scroll-behavior: smooth;
+    overflow: auto;
 }
 
 .content section {
