@@ -5,7 +5,7 @@ var action = urlParams.get('action')
 if (action === 'upload') {
     
 }
-if (action === 'openfile') {
+else if (action === 'openfile') {
     var fName = urlParams.get('file')
     var file = localStorage.getItem(`FILEDATA://${fName}`)
     file = JSON.parse(file)
