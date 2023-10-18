@@ -20,11 +20,16 @@ filesObj.forEach(function(fileName, i) {
     fileElement.classList.add('grid-item')
     fileElement.href =  `editor?action=openfile&file=${title}`
 
+    let titleParent = document.createElement('div')
+    titleParent.classList.add('title-parent')
+
     let titleElement = document.createElement('h2')
     titleElement.textContent = title
     titleElement.classList.add('title')
-    fileElement.appendChild(titleElement)
+    titleParent.appendChild(titleElement)
 
+    fileElement.appendChild(titleParent)
+    
     let authorElement = document.createElement('span')
     authorElement.textContent = author
     authorElement.classList.add('author')
