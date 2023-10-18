@@ -19,7 +19,7 @@ main {
 }
 
 .content {
-    height: 100%;
+    height: 100dvh;
     scroll-behavior: smooth;
 }
 
