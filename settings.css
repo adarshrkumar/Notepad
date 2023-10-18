@@ -3,6 +3,10 @@ body {
     min-height: 100dvh;
 }
 
+main {
+    height: 100dvh;
+}
+
 .sidebar-content {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
