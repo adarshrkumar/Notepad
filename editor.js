@@ -124,10 +124,23 @@ function checkHTML() {
       preview.style.width = '75%'
       span.style.display = ''
       textarea.style = 'border-right: none;'
+      let eleVal = 'documentElement'
       if (value.includes('<html')) {
         value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
-        value = value.split('</html>')[0]
+        if (value.includes('</html>')) {
+          value = value.split('</html>')[0]
+        }
       }
+      else if (value.includes('<xml')) {
+        value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
+      }
+      else if (value.includes('<?xml')) {
+        value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
+      }
+      if (value.includes('<svg')) {
+        eleVal = 'body'
+      }
+      document.getElementById('eleVal').value = eleVal
       isPreview = true
       if (!!theAlert === false) {
         theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
