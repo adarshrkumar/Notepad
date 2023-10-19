@@ -115,7 +115,7 @@ function checkHTML() {
     ext = title.split('.')[1]
   }
 
-  if (ext === 'html' || ext === 'htm' || ext === 'mht') {
+  if (ext === 'html' || ext === 'htm' || ext === 'mht' || ext === 'svg') {
     setTimeout(function() {
 //      alert(true)
       let value = document.querySelector('textarea').value
