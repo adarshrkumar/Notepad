@@ -39,7 +39,7 @@ function addCode() {
           ELEMENTS[i] = ''
         }
       })
-      document[parent.getElementById('eleVal')].innerHTML = code + needsClose + bodyHTML
+      document[parent.document.getElementById('eleVal')].innerHTML = code + needsClose + bodyHTML
       lastCode = code
     }
   }
