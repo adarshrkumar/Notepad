@@ -332,7 +332,7 @@ var functions = [
     function: function(e) { replace('all', e) }, 
   }, 
   {
-    id: 'shareLink', 
+    id: 'makeLink', 
     event: 'onclick', 
     function: function(e) { getShareLink(e) }, 
   }, 
