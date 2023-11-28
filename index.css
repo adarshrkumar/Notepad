@@ -40,7 +40,7 @@
     gap: var(--grid-gap);
 }
 
-.grid-item .options {
+.grid-parent .options {
     --mar: 0.5rem;
     position: absolute;
     top: 0;
@@ -53,7 +53,7 @@
     gap:var(--mar);
 }
 
-.grid-item .options .option {
+.grid-parent .options .option {
     aspect-ratio: 1;
     border-radius: calc(var(--rad)/var(--mar));
 }
