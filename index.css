@@ -61,9 +61,14 @@
 }
 
 
-.grid-item img {
+.grid-item :is(img, .img) {
     width: 64px;
     aspect-ratio: 1;
+}
+
+.grid-item .img {
+    color: initial;
+    text-decoration: none;
 }
 
 .title-parent {
