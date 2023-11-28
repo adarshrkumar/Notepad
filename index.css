@@ -14,11 +14,13 @@
 }
 
 .grid-item {
+    --rad: var(--grid-gap);
+
     display: flex;
     flex-direction: column;
     align-items: center;
     border: solid 2px black;
-    border-radius: var(--grid-gap);
+    border-radius: var(--rad);
     padding: var(--grid-gap);
     gap: var(--grid-gap);
 
@@ -27,7 +29,7 @@
     transition: border-radius 0.5s ease;
 
     &:hover, &:focus {
-        border-radius: calc(var(--grid-gap)/2.5);
+        --rad: calc(var(--grid-gap)/2.5);
     }
 }
 
@@ -46,7 +48,7 @@
 
 .grid-item .options .option {
     aspect-ratio: 1;
-    border-radius: calc(var(--grid-gap)/var(--mar));
+    border-radius: calc(var(--rad)/var(--mar));
 }
 
 
