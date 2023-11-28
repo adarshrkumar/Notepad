@@ -38,6 +38,8 @@
     align-items: center;
     gap: var(--grid-gap);
 
+    text-decoration: none;
+
     overflow: hidden;
     transition: inherit;
 }
@@ -69,20 +71,6 @@
 .grid-item .img {
     font-size: 3.45lh;
     color: initial;
-    text-decoration: none;
-    position: relative;
-
-    &::after {
-        content: '';
-
-        position: absolute;
-        top: 100%;
-
-        width: 100%;
-        height: var(--h, 5px);
-
-        background-color: white;
-    }
 }
 
 .title-parent {
@@ -94,10 +82,13 @@
 
 .grid-item .title {
     margin-block: 0;
+
+    width: fit-content;
+
     word-wrap: break-word;
     text-wrap: balance;
     text-align: center;
-    width: fit-content;
+    text-decoration: solid;
 }
 
 .option {
