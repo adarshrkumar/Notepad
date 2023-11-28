@@ -16,9 +16,8 @@ filesObj.forEach(function(fileName, i) {
     let author = file.author
     let dateModofied = file.dateModofied
 
-    let fileElement = document.createElement('a')
-    fileElement.classList.add('grid-item')
-    fileElement.href =  `editor?action=openfile&file=${title}`
+    let fileParent = document.createElement('div')
+    fileParent.classList.add('grid-parent')
 
     let optionsElement = document.createElement('div')
     optionsElement.classList.add('options')
@@ -27,7 +26,12 @@ filesObj.forEach(function(fileName, i) {
     deleteOption.classList.add('option')
     optionsElement.appendChild(deleteOption)
 
-    fileElement.appendChild(optionsElement)
+    fileParent.appendChild(optionsElement)
+
+    let fileElement = document.createElement('a')
+    fileElement.classList.add('grid-item')
+    fileElement.href =  `editor?action=openfile&file=${title}`
+    fileParent.appendChild(fileElement)
 
     let titleParent = document.createElement('div')
     titleParent.classList.add('title-parent')
@@ -49,5 +53,5 @@ filesObj.forEach(function(fileName, i) {
     dateElement.classList.add('date')
     fileElement.appendChild(dateElement)
 
-    filesEle.appendChild(fileElement)
+    filesEle.appendChild(fileParent)
 });

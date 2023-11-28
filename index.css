@@ -13,17 +13,15 @@
     gap: var(--grid-gap)
 }
 
-.grid-item {
+.grid-parent {
     --rad: var(--grid-gap);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+
     border: solid 2px black;
     border-radius: var(--rad);
-    padding: var(--grid-gap);
-    gap: var(--grid-gap);
 
+    overflow: hidden;
     position: relative;
 
     transition: border-radius 0.5s ease;
@@ -31,6 +29,15 @@
     &:hover, &:focus {
         --rad: calc(var(--grid-gap)/2.5);
     }
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: var(--grid-gap);
+    gap: var(--grid-gap);
 }
 
 .grid-item .options {
