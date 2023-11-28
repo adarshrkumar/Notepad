@@ -46,6 +46,7 @@
 
 .grid-item .options .option {
     aspect-ratio: 1;
+    border-radius: calc(var(--grid-gap)/var(--mar));
 }
 
 .grid-item img {
