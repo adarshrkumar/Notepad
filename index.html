@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width">
     <title>Notepad</title>
     <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="icons.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
     <header></header>
     <main>
-      <section id="actions" class="sidebar-content">
+      <section id="files" class="sidebar-content">
         <sidebar></sidebar>
         <content class="grid-row">
           <div class="grid-parent">
-            <a class="grid-item" href="open">
-              <img src="icons/cloud-folder.svg" alt="Open File Image" />
+            <a class="grid-item" href="editor?action=new">
+              <img src="icons/plus.svg" alt="New File Image" />
               <div class="title-parent">
-                <h2 class="title">Open Existing File</h2>
+                <h2 class="title">New File</h2>
               </div>
             </a>
           </div>
           <div class="grid-parent">
             <a class="grid-item" href="editor?action=upload">
-              <img src="icons/folder.svg" alt="Upload File Image" />
+              <span class="material-symbols-outlined">folder</span>
               <div class="title-parent">
                 <h2 class="title">Upload From Computer</h2>
               </div>
@@ -31,9 +32,10 @@
           </div>
         </content>
         <sidebar></sidebar>
-      </section>
+      </section>  
     </main>
     <footer></footer>
+    <script src="open.js"></script>
     <script>
       // javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
     </script>
