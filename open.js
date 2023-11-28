@@ -20,6 +20,15 @@ filesObj.forEach(function(fileName, i) {
     fileElement.classList.add('grid-item')
     fileElement.href =  `editor?action=openfile&file=${title}`
 
+    let optionsElement = document.createElement('div')
+    optionsElement.classList.add('options')
+
+    let deleteOption = document.createElement('button')
+    deleteOption.classList.add('option')
+    optionsElement.appendChild(deleteOption)
+
+    fileElement.appendChild(optionsElement)
+
     let titleParent = document.createElement('div')
     titleParent.classList.add('title-parent')
 
