@@ -48,13 +48,6 @@ function download() {
   checkHTML()
 }
 
-function reset() {
-  document.querySelector('textarea').value = '';
-  document.title = dtitle
-  document.getElementById('title').value = ''
-  checkHTML()
-}
-
 function setTitle() {
   let ftitle = document.querySelector('input#title').value
   if (ftitle.split('').length <= 0) {
@@ -307,9 +300,9 @@ var functions = [
     function: function(e) { download(e) }, 
   }, 
   {
-    id: 'reset',
+    id: 'delete',
     event: 'onclick', 
-    function: function(e) { reset(e) },  
+    function: function(e) { deleteFile(e) },  
   }, 
   {
     id: 'undo',
@@ -386,11 +379,11 @@ function addListener(f) {
 
 var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
 if (isUpload) {
-    addEventListener('DOMContentLoaded', function(e) { document.getElementById('upload').click() })
-    // upload()
+  addEventListener('DOMContentLoaded', function(e) { document.getElementById('upload').click() })
+  // upload()
 }
 
-function deleteFile() {
+function deleteFile(e) {
   var fTitle = document.getElementById('title').value
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
