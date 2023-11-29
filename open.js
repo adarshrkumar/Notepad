@@ -57,6 +57,7 @@ filesObj.forEach(function(fileName, i) {
 
   deleteOption.classList.add('option')
   deleteOption.classList.add('material-symbols-outlined')
+  deleteOption.classList.add('delete')
 
   deleteOption.textContent = 'delete'
   deleteOption.href = `javascript:deleteFile('.${deleteFile.classList.join('.')}')` 
@@ -69,8 +70,12 @@ filesObj.forEach(function(fileName, i) {
 });
 
 function deleteFile(e) {
-  alert(`hi${0}`)
-  e = e.target
+  if (typeof e === 'string') {
+    e = document.querySelector(e)
+  }
+  else {
+    e = e.target
+  }
   var fTitle = e.querySelector('.title').textContent  
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
