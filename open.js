@@ -69,6 +69,7 @@ filesObj.forEach(function(fileName, i) {
 });
 
 function deleteFile(e) {
+  alert(`hi${0}`)
   e = e.target
   var fTitle = e.querySelector('.title').textContent  
   localStorage.removeItem(`FILEDATA://${fTitle}`)
