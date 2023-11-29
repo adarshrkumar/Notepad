@@ -87,11 +87,11 @@ function deleteFile(i) {
       hasFile = true
     }
   })
-  if (hasFile === false) {
+  if (hasFile) {
     let index = filesObj.indexOf(fTitle)
     filesObj.splice(index, 1)
-  }
-  localStorage.setItem('files', JSON.stringify(filesObj))
+    localStorage.setItem('files', JSON.stringify(filesObj))
 
-  e.parentNode.remove()
+    e.parentNode.remove()
+  }
 }
