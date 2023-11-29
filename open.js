@@ -72,7 +72,6 @@ filesObj.forEach(function(fileName, i) {
 
 function deleteFile(i) {
   var e = filesEle.querySelectorAll('.grid-item')[i]
-  e = e.target
   console.log(e)
 
   var fTitle = e.querySelector('.title').textContent  
