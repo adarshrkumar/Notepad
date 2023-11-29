@@ -24,7 +24,7 @@ filesObj.forEach(function(fileName, i) {
 
     let deleteOption = document.createElement('button')
     deleteOption.classList.add('option')
-    deleteOption.classList.add('material-symbols-outline')
+    deleteOption.classList.add('material-symbols-outlined')
     deleteOption.textContent = 'delete'
     optionsElement.appendChild(deleteOption)
 
