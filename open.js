@@ -60,7 +60,7 @@ filesObj.forEach(function(fileName, i) {
   deleteOption.classList.add('delete')
 
   deleteOption.textContent = 'delete'
-  deleteOption.href = `javascript:deleteFile('.${deleteFile.className.split(' ').join('.')}')` 
+  deleteOption.href = `javascript:deleteFile('.${deleteOption.classList.join('.')}')` 
 
   optionsElement.appendChild(deleteOption)
 
