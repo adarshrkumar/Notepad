@@ -51,10 +51,10 @@
 .grid-parent .options {
     --mar: 0.5rem;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: var(--mar);
+    right: var(--mar);
     
-    margin: var(--mar);
+    /* margin: var(--mar); */
     height: 1.5rem;
 
     display: flex;
