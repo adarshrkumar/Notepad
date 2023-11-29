@@ -53,13 +53,13 @@ filesObj.forEach(function(fileName, i) {
     let optionsElement = document.createElement('div')
     optionsElement.classList.add('options')
 
-    let deleteOption = document.createElement('button')
+    let deleteOption = document.createElement('a')
 
     deleteOption.classList.add('option')
     deleteOption.classList.add('material-symbols-outlined')
 
     deleteOption.textContent = 'delete'
-    deleteOption.setAttribute('onclick', 'deleteFile(this)')
+    deleteOption.href = `javascript:deleteFile('.${deleteFile.classList.join('.')}')` 
 
     optionsElement.appendChild(deleteOption)
 
