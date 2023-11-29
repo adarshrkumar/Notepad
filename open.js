@@ -28,8 +28,9 @@ filesObj.forEach(function(fileName, i) {
     img.classList.add('img')
     img.classList.add('material-symbols-outlined')
     img.textContent = 'description'
+    fileElement.appendChild(img)
 
-  let titleParent = document.createElement('div')
+    let titleParent = document.createElement('div')
     titleParent.classList.add('title-parent')
 
     let titleElement = document.createElement('h2')
