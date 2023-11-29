@@ -72,7 +72,6 @@ filesObj.forEach(function(fileName, i) {
 
 function deleteFile(i) {
   var e = filesEle.querySelectorAll('.grid-item')[i]
-  console.log(e)
 
   var fTitle = e.querySelector('.title').textContent  
   localStorage.removeItem(`FILEDATA://${fTitle}`)
@@ -84,7 +83,7 @@ function deleteFile(i) {
   }
   let hasFile = false
   filesObj.forEach(function(f, i) {
-    if (f === title) {
+    if (f === fTitle) {
       hasFile = true
     }
   })
@@ -93,4 +92,6 @@ function deleteFile(i) {
     filesObj.splice(index, 1)
   }
   localStorage.setItem('files', JSON.stringify(filesObj))
+
+  e.parentNode.remove()
 }
