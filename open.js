@@ -60,6 +60,7 @@ filesObj.forEach(function(fileName, i) {
 
     deleteOption.textContent = 'delete'
     deleteOption.onclick = function(e) {
+      alert(0)
       deleteFile(e)
     }
 
