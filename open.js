@@ -19,17 +19,6 @@ filesObj.forEach(function(fileName, i) {
     let fileParent = document.createElement('div')
     fileParent.classList.add('grid-parent')
 
-    let optionsElement = document.createElement('div')
-    optionsElement.classList.add('options')
-
-    let deleteOption = document.createElement('button')
-    deleteOption.classList.add('option')
-    deleteOption.classList.add('material-symbols-outlined')
-    deleteOption.textContent = 'delete'
-    optionsElement.appendChild(deleteOption)
-
-    fileParent.appendChild(optionsElement)
-
     let fileElement = document.createElement('a')
     fileElement.classList.add('grid-item')
     fileElement.href =  `editor?action=openfile&file=${title}`
@@ -54,6 +43,17 @@ filesObj.forEach(function(fileName, i) {
     dateElement.textContent = dateModofied
     dateElement.classList.add('date')
     fileElement.appendChild(dateElement)
+
+    let optionsElement = document.createElement('div')
+    optionsElement.classList.add('options')
+
+    let deleteOption = document.createElement('button')
+    deleteOption.classList.add('option')
+    deleteOption.classList.add('material-symbols-outlined')
+    deleteOption.textContent = 'delete'
+    optionsElement.appendChild(deleteOption)
+
+    fileParent.appendChild(optionsElement)
 
     filesEle.appendChild(fileParent)
 });
