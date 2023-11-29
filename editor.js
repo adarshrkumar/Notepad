@@ -389,3 +389,28 @@ if (isUpload) {
     addEventListener('DOMContentLoaded', function(e) { document.getElementById('upload').click() })
     // upload()
 }
+
+function deleteFile() {
+  var fTitle = document.getElementById('title').value
+  localStorage.removeItem(`FILEDATA://${fTitle}`)
+
+  let filesObj = localStorage.getItem('files')
+  filesObj = JSON.parse(filesObj)
+  if (!!filesObj === false) {
+    filesObj = []
+  }
+  let hasFile = false
+  filesObj.forEach(function(f, i) {
+    if (f === fTitle) {
+      hasFile = true
+    }
+  })
+  if (hasFile === false) {
+    let index = filesObj.indexOf(fTitle)
+    filesObj.splice(index, 1)
+  }
+  localStorage.setItem('files', JSON.stringify(filesObj))
+
+  history.back();
+  location.href = '/'
+}
