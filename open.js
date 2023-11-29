@@ -60,7 +60,8 @@ filesObj.forEach(function(fileName, i) {
   deleteOption.classList.add('delete')
 
   deleteOption.textContent = 'delete'
-  deleteOption.href = `javascript:deleteFile('.${deleteOption.className.split(' ').join('.')}')` 
+  deleteOption.href = '#'
+  deleteOption.setAttribute('onclick', 'deleteFile(this)') 
 
   optionsElement.appendChild(deleteOption)
 
@@ -77,8 +78,8 @@ function deleteFile(e) {
     e = e.target
   }
   console.log(e)
-  
-  var fTitle = e.querySelector('.title').textContent  
+
+  var fTitle = e.parentNode.parentNode.querySelector('.title').textContent  
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
   let filesObj = localStorage.getItem('files')
