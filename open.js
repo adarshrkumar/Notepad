@@ -59,10 +59,7 @@ filesObj.forEach(function(fileName, i) {
     deleteOption.classList.add('material-symbols-outlined')
 
     deleteOption.textContent = 'delete'
-    deleteOption.onclick = function(e) {
-      alert(0)
-      deleteFile(e)
-    }
+    deleteOption.setAttribute('onclick', 'deleteFile(this)')
 
     optionsElement.appendChild(deleteOption)
 
