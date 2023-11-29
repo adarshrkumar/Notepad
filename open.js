@@ -24,7 +24,12 @@ filesObj.forEach(function(fileName, i) {
     fileElement.href =  `editor?action=openfile&file=${title}`
     fileParent.appendChild(fileElement)
 
-    let titleParent = document.createElement('div')
+    let img = document.createElement('span')
+    img.classList.add('img')
+    img.classList.add('material-symbols-outlined')
+    img.textContent = 'description'
+
+  let titleParent = document.createElement('div')
     titleParent.classList.add('title-parent')
 
     let titleElement = document.createElement('h2')
