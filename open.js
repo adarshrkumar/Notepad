@@ -76,6 +76,8 @@ function deleteFile(e) {
   else {
     e = e.target
   }
+  console.log(e)
+  
   var fTitle = e.querySelector('.title').textContent  
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
