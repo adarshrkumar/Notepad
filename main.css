@@ -80,6 +80,9 @@
 .title-parent {
     flex: 1;
     width: 100%;
+
+    display: grid;
+    place-items: center;
 }
 
 .grid-item .title {
