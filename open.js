@@ -54,12 +54,41 @@ filesObj.forEach(function(fileName, i) {
     optionsElement.classList.add('options')
 
     let deleteOption = document.createElement('button')
+
     deleteOption.classList.add('option')
     deleteOption.classList.add('material-symbols-outlined')
+
     deleteOption.textContent = 'delete'
+    deleteOption.onclick = function(e) {
+      deleteFile(e)
+    }
+
     optionsElement.appendChild(deleteOption)
 
     fileParent.appendChild(optionsElement)
 
     filesEle.appendChild(fileParent)
 });
+
+function deleteFile(e) {
+  e = e.target
+  var fTitle = e.querySelector('.title').textContent  
+  localStorage.removeItem(`FILEDATA://${fTitle}`)
+
+  let filesObj = localStorage.getItem('files')
+  filesObj = JSON.parse(filesObj)
+  if (!!filesObj === false) {
+    filesObj = []
+  }
+  let hasFile = false
+  filesObj.forEach(function(f, i) {
+    if (f === title) {
+      hasFile = true
+    }
+  })
+  if (hasFile === false) {
+    let index = filesObj.indexOf(fTitle)
+    filesObj.splice(index, 1)
+  }
+  localStorage.setItem('files', JSON.stringify(filesObj))
+}
