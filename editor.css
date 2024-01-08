@@ -59,12 +59,12 @@ main textarea {
   height: 100%;
   box-sizing: border-box;
   &:not(.code) {
-    border-right: none;
     resize: none;
   }
 }
 
 main textarea.code {
+  border-right: none;
   outline: none;
   resize: horizontal;
 }
