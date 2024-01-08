@@ -72,7 +72,6 @@ else if (action === 'filelink') {
     document.getElementById('upload').onclick = function(e) {}
     document.getElementById('upload').parentNode.href = `${location.pathname}?action=upload`
 
-    document.getElementById('reset').onclick = function() {}
     document.getElementById('reset').parentNode.href = `${location.pathname}?action=new`
 
     let editBtn = document.getElementById('editFile')
