@@ -45,8 +45,9 @@ else if (action === 'filelink') {
     disabledEles.push(textAreaEle)
 
     disabledEles.forEach(function(ele, i) {
-        ele.setAttribute('disabled', '')  
+        ele.setAttribute('disabled', '')
         ele.style.cursor = 'pointer'
+        ele.onclick = function(e) { editFile(e) }
     })
 
     let removeEles = [
