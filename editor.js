@@ -282,7 +282,7 @@ var functions = [
     function: function(e) { setTitle(e) }, 
   }, 
   {
-    id: 'editBtn', 
+    id: 'editFile', 
     event: 'onclick', 
     function: function(e) { editFile(e) }, 
   }, 
