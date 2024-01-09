@@ -1,14 +1,8 @@
 /*  Custom Scrollbar  */
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 100%;
-/*  border-radius: 25px;  */
-}
- 
-section::-webkit-scrollbar {
-  width: 100% !important;
-  height: 8px !important;
+  width: 8px;
+  height: 8px;
 /*  border-radius: 25px;  */
 }
  
@@ -83,16 +77,6 @@ main #preview {
   box-sizing: border-box;
 }
 
-[hidden] {
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  & * {
-    pointer-events: none;
-  }
-}
-
 .toolbar {
 /*  min-width: 150px; */
   display: flex;
@@ -101,7 +85,7 @@ main #preview {
   gap: 8px;
 }
 
-.toolbar > :is(div, a) {
+.toolbar > :is(div, a):not([hidden]) {
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -121,4 +105,14 @@ input:not(input[type='file']) {
 
 [style='display: none;']:focus {
   display: normal;
+}
+
+[hidden] {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  & * {
+    pointer-events: none;
+  }
 }
