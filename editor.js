@@ -268,6 +268,26 @@ function editFile(fileName=false) {
     ele.removeAttribute('disabled', '')  
     ele.style.cursor = 'auto'
   })
+
+  let removeEles = [
+    'enableHTML', 
+    'undo', 
+    'redo', 
+    'replacethis', 
+    'withthis', 
+    'replaceThis', 
+    'replaceAll', 
+]
+
+  removeEles.forEach(function(e, i) {
+    let element = document.querySelector(e)
+    if (!!element === false) {
+        element = document.getElementById(e)
+    }
+    if (!!element) {
+        element.parentNode.removeAttribute('hidden')
+    }
+  })
 }
 
 function upload() {
