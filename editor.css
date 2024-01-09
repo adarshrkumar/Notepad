@@ -83,6 +83,16 @@ main #preview {
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  & * {
+    pointer-events: none;
+  }
+}
+
 .toolbar {
 /*  min-width: 150px; */
   display: flex;
@@ -111,14 +121,4 @@ input:not(input[type='file']) {
 
 [style='display: none;']:focus {
   display: normal;
-}
-
-[hidden] {
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  & * {
-    pointer-events: none;
-  }
 }
