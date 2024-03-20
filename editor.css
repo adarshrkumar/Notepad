@@ -99,6 +99,7 @@ body {
 .container:has(.image-preview[shown]) {
   --text-area: 0;
   --sidebar-area: 1fr;
+  overflow-y: auto;
   textarea {
     padding-inline: 0;
   }
