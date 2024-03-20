@@ -60,7 +60,7 @@ function setTitle() {
     }
     document.title = `${ftitle} | ${dtitle}`
   }
-  ext = ftitle.split('.')[ftitle.split('.').length - 1]
+  ext = ftitle.split('.').slice(-1)
   checkHTML()
 }
 
@@ -81,7 +81,7 @@ readfile.onchange = object => {
    }
   let filename = readfile.value.split('\\').slice(-1)
   let ftitle = ''
-  if (filename.split('.')[filename.split('.').length - 1] === 'txt') {
+  if (filename.split('.').slice(-1) === 'txt') {
     ftitle = filename.split(`.${filename.split('.').slice(-1)}`)[0]
   }
   else {
@@ -102,6 +102,8 @@ readfile.onchange = object => {
 textarea.addEventListener('keyup', checkHTML)
 
 function checkImage(file) {
+  alert(JSON.stringify(file))
+  return
   var path = file.value
 
   let type = file.type
