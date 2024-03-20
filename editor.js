@@ -89,7 +89,7 @@ readfile.onchange = object => {
     ftitle = filename
   }
 
-  var isImage = checkImage(file, filename)
+  var isImage = checkImage(object, file, filename)
 
   if (isImage) {
     checkHTML('image', true)
@@ -120,7 +120,8 @@ readfile.onchange = object => {
 
 textarea.addEventListener('keyup', checkHTML)
 
-function checkImage(file, name) {
+function checkImage(element, file, name) {
+  var path = element.value
   var ext = name
   if (ext.includes('.')) {
     ext = ext.split('.').slice(-1)
