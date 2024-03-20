@@ -178,7 +178,7 @@ function checkHTML(type) {
     ext = title.split('.')[1]
   }
 
-  var isHTML= false
+  var isHTML = false
   htmlExts.forEach(function(g) {
     g.forEach(function(e, i) {
       if (ext == e) {
