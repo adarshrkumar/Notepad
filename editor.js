@@ -117,13 +117,13 @@ function checkImage(file) {
   }
 </style>
 <img src="${path}" alt="">`
-    checkHTML(true)
+    checkHTML('image', true)
     return true
   }
   return false
 }
 
-function checkHTML(override) {
+function checkHTML(type, override) {
   var preview = main.querySelector('iframe#preview')
   var span = main.querySelector('span')
   let title = document.getElementById('title').value
@@ -159,12 +159,14 @@ function checkHTML(override) {
       }
       document.getElementById('eleVal').value = eleVal
       isPreview = true
-      if (!!theAlert === false) {
-        theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
-        if (!!theAlert) {
-          prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
+      if (type !== 'image') {
+        if (!!theAlert === false) {
+          theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
+          if (!!theAlert) {
+            prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
+          }
+          hasShown = true
         }
-        hasShown = true
       }
       if (hasUpdatedPreview === false) {
         preview.src = `/preview.html`
