@@ -154,7 +154,7 @@ function checkImage(element, file, name) {
   }
 </style>
 <img src="${path}" alt="">`
-        }, 1)
+        }, 1000)
         isImage = true
       }
     })
