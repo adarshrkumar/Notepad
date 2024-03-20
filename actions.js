@@ -15,9 +15,9 @@ else if (action === 'openfile') {
     var fName = String(file.title)
     if (fName.includes('.')) {
         nFName = fName.split('.')
-        nFName = nFName[nFName.length-1]
-        if (fName === 'txt') {
-            fName = fName.substring(fName.split('').length-4)
+        nFName = nFName.slice(-1)
+        if (nFName === 'txt') {
+            fName = fName.slice(-4)
         }
     }
 
@@ -27,7 +27,15 @@ else if (action === 'openfile') {
     }
 
     document.getElementById('title').value = fName
-    textarea.value = file.content
+
+    var type = 'text'
+    if (!!file.type) type = file.type
+    if (type === 'image') {
+        showImage(fContent)
+    }
+    else {
+        textarea.value = fContent
+    }
 }
 else if (action === 'filelink') {
     let fName = urlParams.get('file')

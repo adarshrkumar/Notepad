@@ -98,12 +98,7 @@ readfile.onchange = object => {
   }
 
   isImage = checkImage(object, file, filename)
-
-  if (isImage) {
-    showImage()
-    saveToLocalStorage(null)
-  }
-  else {
+  if (!isImage) {
     // setting up the reader
     var reader = new FileReader();
     reader.readAsText(file,'UTF-8');
@@ -153,7 +148,8 @@ function checkImage(element, file, name) {
     g.forEach(function(e, i) {
       if (ext == e) {
         setTimeout(function() {
-          textarea.value = `image('${path}')`
+          showImage()
+          saveToLocalStorage({type: 'image', content: 'path'})
         }, 1000)
         isImage = true
       }
@@ -281,11 +277,22 @@ function redo() {
 
 checkHTML()
 
-function saveToLocalStorage(e) {
+function saveToLocalStorage(info) {
+  let value = document.querySelector('textarea').value
+  var type = 'text'
+  if (!!info) {
+    if (!!info.type) {
+      type = info.type
+      if (type === 'image') {
+        if (!!info.content) {
+          value = info.content
+        }
+      }
+    }
+  }
   let title = document.getElementById('title').value
   if (title === '' || !!title === false || title === null) return
 
-  let value = document.querySelector('textarea').value
   let author = localStorage.getItem('username')
   if (!!author === false) author = ''
   let d = new Date()
