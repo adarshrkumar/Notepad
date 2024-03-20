@@ -92,16 +92,16 @@ readfile.onchange = object => {
   var isImage = checkImage(file, filename)
   console.log(isImage)
 
-  if (!isImage && false) {
-    // setting up the reader
-    var reader = new FileReader();
-    reader.readAsText(file,'UTF-8');
+  // if (!isImage) {
+  //   // setting up the reader
+  //   var reader = new FileReader();
+  //   reader.readAsText(file,'UTF-8');
 
-    // here we tell the reader what to do when it's done reading...
-    reader.onload = readerEvent => {
-      document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
-    }
-  }
+  //   // here we tell the reader what to do when it's done reading...
+  //   reader.onload = readerEvent => {
+  //     document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
+  //   }
+  // }
 
   if (ftitle.split('').length <= 0) {
     document.title = dtitle
