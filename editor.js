@@ -259,8 +259,8 @@ checkHTML()
 
 function saveToLocalStorage(e) {
   let title = document.getElementById('title').value
-  if (title === '') return
-  
+  if (title === '' || !!title === false || title === null) return
+
   let value = document.querySelector('textarea').value
   let author = localStorage.getItem('username')
   if (!!author === false) author = ''
