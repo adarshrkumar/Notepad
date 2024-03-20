@@ -79,10 +79,10 @@ readfile.onchange = object => {
    reader.onload = readerEvent => {
       document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
    }
-  let filename = readfile.value.split('\\')[readfile.value.split('\\').length - 1]
+  let filename = readfile.value.split('\\').slice(-1)
   let ftitle = ''
   if (filename.split('.')[filename.split('.').length - 1] === 'txt') {
-    ftitle = filename.split(`.${filename.split('.')[filename.split('.').length - 1]}`)[0]
+    ftitle = filename.split(`.${filename.split('.').slice(-1)}`)[0]
   }
   else {
     ftitle = filename
