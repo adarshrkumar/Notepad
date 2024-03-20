@@ -142,9 +142,8 @@ function checkImage(element, file, name) {
   })
 
   let reader = new FileReader();
-  var path = ''
   reader.onload = function () {
-    path = reader.result//.replace('data:', '').replace(/^.+,/, "");
+    var path = reader.result//.replace('data:', '').replace(/^.+,/, "");
     if (isImage) {
       showImage(path)
       saveToLocalStorage({type: 'image', content: path})
