@@ -24,6 +24,7 @@ var histI = 0
 var dtitle = document.title
 var hasUpdatedPreview = false
 var isPreview = false
+var isImage = false
 var theAlert = false
 var main = document.querySelector('main')
 var textarea = main.querySelector('textarea')
@@ -96,7 +97,7 @@ readfile.onchange = object => {
     ftitle = filename
   }
 
-  var isImage = checkImage(object, file, filename)
+  isImage = checkImage(object, file, filename)
 
   if (isImage) {
     checkHTML('image')
@@ -242,7 +243,7 @@ function checkHTML(type) {
 }
 
 function outputsize() {
-  if (document.querySelector('textarea').clientWidth < 150) {
+  if (!isImage && document.querySelector('textarea').clientWidth < 150) {
     textarea.style.width = `${150}px`
   }
 }
