@@ -93,7 +93,6 @@ body {
   }
   &[shown] {
     grid-column: sidebar;
-    width: var(--sidebar-area, 0);
   }
 }
 
