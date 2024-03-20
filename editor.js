@@ -475,8 +475,8 @@ function deleteFile(e) {
     filesObj.splice(index, 1)
   }
   else {
-    var location = location.pathname
-    location.href = `${location.pathname}?action=new`
+    var location = window.location.pathname
+    location.href = `${location}?action=new`
   }
   localStorage.setItem('files', JSON.stringify(filesObj))
 
