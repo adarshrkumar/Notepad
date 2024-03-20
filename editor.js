@@ -90,8 +90,9 @@ readfile.onchange = object => {
   }
 
   var isImage = checkImage(file, filename)
+  console.log(isImage)
 
-  if (!isImage) {
+  if (!isImage && false) {
     // setting up the reader
     var reader = new FileReader();
     reader.readAsText(file,'UTF-8');
@@ -124,7 +125,6 @@ function checkImage(file, name) {
   var isImage = false
   supptdImgExts.forEach(function(g) {
     g.forEach(function(e, i) {
-      console.log(`${ext} === ${e}`)
       if (ext === e) {
         textarea.value = `<style>
   img {
