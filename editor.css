@@ -97,8 +97,8 @@ body {
 }
 
 .container:has(.image-preview[shown]) {
-  --text-area: auto;
-  --sidebar-area: 20%;
+  --text-area: 0;
+  --sidebar-area: 1fr;
 }
 
 .toolbar {
