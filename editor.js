@@ -137,6 +137,7 @@ function checkImage(file, name) {
 <img src="${path}" alt="">`
         isImage = true
         checkHTML('image', true)
+        saveToLocalStorage(null)
       }
     })
   })
