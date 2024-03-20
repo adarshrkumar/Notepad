@@ -90,9 +90,13 @@ readfile.onchange = object => {
   }
 
   var isImage = checkImage(file, filename)
-  console.log(isImage)
 
-  // if (!isImage) {
+  if (isImage) {
+    checkHTML('image', true)
+    saveToLocalStorage(null)
+  }
+
+  // else {
   //   // setting up the reader
   //   var reader = new FileReader();
   //   reader.readAsText(file,'UTF-8');
@@ -136,12 +140,11 @@ function checkImage(file, name) {
 </style>
 <img src="${path}" alt="">`
         isImage = true
-        checkHTML('image', true)
-        saveToLocalStorage(null)
       }
     })
   })
 
+  console.log(isImage)
   return isImage
 }
 
