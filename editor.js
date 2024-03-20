@@ -193,6 +193,7 @@ function checkHTML(type) {
           if (type == 'image') {
             textarea.style.width = '0'
             textarea.style.resize = 'none'
+            textarea.style.overflowY = 'hidden'
           }
           let eleVal = 'documentElement'
           if (value.includes('<html')) {
