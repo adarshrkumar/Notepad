@@ -1,3 +1,7 @@
+var imageFileExts = [
+
+]
+
 var history = ['']
 var histI = 0
 var dtitle = document.title
@@ -92,11 +96,32 @@ readfile.onchange = object => {
   document.querySelector('input#title').value = ftitle
   document.getElementById('title').value = ftitle
   checkHTML()
+  checkImage(file)
 }
 
 textarea.addEventListener('keyup', checkHTML)
 
-function checkHTML() {
+function checkImage(element) {
+  var path = element.value
+
+  let type = file.type
+  if (type.includes('/')) type = type.split('/')[0]
+
+  if (type === 'image') {
+    textarea.value = `<style>
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>
+<img src="${path}" alt="">`
+    checkHTML(true)
+  }
+}
+
+function checkHTML(override) {
   var preview = main.querySelector('iframe#preview')
   var span = main.querySelector('span')
   let title = document.getElementById('title').value
@@ -105,7 +130,7 @@ function checkHTML() {
     ext = title.split('.')[1]
   }
 
-  if (ext === 'html' || ext === 'htm' || ext === 'mht' || ext === 'svg') {
+  if (ext === 'html' || ext === 'htm' || ext === 'mht' || ext === 'svg' || override) {
     setTimeout(function() {
 //      alert(true)
       let value = document.querySelector('textarea').value
