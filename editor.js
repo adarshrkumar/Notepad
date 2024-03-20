@@ -181,9 +181,8 @@ function checkHTML(type) {
           let value = document.querySelector('textarea').value
           textarea = document.querySelector('textarea')
           preview.setAttribute('shown', true)
-          preview.style.display = ''
           span.style.display = ''
-          textarea.style.borderRight = 'none;'
+          textarea.style.borderRight = 'none'
           let eleVal = 'documentElement'
           if (value.includes('<html')) {
             value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
@@ -220,10 +219,10 @@ function checkHTML(type) {
     })
   })
   if (!isHTML && isPreview === true) {
-    preview.style.display = 'none'
+    preview.removeAttribute('shown')
     span.style.display = 'none'
     preview.src = `/preview.html`
-    textarea.style = ''
+    textarea.style.removeProperty('border-right')
     hasShown = false
     document.querySelector('textarea').removeAttribute('id')
   }
