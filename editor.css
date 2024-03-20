@@ -40,7 +40,7 @@ body {
   flex: 1;
 
   display: grid;
-  grid-template-columns: var(--text-area, 1fr) var(--preview-area, 0) var(--image-area, 0);
+  grid-template-columns: var(--text-area, 1fr) [sidebar-start] var(--sidebar-area, 0) [sidebar-end];
   align-items: center;
 
   overflow-y: hidden;
@@ -75,24 +75,31 @@ body {
   &:not([shown]) {
     display: none;
   }
+  &[shown] {
+    grid-column: sidebar;
+  }
 }
 
 .container:has(#preview[shown]) {
   --text-area: auto;
-  --preview-area: 10%;
-  --image-area: 0;
+  --sidebar-area: 10%;
 }
 
 .image-preview {
+  max-height: 100%;
+  max-width: var(--sidebar-area, 0);
   &:not([shown]) {
     display: none;
+  }
+  &[shown] {
+    grid-column: sidebar;
+    width: var(--sidebar-area, 0);
   }
 }
 
 .container:has(.image-preview[shown]) {
   --text-area: auto;
-  --preview-area: 0;
-  --image-area: 10%;
+  --sidebar-area: 10%;
 }
 
 .toolbar {
