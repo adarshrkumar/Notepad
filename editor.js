@@ -40,7 +40,6 @@ function download() {
   // when the read operation is finished, this will be called
   reader.onloadend = function() {
     // the result attribute contains the contents of the file
-    console.log(reader.result);
   }
 
   // read the file as text
@@ -160,7 +159,6 @@ function checkImage(element, file, name) {
     })
   })
 
-  console.log(isImage)
   return isImage
 }
 
@@ -203,14 +201,12 @@ function checkHTML(type) {
           }
           document.getElementById('eleVal').value = eleVal
           isPreview = true
-          if (type !== 'image') {
-            if (!!theAlert === false) {
-              theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
-              if (!!theAlert) {
-                prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
-              }
-              hasShown = true
+          if (type !== 'image' && !!theAlert === false) {
+            theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
+            if (!!theAlert) {
+              prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
             }
+            hasShown = true
           }
           if (hasUpdatedPreview === false) {
             preview.src = `/preview.html`
