@@ -123,7 +123,7 @@ function showImage() {
   var image = document.querySelector('.image-preview')
   image.src = src
   image.alt = 'Image Preview'
-  image.setAttribute('shown', true)
+  image.setAttribute('shown', '')
 }
 
 function checkImage(element, file, name) {
@@ -172,7 +172,7 @@ function checkHTML(type) {
     //      alert(true)
           let value = document.querySelector('textarea').value
           textarea = document.querySelector('textarea')
-          preview.setAttribute('shown', true)
+          preview.setAttribute('shown', '')
           span.style.display = ''
           textarea.style.borderRight = 'none'
           let eleVal = 'documentElement'
