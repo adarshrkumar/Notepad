@@ -11,6 +11,14 @@ var supptdImgExts = [
   ['xbm'], 
 ]
 
+var htmlExts = [
+  ['html', 'htm', 'mht'], 
+]
+
+supptdImgExts.forEach(function(g, i) {
+  htmlExts.push(g)
+})
+
 var history = ['']
 var histI = 0
 var dtitle = document.title
@@ -92,7 +100,7 @@ readfile.onchange = object => {
   var isImage = checkImage(object, file, filename)
 
   if (isImage) {
-    checkHTML('image', true)
+    checkHTML('image')
     saveToLocalStorage(null)
   }
   else {
@@ -148,7 +156,7 @@ function checkImage(element, file, name) {
   return isImage
 }
 
-function checkHTML(type, override) {
+function checkHTML(type) {
   var preview = main.querySelector('iframe#preview')
   var span = main.querySelector('span')
   let title = document.getElementById('title').value
@@ -157,50 +165,56 @@ function checkHTML(type, override) {
     ext = title.split('.')[1]
   }
 
-  if (ext === 'html' || ext === 'htm' || ext === 'mht' || ext === 'svg' || override) {
-    setTimeout(function() {
-//      alert(true)
-      let value = document.querySelector('textarea').value
-      textarea = document.querySelector('textarea')
-      preview.style.display = ''
-      preview.style.width = '75%'
-      span.style.display = ''
-      textarea.style = 'border-right: none;'
-      let eleVal = 'documentElement'
-      if (value.includes('<html')) {
-        value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
-        if (value.includes('</html>')) {
-          value = value.split('</html>')[0]
-        }
-      }
-      else if (value.includes('<xml')) {
-        value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
-      }
-      else if (value.includes('<?xml')) {
-        value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
-      }
-      if (value.includes('<svg')) {
-        eleVal = 'body'
-      }
-      document.getElementById('eleVal').value = eleVal
-      isPreview = true
-      if (type !== 'image') {
-        if (!!theAlert === false) {
-          theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
-          if (!!theAlert) {
-            prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
+  var isHTML= false
+  htmlExts.forEach(function(g) {
+    g.forEach(function(e, i) {
+      if (ext == e) {
+        setTimeout(function() {
+    //      alert(true)
+          let value = document.querySelector('textarea').value
+          textarea = document.querySelector('textarea')
+          preview.style.display = ''
+          preview.style.width = '75%'
+          span.style.display = ''
+          textarea.style = 'border-right: none;'
+          let eleVal = 'documentElement'
+          if (value.includes('<html')) {
+            value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
+            if (value.includes('</html>')) {
+              value = value.split('</html>')[0]
+            }
           }
-          hasShown = true
-        }
+          else if (value.includes('<xml')) {
+            value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
+          }
+          else if (value.includes('<?xml')) {
+            value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
+          }
+          if (value.includes('<svg')) {
+            eleVal = 'body'
+          }
+          document.getElementById('eleVal').value = eleVal
+          isPreview = true
+          if (type !== 'image') {
+            if (!!theAlert === false) {
+              theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
+              if (!!theAlert) {
+                prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
+              }
+              hasShown = true
+            }
+          }
+          if (hasUpdatedPreview === false) {
+            preview.src = `/preview.html`
+            hasUpdatedPreview = true
+          }
+          document.querySelector('textarea').classList.add('code')
+        }, 1)
+        isHTML = true
       }
-      if (hasUpdatedPreview === false) {
-        preview.src = `/preview.html`
-        hasUpdatedPreview = true
-      }
-      document.querySelector('textarea').classList.add('code')
-    }, 1)
-  }
-  else if (isPreview === true) {
+    })
+  })
+  if (!isHTML && isPreview === true) {
     preview.style.display = 'none'
     span.style.display = 'none'
     preview.src = `/preview.html`
