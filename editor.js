@@ -129,8 +129,8 @@ function checkImage(file, name) {
   var isImage = false
   supptdImgExts.forEach(function(g) {
     g.forEach(function(e, i) {
-      console.log(`${ext} === ${e}: ${ext === e}`)
-      if (ext === e) {
+      console.log(`${ext} === ${e}: ${ext == e}`)
+      if (ext == e) {
         textarea.value = `<style>
   img {
     width: 100%;
