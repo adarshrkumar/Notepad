@@ -100,7 +100,7 @@ body {
   --text-area: 0;
   --sidebar-area: 1fr;
   textarea {
-    width: 0;
+    padding-inline: 0;
   }
 }
 
