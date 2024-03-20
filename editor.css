@@ -98,7 +98,7 @@ body {
 
 .container:has(.image-preview[shown]) {
   --text-area: auto;
-  --sidebar-area: 10%;
+  --sidebar-area: 20%;
 }
 
 .toolbar {
