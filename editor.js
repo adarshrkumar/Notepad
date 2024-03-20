@@ -77,7 +77,8 @@ var readfile = document.querySelector("input[type='file']#readfile");
 
 readfile.onchange = object => { 
   // getting a hold of the file reference
-  var file = object.target.files[0]; 
+  var file = object.target.files[0];
+  if (!file) return 
 
   let filename = file.name
   let ftitle = ''
