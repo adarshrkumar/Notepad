@@ -63,18 +63,21 @@ function setTitle() {
 var readfile = document.querySelector("input[type='file']#readfile");
 
 readfile.onchange = object => { 
-
    // getting a hold of the file reference
    var file = object.target.files[0]; 
+   var isImage = checkImage(file)
 
-   // setting up the reader
-   var reader = new FileReader();
-   reader.readAsText(file,'UTF-8');
+  if (!isImage) {
+    // setting up the reader
+    var reader = new FileReader();
+    reader.readAsText(file,'UTF-8');
 
-   // here we tell the reader what to do when it's done reading...
-   reader.onload = readerEvent => {
+    // here we tell the reader what to do when it's done reading...
+    reader.onload = readerEvent => {
       document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
-   }
+    }
+  }
+
   let filename = readfile.value.split('\\').slice(-1)
   let ftitle = ''
   if (filename.split('.').slice(-1) === 'txt') {
@@ -92,7 +95,6 @@ readfile.onchange = object => {
   document.querySelector('input#title').value = ftitle
   document.getElementById('title').value = ftitle
   checkHTML()
-  checkImage(file)
 }
 
 textarea.addEventListener('keyup', checkHTML)
@@ -116,7 +118,9 @@ function checkImage(file) {
 </style>
 <img src="${path}" alt="">`
     checkHTML(true)
+    return true
   }
+  return false
 }
 
 function checkHTML(override) {
