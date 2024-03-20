@@ -1,7 +1,3 @@
-var imageFileExts = [
-
-]
-
 var history = ['']
 var histI = 0
 var dtitle = document.title
