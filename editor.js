@@ -101,8 +101,8 @@ readfile.onchange = object => {
 
 textarea.addEventListener('keyup', checkHTML)
 
-function checkImage(element) {
-  var path = element.value
+function checkImage(file) {
+  var path = file.value
 
   let type = file.type
   if (type.includes('/')) type = type.split('/')[0]
