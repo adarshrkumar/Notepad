@@ -132,7 +132,6 @@ function checkImage(element, file, name) {
   var path = ''
   reader.onload = function () {
     path = reader.result//.replace('data:', '').replace(/^.+,/, "");
-    console.log(path);
   }
   reader.readAsDataURL(file);
 
@@ -145,6 +144,7 @@ function checkImage(element, file, name) {
   supptdImgExts.forEach(function(g) {
     g.forEach(function(e, i) {
       if (ext == e) {
+        setTimeout(function() {
         textarea.value = `<style>
   img {
     width: 100%;
@@ -154,6 +154,7 @@ function checkImage(element, file, name) {
   }
 </style>
 <img src="${path}" alt="">`
+        }, 1)
         isImage = true
       }
     })
