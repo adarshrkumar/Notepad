@@ -477,8 +477,8 @@ function deleteFile(e) {
   localStorage.setItem('files', JSON.stringify(filesObj))
 
   if (!hasFile) {
-    var location = window.location.pathname
-    location.href = `${location}?action=new`
+    var page = location.pathname
+    location.href = `${page}?action=new`
   }
 
   history.back();
