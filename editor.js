@@ -149,6 +149,7 @@ function checkImage(element, file, name) {
     min-height: 100%;
   }
   body {
+    margin: 0;
     display: grid;
     place-items: center;
   }
@@ -187,7 +188,11 @@ function checkHTML(type) {
           preview.style.display = ''
           preview.style.width = '75%'
           span.style.display = ''
-          textarea.style = 'border-right: none;'
+          textarea.style.borderRight = 'none;'
+          if (type == 'image') {
+            textarea.style.width = '0'
+            textarea.style.resize = 'none'
+          }
           let eleVal = 'documentElement'
           if (value.includes('<html')) {
             value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
