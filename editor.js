@@ -284,7 +284,6 @@ function saveToLocalStorage(e) {
   if (hasFile === false) {
     filesObj.push(title)
   }
-  console.log(filesObj)
   localStorage.setItem('files', JSON.stringify(filesObj))
 }
 
