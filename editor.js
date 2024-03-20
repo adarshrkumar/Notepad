@@ -474,11 +474,12 @@ function deleteFile(e) {
     let index = filesObj.indexOf(fTitle)
     filesObj.splice(index, 1)
   }
-  else {
+  localStorage.setItem('files', JSON.stringify(filesObj))
+
+  if (!hasFile) {
     var location = window.location.pathname
     location.href = `${location}?action=new`
   }
-  localStorage.setItem('files', JSON.stringify(filesObj))
 
   history.back();
   location.href = '/'
