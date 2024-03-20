@@ -15,10 +15,6 @@ var htmlExts = [
   ['html', 'htm', 'mht'], 
 ]
 
-supptdImgExts.forEach(function(g, i) {
-  htmlExts.push(g)
-})
-
 var history = ['']
 var histI = 0
 var dtitle = document.title
