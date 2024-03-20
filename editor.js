@@ -26,8 +26,8 @@ var hasUpdatedPreview = false
 var isPreview = false
 var isImage = false
 var theAlert = false
-var main = document.querySelector('main')
-var textarea = main.querySelector('textarea')
+var container = document.querySelector('.container')
+var textarea = container.querySelector('textarea')
 
 function download() {
   let input = document.querySelector('textarea').value;
@@ -100,7 +100,7 @@ readfile.onchange = object => {
   isImage = checkImage(object, file, filename)
 
   if (isImage) {
-    checkHTML('image')
+    showImage()
     saveToLocalStorage(null)
   }
   else {
@@ -127,6 +127,14 @@ readfile.onchange = object => {
 
 textarea.addEventListener('keyup', checkHTML)
 
+function showImage() {
+  var src = textarea.value.slice(7, -2)
+  var image = document.querySelector('.image-preview')
+  image.src = src
+  image.alt = 'Image Preview'
+  image.setAttribute('shown', true)
+}
+
 function checkImage(element, file, name) {
   let reader = new FileReader();
   var path = ''
@@ -145,21 +153,7 @@ function checkImage(element, file, name) {
     g.forEach(function(e, i) {
       if (ext == e) {
         setTimeout(function() {
-        textarea.value = `<style>
-  html, body {
-    min-height: 100%;
-  }
-  body {
-    margin: 0;
-    display: grid;
-    place-items: center;
-  }
-  img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-</style>
-<img src="${path}" alt="">`
+          textarea.value = `image('${path}')`
         }, 1000)
         isImage = true
       }
@@ -170,8 +164,8 @@ function checkImage(element, file, name) {
 }
 
 function checkHTML(type) {
-  var preview = main.querySelector('iframe#preview')
-  var span = main.querySelector('span')
+  var preview = container.querySelector('iframe#preview')
+  var span = container.querySelector('span')
   let title = document.getElementById('title').value
   let ext = ''
   if (title.includes('.')) {
@@ -186,15 +180,10 @@ function checkHTML(type) {
     //      alert(true)
           let value = document.querySelector('textarea').value
           textarea = document.querySelector('textarea')
+          preview.setAttribute('shown', true)
           preview.style.display = ''
-          preview.style.width = '75%'
           span.style.display = ''
           textarea.style.borderRight = 'none;'
-          if (type == 'image') {
-            textarea.style.width = '0'
-            textarea.style.resize = 'none'
-            textarea.style.overflowY = 'hidden'
-          }
           let eleVal = 'documentElement'
           if (value.includes('<html')) {
             value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
@@ -253,7 +242,7 @@ outputsize()
 new ResizeObserver(outputsize).observe(textarea) 
 
 function replace(cmd) {
-  let value = main.querySelector('textarea').value
+  let value = container.querySelector('textarea').value
   let section = document.querySelector('section')
   let value1 = section.querySelector('input#replacethis').value
   let value2 = section.querySelector('input#withthis').value
@@ -330,7 +319,7 @@ textarea.addEventListener('keypress', saveToLocalStorage)
 
 function getShareLink() {
   let fileName = document.getElementById('title').value
-  let fContent = document.querySelector('main textarea').value
+  let fContent = document.querySelector('container textarea').value
   fContent = btoa(fContent)
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
   let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
@@ -346,7 +335,7 @@ function editFile(fileName=false) {
   let titleEle = document.getElementById('title')
   disabledEles.push(titleEle)  
 
-  let textAreaEle = document.querySelector('main textarea')
+  let textAreaEle = document.querySelector('container textarea')
   disabledEles.push(textAreaEle)
 
   disabledEles.forEach(function(ele, i) {

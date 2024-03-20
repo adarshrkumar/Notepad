@@ -36,19 +36,17 @@ body {
   flex-direction: column;
 }
 
-main {
+.container {
   flex: 1;
-  display: flex;
-  flex-direction: row;
+
+  display: grid;
+  grid-template-columns: var(--text-area, 1fr) var(--preview-area, 0) var(--image-area, 0);
+  align-items: center;
+
   overflow-y: hidden;
 }
 
-main > div {
-  width: 100%;
-  height: 100%;
-}
-
-main textarea {
+.container textarea {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -57,24 +55,44 @@ main textarea {
   }
 }
 
-main textarea.code {
+.container textarea.code {
   border-right: none;
   outline: none;
   resize: horizontal;
 }
 
-main > span {
+.container > span {
   width: 1px;
   height: 100%;
   background-color: gray;
 }
 
-main #preview {
-  flex: 1;
+.container #preview {
   height: 100%;
   border: solid 0.5px gray;
   border-left: none;
   box-sizing: border-box;
+  &:not([shown]) {
+    display: none;
+  }
+}
+
+.container:has(#preview[shown]) {
+  --text-area: auto;
+  --preview-area: 10%;
+  --image-area: 0;
+}
+
+.image-preview {
+  &:not([shown]) {
+    display: none;
+  }
+}
+
+.container:has(.image-preview[shown]) {
+  --text-area: auto;
+  --preview-area: 0;
+  --image-area: 10%;
 }
 
 .toolbar {
