@@ -128,7 +128,14 @@ readfile.onchange = object => {
 textarea.addEventListener('keyup', checkHTML)
 
 function checkImage(element, file, name) {
-  var path = element.value
+  let reader = new FileReader();
+  var path = ''
+  reader.onload = function () {
+    path = reader.result//.replace('data:', '').replace(/^.+,/, "");
+    console.log(path);
+  }
+  reader.readAsDataURL(file);
+
   var ext = name
   if (ext.includes('.')) {
     ext = ext.split('.').slice(-1)
