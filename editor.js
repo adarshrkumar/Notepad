@@ -145,9 +145,14 @@ function checkImage(element, file, name) {
       if (ext == e) {
         setTimeout(function() {
         textarea.value = `<style>
+  html, body {
+    min-height: 100%;
+  }
+  body {
+    display: grid;
+    place-items: center;
+  }
   img {
-    width: 100%;
-    height: 100%;
     max-width: 100%;
     max-height: 100%;
   }
