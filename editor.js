@@ -1,3 +1,16 @@
+var supptdImgExts = [
+  ['apng'], 
+  ['avif'], 
+  ['bmp'], 
+  ['gif'], 
+  ['ico', 'cur'], 
+  ['jpg', 'jpeg', 'jpe', 'jfif', 'pjpeg', 'pjp'], 
+  ['png'], 
+  ['webp'], 
+  ['tif', 'tiff'], 
+  ['xbm'], 
+]
+
 var history = ['']
 var histI = 0
 var dtitle = document.title
@@ -63,9 +76,19 @@ function setTitle() {
 var readfile = document.querySelector("input[type='file']#readfile");
 
 readfile.onchange = object => { 
-   // getting a hold of the file reference
-   var file = object.target.files[0]; 
-   var isImage = checkImage(file)
+  // getting a hold of the file reference
+  var file = object.target.files[0]; 
+
+  let filename = file.name
+  let ftitle = ''
+  if (filename.split('.').slice(-1) === 'txt') {
+    ftitle = filename.split(`.${filename.split('.').slice(-1)}`)[0]
+  }
+  else {
+    ftitle = filename
+  }
+
+  var isImage = checkImage(file, filename)
 
   if (!isImage) {
     // setting up the reader
@@ -78,14 +101,6 @@ readfile.onchange = object => {
     }
   }
 
-  let filename = readfile.value.split('\\').slice(-1)
-  let ftitle = ''
-  if (filename.split('.').slice(-1) === 'txt') {
-    ftitle = filename.split(`.${filename.split('.').slice(-1)}`)[0]
-  }
-  else {
-    ftitle = filename
-  }
   if (ftitle.split('').length <= 0) {
     document.title = dtitle
   }
@@ -99,16 +114,17 @@ readfile.onchange = object => {
 
 textarea.addEventListener('keyup', checkHTML)
 
-function checkImage(file) {
-  console.log(file)
-  return
-  var path = file.value
+function checkImage(file, name) {
+  var ext = name
+  if (ext.includes('.')) {
+    ext = ext.split('.').slice(-1)
+  }
 
-  let type = file.type
-  if (type.includes('/')) type = type.split('/')[0]
-
-  if (type === 'image') {
-    textarea.value = `<style>
+  var isImage = false
+  supptdImgExts.forEach(function(g) {
+    g.forEach(function(e, i) {
+      if (ext === e) {
+        textarea.value = `<style>
   img {
     width: 100%;
     height: 100%;
@@ -117,10 +133,13 @@ function checkImage(file) {
   }
 </style>
 <img src="${path}" alt="">`
-    checkHTML('image', true)
-    return true
-  }
-  return false
+        isImage = true
+        checkHTML('image', true)
+      }
+    })
+  })
+
+  return isImage
 }
 
 function checkHTML(type, override) {
