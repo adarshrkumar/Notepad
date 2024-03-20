@@ -95,17 +95,16 @@ readfile.onchange = object => {
     checkHTML('image', true)
     saveToLocalStorage(null)
   }
+  else {
+    // setting up the reader
+    var reader = new FileReader();
+    reader.readAsText(file,'UTF-8');
 
-  // else {
-  //   // setting up the reader
-  //   var reader = new FileReader();
-  //   reader.readAsText(file,'UTF-8');
-
-  //   // here we tell the reader what to do when it's done reading...
-  //   reader.onload = readerEvent => {
-  //     document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
-  //   }
-  // }
+    // here we tell the reader what to do when it's done reading...
+    reader.onload = readerEvent => {
+      document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
+    }
+  }
 
   if (ftitle.split('').length <= 0) {
     document.title = dtitle
@@ -130,7 +129,6 @@ function checkImage(element, file, name) {
   var isImage = false
   supptdImgExts.forEach(function(g) {
     g.forEach(function(e, i) {
-      console.log(`${ext} == ${e}: ${ext == e}`)
       if (ext == e) {
         textarea.value = `<style>
   img {
