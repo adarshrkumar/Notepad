@@ -118,8 +118,7 @@ readfile.onchange = object => {
 
 textarea.addEventListener('keyup', checkHTML)
 
-function showImage() {
-  var src = textarea.value.slice(7, -2)
+function showImage(src) {
   var image = document.querySelector('.image-preview')
   image.src = src
   image.alt = 'Image Preview'
@@ -127,12 +126,6 @@ function showImage() {
 }
 
 function checkImage(element, file, name) {
-  let reader = new FileReader();
-  var path = ''
-  reader.onload = function () {
-    path = reader.result//.replace('data:', '').replace(/^.+,/, "");
-  }
-  reader.readAsDataURL(file);
 
   var ext = name
   if (ext.includes('.')) {
@@ -143,14 +136,21 @@ function checkImage(element, file, name) {
   supptdImgExts.forEach(function(g) {
     g.forEach(function(e, i) {
       if (ext == e) {
-        setTimeout(function() {
-          showImage()
-          saveToLocalStorage({type: 'image', content: 'path'})
-        }, 1000)
         isImage = true
       }
     })
   })
+
+  let reader = new FileReader();
+  var path = ''
+  reader.onload = function () {
+    path = reader.result//.replace('data:', '').replace(/^.+,/, "");
+    if (isImage) {
+      showImage(path)
+      saveToLocalStorage({type: 'image', content: path})
+    }
+  }
+  reader.readAsDataURL(file);
 
   return isImage
 }
