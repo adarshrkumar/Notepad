@@ -100,7 +100,6 @@ body {
 .container:has(.image-preview[shown]) {
   --text-area: 0;
   --sidebar-area: 1fr;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   textarea {
@@ -110,6 +109,8 @@ body {
   }
   .image-preview[shown] {
     flex: 1;
+    box-sizing: border-box;
+    border: solid 1px black;
   }
 }
 
