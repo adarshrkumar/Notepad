@@ -41,7 +41,6 @@ body {
 
   display: grid;
   grid-template-columns: var(--text-area, 1fr) [sidebar-start] var(--sidebar-area, 0) [sidebar-end];
-  grid-template-rows: 1fr;
   align-items: center;
 
   overflow-y: hidden;
