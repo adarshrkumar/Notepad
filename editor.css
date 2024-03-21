@@ -104,6 +104,7 @@ body {
   display: flex;
   flex-direction: column;
   textarea {
+    display: none;
     padding-inline: 0;
     border: none;
   }
