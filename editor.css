@@ -101,11 +101,14 @@ body {
   --text-area: 0;
   --sidebar-area: 1fr;
   overflow-y: auto;
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   textarea {
     padding-inline: 0;
     border: none;
+  }
+  .image-preview[shown] {
+    flex: 1;
   }
 }
 
