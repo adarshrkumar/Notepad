@@ -41,6 +41,7 @@ body {
 
   display: grid;
   grid-template-columns: var(--text-area, 1fr) [sidebar-start] var(--sidebar-area, 0) [sidebar-end];
+  grid-template-rows: 1fr;
   align-items: center;
 
   overflow-y: hidden;
@@ -100,6 +101,8 @@ body {
   --text-area: 0;
   --sidebar-area: 1fr;
   overflow-y: auto;
+  /* display: flex;
+  flex-direction: column; */
   textarea {
     padding-inline: 0;
   }
