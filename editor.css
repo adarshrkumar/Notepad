@@ -56,15 +56,15 @@ body {
 }
 
 .container textarea.code {
-  border-right: none;
+  /* border-right: none; */
   outline: none;
   resize: horizontal;
 }
 
-.container > span {
-  width: 1px;
+.container > #resizer {
+  /* width: 1px;
   height: 100%;
-  background-color: gray;
+  background-color: gray; */
 }
 
 .container #preview {
