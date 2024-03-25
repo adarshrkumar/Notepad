@@ -72,6 +72,7 @@ body {
   border: solid 0.5px gray;
   border-left: none;
   box-sizing: border-box;
+  grid-column: preview-area;
   &:not([shown]) {
     display: none;
   }
@@ -88,6 +89,7 @@ body {
 .image-preview {
   max-height: 100%;
   max-width: 100%;
+  grid-column: image-area;
   &:not([shown]) {
     display: none;
   }
@@ -107,7 +109,6 @@ body {
     border: none;
   }
   .image-preview[shown] {
-    flex: 1;
     box-sizing: border-box;
     border: solid 1px black;
   }
