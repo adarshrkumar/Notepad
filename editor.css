@@ -72,7 +72,7 @@ body {
   border: solid 0.5px gray;
   border-left: none;
   box-sizing: border-box;
-  grid-column: preview-area;
+  grid-column: sidebar-area;
   &:not([shown]) {
     display: none;
   }
@@ -82,14 +82,14 @@ body {
 }
 
 .container:has(#preview[shown]) {
-  --text-area: auto;
+  --text-area: 1fr;
   --sidebar-area: 10%;
 }
 
 .image-preview {
   max-height: 100%;
   max-width: 100%;
-  grid-column: image-area;
+  grid-column: sidebar-area;
   &:not([shown]) {
     display: none;
   }
