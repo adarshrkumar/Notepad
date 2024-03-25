@@ -70,6 +70,7 @@ body {
 
 .container #preview {
   height: 100%;
+  width: auto;
   border: solid 0.5px gray;
   border-left: none;
   box-sizing: border-box;
@@ -84,7 +85,7 @@ body {
 
 .container:has(#preview[shown]) {
   --text-area: 1fr;
-  --sidebar-area: 10%;
+  --sidebar-area: 20%;
 }
 
 .image-preview {
