@@ -517,7 +517,7 @@ function deleteFile(e) {
   location.href = '/'
 }
 
-setFontSize(fsDefault)
+fontSizeChange(null, fsDefault)
 function fontSizeChange(e, size) {
   var finput = document.getElementById('fs-input')
   var slider = document.getElementById('fs-slider')
