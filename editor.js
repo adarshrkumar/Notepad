@@ -534,6 +534,6 @@ function fontSizeChange(e, size) {
 }
 
 function setFontSize(s) {
-  document.querySelector('.fs-unit').textContent = pt 
+  document.querySelector('.fs-unit').textContent = 'pt'
   textarea.style.fontSize = `${s}${fsUnit}`
 }
