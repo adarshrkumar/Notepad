@@ -374,37 +374,37 @@ var functions = [
   {
     id: 'title', 
     event: 'onkeyup', 
-    function: function(e) { setTitle(e) }, 
+    function: setTitle, 
   }, 
   {
     id: 'editFile', 
     event: 'onclick', 
-    function: function(e) { editFile(e) }, 
+    function: editFile, 
   }, 
   {
     id: 'upload', 
     event: 'onclick', 
-    function: function(e) { upload(e) }, 
+    function: upload, 
   }, 
   {
     id: 'download', 
     event: 'onclick', 
-    function: function(e) { download(e) }, 
+    function: download, 
   }, 
   {
     id: 'delete',
     event: 'onclick', 
-    function: function(e) { deleteFile(e) },  
+    function: deleteFile,  
   }, 
   {
     id: 'undo',
     event: 'onclick', 
-    function: function(e) { undo(e) },  
+    function: undo,  
   }, 
   {
     id: 'redo',
     event: 'onclick', 
-    function: function(e) { redo(e) },  
+    function: redo,  
   }, 
   {
     id: 'replaceThis', 
@@ -419,18 +419,27 @@ var functions = [
   {
     id: 'makeLink', 
     event: 'onclick', 
-    function: function(e) { getShareLink(e) }, 
+    function: getShareLink, 
   }, 
   {
     id: 'enableHTML', 
     event: 'onclick', 
-    function: function(e) { checkHTML(e) }, 
+    function: checkHTML, 
+  }, 
+  {
+    id: 'fs-input', 
+    event: 'onchange', 
+    function: fontSizeChange, 
+  }, 
+  {
+    id: 'fs-slider', 
+    event: 'onchange', 
+    function: fontSizeChange, 
   }, 
 ]
 
 function addEventListeners() {
   functions.forEach(function(f, i) {
-    let id = f.id
     let isNeeds = false
     addListener(f)
   })
@@ -503,4 +512,25 @@ function deleteFile(e) {
 
   history.back();
   location.href = '/'
+}
+
+setFontSize(12)
+function fontSizeChange(e, size) {
+  var finput = document.getElementById('fs-input')
+  var slider = document.getElementById('fs-slider')
+
+  if (!!e) {
+    if (!!e.target) {
+      if (!!e.target.value) size = parseInt(e.target.value)
+    }
+  }
+
+  finput.value = size
+  slider.value = size
+
+  setFontSize(size)
+}
+
+function setFontSize(s) {
+  textarea.style.fontSize = `${s}pt`
 }

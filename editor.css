@@ -138,6 +138,10 @@ input:not(input[type='file']) {
   max-width: 150px;
 }
 
+.fs-input {
+  min-width: 2ch; width: fit-content;
+}
+
 [onclick] {
   cursor: pointer;
 }
