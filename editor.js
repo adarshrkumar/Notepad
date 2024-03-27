@@ -16,6 +16,7 @@ var htmlExts = [
 ]
 
 var fsUnit = 'pt'
+var fsDefault = 10
 
 var history = ['']
 var histI = 0
@@ -516,7 +517,7 @@ function deleteFile(e) {
   location.href = '/'
 }
 
-setFontSize(12)
+setFontSize(fsDefault)
 function fontSizeChange(e, size) {
   var finput = document.getElementById('fs-input')
   var slider = document.getElementById('fs-slider')
