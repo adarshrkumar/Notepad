@@ -15,6 +15,8 @@ var htmlExts = [
   ['html', 'htm', 'mht'], 
 ]
 
+var fsUnit = 'pt'
+
 var history = ['']
 var histI = 0
 var dtitle = document.title
@@ -532,5 +534,6 @@ function fontSizeChange(e, size) {
 }
 
 function setFontSize(s) {
-  textarea.style.fontSize = `${s}pt`
+  document.querySelector('.fs-unit').textContent = pt
+  textarea.style.fontSize = `${s}${fsUnit}`
 }
