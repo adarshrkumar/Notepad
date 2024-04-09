@@ -1,5 +1,24 @@
 var currentState = null
 
+var menuItems = [
+  {
+    name: 'Save', 
+    func: saveToLocalStorage, 
+  }, 
+  {
+    name: 'Delete', 
+    func: deleteFile, 
+  }, 
+  {
+    name: 'Upload', 
+    func: upload, 
+  }, 
+  {
+    name: 'Download', 
+    func: download, 
+  }, 
+]
+
 tinymce.init({
   selector: 'textarea', 
   resize: false, 
@@ -15,7 +34,7 @@ tinymce.init({
   ], 
 
   menu: {
-    newFile: { title: 'File', items: 'save saveas | upload download | print | delete' }
+    newFile: { title: 'File', items: 'save delete | upload download | print' }
   },
   menubar: 'newFile edit view insert format tools table help',
 
@@ -24,8 +43,10 @@ tinymce.init({
   setup: (editor) => {
     currentState = 'editor'
     editor.on('change', () => {
-      saveToLocalStorage();
+      saveToLocalStorage(editor);
     });
+
+    addMenuItems()
   }
 });
 
@@ -492,4 +513,28 @@ function fontSizeChange(e, size) {
 function setFontSize(s) {
   document.querySelector('.fs-unit').textContent = 'pt'
   textarea.style.fontSize = `${s}${fsUnit}`
+}
+
+// save delete | upload download | print
+function addMenuItems(editor) {
+  addMenuItems.forEach(function(m, i) {
+    var mId = m.name.toLowerCase()
+
+    if (mId.includes(' ')) {
+      mId = mId.split(' ')
+      mId.forEach(function(p, i) {
+        if (i !== 0) {
+          mId[i] = `${p[0].toUpperCase()}${p.slice(1)}`
+        }
+      })
+      mId = mId.join('')
+    }
+
+    editor.ui.registry.addMenuItem(mId, {
+      text: m.name,
+      onAction: () => m.func()
+    });
+  })
+
+
 }
