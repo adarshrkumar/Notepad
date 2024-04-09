@@ -1,11 +1,11 @@
 var bodyHTML = document.body.innerHTML
   
-var code = parent.document.querySelector('textarea').value
+var code = parent.tinymce.activeEditor.getContent({ format: 'html' })
 var lastCode = ''
 addCode()
 setInterval(addCode, 1)
 function addCode() {
-  var code = parent.document.querySelector('textarea').value
+  code = tinymce.activeEditor.getContent({ format: 'html' });
   if (!!code) {
     if (code !== lastCode) {
        if (code.endsWith('<')) {
