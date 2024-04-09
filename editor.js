@@ -517,7 +517,7 @@ function setFontSize(s) {
 
 // save delete | upload download | print
 function addMenuItems(editor) {
-  addMenuItems.forEach(function(m, i) {
+  menuItems.forEach(function(m, i) {
     var mId = m.name.toLowerCase()
 
     if (mId.includes(' ')) {
