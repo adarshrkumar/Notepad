@@ -13,6 +13,12 @@ tinymce.init({
     'insertdatetime', 
     'help'
   ], 
+
+  menu: {
+    newFile: { title: 'File', items: 'save saveas | upload download | print | delete' }
+  },
+  menubar: 'newFile edit view insert format tools table help',
+
   placeholder: 'Type here...', 
   content_style: '.toolbar { border-bottom: none; }', 
   setup: (editor) => {
