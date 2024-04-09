@@ -44,47 +44,9 @@ else if (action === 'filelink') {
     let fContent = urlParams.get('content')
     fContent = atob(fContent)
 
-    let disabledEles = []
-
-    let titleEle = document.getElementById('title')
-    titleEle.value = fName
-    disabledEles.push(titleEle)  
-
     let textAreaEle = document.querySelector('main textarea')
-    textAreaEle.value = fContent
-    disabledEles.push(textAreaEle)
-
-    disabledEles.forEach(function(ele, i) {
-        ele.setAttribute('disabled', '')
-        ele.style.cursor = 'pointer'
-        ele.onclick = function(e) { editFile(e) }
-    })
-
-    let removeEles = [
-        'enableHTML', 
-        'undo', 
-        'redo', 
-        'replacethis', 
-        'withthis', 
-        'replaceThis', 
-        'replaceAll', 
-    ]
-
-    removeEles.forEach(function(e, i) {
-        let element = document.querySelector(e)
-        if (!!element === false) {
-            element = document.getElementById(e)
-        }
-        if (!!element) {
-            element.parentNode.setAttribute('hidden', '')
-        }
-    })
-
-    document.getElementById('upload').onclick = function(e) {}
-    document.getElementById('upload').parentNode.href = `${location.pathname}?action=upload`
-
-    let editBtn = document.getElementById('editFile')
-    editBtn.parentNode.removeAttribute('hidden')
+    if (fContent.includes('\n')) fContent = fContent.split('\n').join('<br>')
+    tinymce.activeEditor.setContent(fContent);
 }
 else {
     location.href = '/'
