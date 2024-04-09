@@ -115,6 +115,7 @@ body {
   flex-direction: row;
   padding: 8px;
   gap: 8px;
+  border-bottom: solid 1px gray;
 }
 
 .toolbar > :is(div, a):not([hidden]) {
