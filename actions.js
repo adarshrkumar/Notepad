@@ -34,7 +34,9 @@ else if (action === 'openfile') {
         showImage(fContent)
     }
     else {
-        textarea.value = fContent
+        var text = fContent
+        if (text.includes('\n')) text = text.split('\n').join('<br>')
+        tinymce.activeEditor.setContent(text);
     }
 }
 else if (action === 'filelink') {

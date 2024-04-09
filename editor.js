@@ -29,7 +29,7 @@ var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
 
 function download() {
-  let input = document.querySelector('textarea').value;
+  let input = tinymce.activeEditor.getContent({ format: 'text' });
 
   // create a new Blob object with the content you want to assign
   let blob = new Blob([input], {type: "text/plain"});
@@ -49,17 +49,8 @@ function download() {
   link.href = window.URL.createObjectURL(blob);
   let title = document.getElementById('title').value
   if (!!title === false) title = 'New Text File'
-  let ext = ''
-  if (title.includes('.')) {
-    ext = ext.split('.')[1]
-  }
-  if (ext === 'txt') {
-    link.download = `${title}.txt`  ;
-  }
-  else {
-    link.download = `${title}`  ;
-  }
-  if (Boolean(document.querySelector('textarea').value) || !!title) {
+  link.download = `${title}.tnynpd`;
+  if (!!document.querySelector('textarea').value || !!title) {
     link.click();
   }
   checkHTML()
@@ -104,7 +95,9 @@ readfile.onchange = object => {
 
     // here we tell the reader what to do when it's done reading...
     reader.onload = readerEvent => {
-      document.querySelector('textarea').value = readerEvent.target.result; // this is the content!
+      var text = readerEvent.target.result
+      if (text.includes('\n')) text = text.split('\n').join('<br>')
+      tinymce.activeEditor.setContent(text);
     }
   }
 
@@ -114,7 +107,6 @@ readfile.onchange = object => {
   else {
     document.title = `${ftitle} | ${dtitle}`
   }
-  document.querySelector('input#title').value = ftitle
   document.getElementById('title').value = ftitle
   checkHTML()
 }
@@ -172,7 +164,7 @@ function checkHTML(type) {
       if (ext == e) {
         setTimeout(function() {
     //      alert(true)
-          let value = document.querySelector('textarea').value
+          let value = tinymce.activeEditor.getContent({ format: 'text' });
           textarea = document.querySelector('textarea')
           preview.setAttribute('shown', '')
           span.style.display = ''
@@ -222,7 +214,7 @@ function checkHTML(type) {
   }
   histI++
   history[histI + 1] = false
-  history[histI] = document.querySelector('textarea').value
+  history[histI] = tinymce.activeEditor.getContent({ format: 'text' });
 }
 
 function outputsize() {
@@ -234,49 +226,10 @@ outputsize()
  
 new ResizeObserver(outputsize).observe(textarea) 
 
-function replace(cmd) {
-  let value = container.querySelector('textarea').value
-  let section = document.querySelector('section')
-  let value1 = section.querySelector('input#replacethis').value
-  let value2 = section.querySelector('input#withthis').value
-  if (cmd === 'all') {
-    while (value.includes(value1)) {
-      value = value.replace(value1, value2)
-    }
-  }
-  if (cmd === 'single') {
-    value = value.replace(value1, value2)
-  }
-  textarea.value = value
-  checkHTML()
-}
-
-function undo() {
-  if (histI > 0) {
-    histI--
-    while (history[histI] === false) {
-      histI--
-    }
-    document.querySelector('textarea').value = history[histI]
-  }
-  checkHTML()
-}
-
-function redo() {
-  if (histI <= history.length - 1) {
-    histI++
-    while (history[histI] === false) {
-      histI++
-    }
-    document.querySelector('textarea').value = history[histI]
-  }
-  checkHTML()
-}
-
 checkHTML()
 
 function saveToLocalStorage(info) {
-  let value = document.querySelector('textarea').value
+  let value = tinymce.activeEditor.getContent({ format: 'text' });
   var type = 'text'
   if (!!info) {
     if (!!info.type) {
@@ -323,7 +276,7 @@ textarea.addEventListener('keypress', saveToLocalStorage)
 
 function getShareLink() {
   let fileName = document.getElementById('title').value
-  let fContent = document.querySelector('container textarea').value
+  let fContent = tinymce.activeEditor.getContent({ format: 'text' });
   fContent = btoa(fContent)
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
   let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
