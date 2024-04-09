@@ -8,6 +8,7 @@
     <link href="editor.css" rel="stylesheet" type="text/css" />
     <link href="icons.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tiny.cloud/1/qe1yig5tgvcqpzeeabwqce18y6ids1owccr5y6ief739ddhq/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
   </head>
   <body>
     <header class="toolbar">
@@ -34,12 +35,12 @@
 <!--      <div>
         <button id="enableHTML">Enable HTML Preview</button>
       </div>      -->
-      <div>
+      <!-- <div>
         <button id="undo">Undo</button>
       </div>           
       <div>
         <button id="redo">Redo</button>
-      </div>           
+      </div>            -->
       <!-- <div>
         <input id="replacethis" placeholder="Replace This"/>
       </div>
@@ -55,11 +56,11 @@
       <div>
         <button id="makeLink">Generate Link to File</button>
       </div>
-      <div>
+      <!-- <div>
         <span>Font Size:&nbsp;</span>
         <input type="number" id="fs-input"><span class="fs-unit">pt</span>
         <input type="range" id="fs-slider" min="0" max="100">
-      </div>
+      </div> -->
     </header>
     <input id="readfile" type="file" style="opacity: 0; width: 0; height: 0;" name="readfile" accept="text/*,image/*,.md,html/*,.mht,.svg,.astro,.vue,.js/*,.jsxm,.jsm,.jsxm,ts/*,.ts,.tsx,.tsm,.tsxm,.scss,.sass,json/*,.bat,.cmd,.sh,.yml,.yaml,.🗿">
     <main class="container">
@@ -68,6 +69,21 @@
       <iframe id="preview" src="  "></iframe>
       <img class="image-preview" src="null" alt="">
     </main>
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+          { value: 'First.Name', title: 'First Name' },
+          { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+      });
+    </script>
     <a id="downloader"></a>
     <input id="eleVal" hidden>
     <script src="editor.js"></script>
