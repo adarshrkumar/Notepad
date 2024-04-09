@@ -1,11 +1,25 @@
+var currentState = null
+
+tinymce.init({
+  selector: 'textarea', 
+  resize: false, 
+  placeholder: 'Type here...', 
+  content_style: '.toolbar { border-bottom: none; }', 
+  setup: (editor) => {
+    currentState = 'editor'
+    editor.on('change', () => {
+      saveToLocalStorage();
+    });
+  }
+});
+
 var supptdImgExts = [
-  ['apng'], 
   ['avif'], 
   ['bmp'], 
   ['gif'], 
   ['ico', 'cur'], 
   ['jpg', 'jpeg', 'jpe', 'jfif', 'pjpeg', 'pjp'], 
-  ['png'], 
+  ['apng', 'png'], 
   ['webp'], 
   ['tif', 'tiff'], 
   ['xbm'], 
@@ -18,12 +32,8 @@ var htmlExts = [
 var fsUnit = 'pt'
 var fsDefault = 10
 
-var history = ['']
-var histI = 0
 var dtitle = document.title
 var hasUpdatedPreview = false
-var isPreview = false
-var isImage = false
 var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
@@ -87,8 +97,8 @@ readfile.onchange = object => {
     ftitle = filename
   }
 
-  isImage = checkImage(object, file, filename)
-  if (!isImage) {
+  currentState = checkImage(object, file, filename, currentState)
+  if (currentState !== 'image') {
     // setting up the reader
     var reader = new FileReader();
     reader.readAsText(file,'UTF-8');
@@ -120,18 +130,17 @@ function showImage(src) {
   image.setAttribute('shown', '')
 }
 
-function checkImage(element, file, name) {
+function checkImage(element, file, name, state) {
 
   var ext = name
   if (ext.includes('.')) {
     ext = ext.split('.').slice(-1)
   }
 
-  var isImage = false
   supptdImgExts.forEach(function(g) {
     g.forEach(function(e, i) {
       if (ext == e) {
-        isImage = true
+        state = 'image'
       }
     })
   })
@@ -139,14 +148,14 @@ function checkImage(element, file, name) {
   let reader = new FileReader();
   reader.onload = function () {
     var path = reader.result//.replace('data:', '').replace(/^.+,/, "");
-    if (isImage) {
+    if (currentState === 'image') {
       showImage(path)
       saveToLocalStorage({type: 'image', content: path})
     }
   }
   reader.readAsDataURL(file);
 
-  return isImage
+  return state
 }
 
 function checkHTML(type) {
@@ -186,9 +195,9 @@ function checkHTML(type) {
             eleVal = 'body'
           }
           document.getElementById('eleVal').value = eleVal
-          isPreview = true
+          currentState = 'preview'
           if (type !== 'image' && !!theAlert === false) {
-            theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK, to copy!')
+            theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK to copy to clipboard!')
             if (!!theAlert) {
               prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
             }
@@ -204,7 +213,7 @@ function checkHTML(type) {
       }
     })
   })
-  if (!isHTML && isPreview === true) {
+  if (!isHTML && currentState === 'preview') {
     preview.removeAttribute('shown')
     span.style.display = 'none'
     preview.src = `/preview.html`
@@ -212,13 +221,10 @@ function checkHTML(type) {
     hasShown = false
     document.querySelector('textarea').removeAttribute('id')
   }
-  histI++
-  history[histI + 1] = false
-  history[histI] = tinymce.activeEditor.getContent({ format: 'text' });
 }
 
 function outputsize() {
-  if (!isImage && document.querySelector('textarea').clientWidth < 150) {
+  if (currentState !== 'image' && document.querySelector('textarea').clientWidth < 150) {
     textarea.style.width = `${150}px`
   }
 }

@@ -52,19 +52,6 @@
       <img class="image-preview" src="null" alt="">
     </main>
     <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-    <script>
-      tinymce.init({
-        selector: 'textarea', 
-        resize: false, 
-        placeholder: 'Type here...', 
-        content_style: '.toolbar { border-bottom: none; }', 
-        setup: (editor) => {
-          editor.on('change', () => {
-            saveToLocalStorage();
-          });
-        }
-      });
-    </script>
     <a id="downloader"></a>
     <input id="eleVal" hidden>
     <script src="editor.js"></script>
