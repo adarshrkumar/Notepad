@@ -400,26 +400,6 @@ var functions = [
     function: deleteFile,  
   }, 
   {
-    id: 'undo',
-    event: 'onclick', 
-    function: undo,  
-  }, 
-  {
-    id: 'redo',
-    event: 'onclick', 
-    function: redo,  
-  }, 
-  {
-    id: 'replaceThis', 
-    event: 'onclick', 
-    function: function(e) { replace('single', e) }, 
-  }, 
-  {
-    id: 'replaceAll', 
-    event: 'onclick', 
-    function: function(e) { replace('all', e) }, 
-  }, 
-  {
     id: 'makeLink', 
     event: 'onclick', 
     function: getShareLink, 
