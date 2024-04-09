@@ -46,7 +46,7 @@ tinymce.init({
       saveToLocalStorage(editor);
     });
 
-    addMenuItems()
+    addMenuItems(editor)
   }
 });
 
