@@ -3,6 +3,16 @@ var currentState = null
 tinymce.init({
   selector: 'textarea', 
   resize: false, 
+  plugins: [
+    'link', 'image', 'lists', 'anchor', 'media', 'table', 'emoticons',     
+    'preview', 'pagebreak', 'fullscreen', 'template', 
+
+    'autolink', 
+    'searchreplace', 'wordcount', 
+    'visualblocks', 'visualchars', 'code', 
+    'insertdatetime', 
+    'help'
+  ], 
   placeholder: 'Type here...', 
   content_style: '.toolbar { border-bottom: none; }', 
   setup: (editor) => {
