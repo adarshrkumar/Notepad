@@ -109,27 +109,8 @@ body {
   }
 }
 
-.toolbar {
-/*  min-width: 150px; */
-  display: flex;
-  flex-direction: row;
-  padding: 8px;
-  gap: 8px;
-  border-bottom: solid 1px gray;
-}
-
-.toolbar > :is(div, a):not([hidden]) {
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-}
-
 a#downloader {
   display: none;
-}
-
-input:not(input[type='file']) {
-  max-width: 150px;
 }
 
 #fs-input {
