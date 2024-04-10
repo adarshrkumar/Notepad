@@ -1,6 +1,7 @@
 var bodyHTML = document.body.innerHTML
   
-var code = parent.tinymce.activeEditor.getContent({ format: 'html' })
+var code = (new URLSearchParams(location.search)).get('content')
+if (!!code) code = btoa(code)
 var lastCode = ''
 addCode()
 setInterval(addCode, 1)

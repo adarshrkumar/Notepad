@@ -80,7 +80,6 @@ var fsUnit = 'pt'
 var fsDefault = 10
 
 var dtitle = document.title
-var hasUpdatedPreview = false
 var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
@@ -258,10 +257,7 @@ function checkHTML(type) {
             }
             hasShown = true
           }
-          if (hasUpdatedPreview === false) {
-            preview.src = `/preview.html`
-            hasUpdatedPreview = true
-          }
+          preview.src = `/preview.html?content=${btoa(value)}`
           document.querySelector('textarea').classList.add('code')
         }, 1)
         isHTML = true
