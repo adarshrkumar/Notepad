@@ -1,3 +1,4 @@
+var previewWindow = null
 var currentState = null
 var docTitle = ''
 
@@ -53,7 +54,6 @@ tinymce.init({
     currentState = 'editor'
     editor.on('change', () => {
       saveFile(editor);
-      checkHTML()
     });
 
     addMenuItems(editor)
@@ -71,13 +71,6 @@ var supptdImgExts = [
   ['tif', 'tiff'], 
   ['xbm'], 
 ]
-
-var htmlExts = [
-  ['html', 'htm', 'mht'], 
-]
-
-var fsUnit = 'pt'
-var fsDefault = 10
 
 var dtitle = document.title
 var theAlert = false
@@ -118,7 +111,6 @@ function download() {
   if (!!title) {
     link.click();
   }
-  checkHTML()
 }
 
 function setTitle() {
@@ -133,7 +125,6 @@ function setTitle() {
     document.title = `${title} | ${dtitle}`
   }
   ext = title.split('.').slice(-1)
-  checkHTML()
 }
 
 var readfile = document.querySelector("input[type='file']#readfile");
@@ -172,7 +163,6 @@ readfile.onchange = object => {
     document.title = `${title} | ${dtitle}`
   }
   docTitle = title
-  checkHTML()
 }
 
 function showImage(src) {
@@ -183,7 +173,6 @@ function showImage(src) {
 }
 
 function checkImage(element, file, name, state) {
-
   var ext = name
   if (ext.includes('.')) {
     ext = ext.split('.').slice(-1)
@@ -210,9 +199,7 @@ function checkImage(element, file, name, state) {
   return state
 }
 
-function checkHTML(type) {
-  var preview = container.querySelector('iframe#preview')
-  var span = container.querySelector('span')
+function previewHTML() {
   let title = docTitle
   let ext = ''
   if (title.includes('.')) {
@@ -238,40 +225,7 @@ function checkHTML(type) {
   if (value.includes('<svg')) {
     eleVal = 'body'
   }
-
-  var isHTML = false
-  htmlExts.forEach(function(g) {
-    g.forEach(function(e, i) {
-      if (ext == e) {
-        setTimeout(function() {
-    //      alert(true)
-          preview.setAttribute('shown', '')
-          span.style.display = ''
-          textarea.style.borderRight = 'none'
-          document.getElementById('eleVal').value = eleVal
-          currentState = 'preview'
-          if (type !== 'image' && !!theAlert === false) {
-            theAlert = confirm('There is a default css file that you can add to your code, just add the following code: `<link rel="stylesheet" href="/default.css" />`. Pro tip: click OK to copy to clipboard!')
-            if (!!theAlert) {
-              prompt('Default CSS File Import Code', '<link rel="stylesheet" href="/default.css" />')
-            }
-            hasShown = true
-          }
-          preview.src = `/preview.html?content=${btoa(value)}`
-          document.querySelector('textarea').classList.add('code')
-        }, 1)
-        isHTML = true
-      }
-    })
-  })
-  if (!isHTML && currentState === 'preview') {
-    preview.removeAttribute('shown')
-    span.style.display = 'none'
-    preview.src = `/preview.html`
-    textarea.style.removeProperty('border-right')
-    hasShown = false
-    document.querySelector('textarea').removeAttribute('id')
-  }
+  previewWindow = open(`/preview.html?eleval=${eleVal}&content=${btoa(value)}`)
 }
 
 function outputsize() {
@@ -282,8 +236,6 @@ function outputsize() {
 outputsize()
  
 new ResizeObserver(outputsize).observe(textarea) 
-
-checkHTML()
 
 function saveFile(info) {
   let value = tinymce.activeEditor.getContent({ format: 'text' });

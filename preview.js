@@ -1,10 +1,13 @@
+var urlParams = new URLSearchParams(location.search)
 var bodyHTML = document.body.innerHTML
   
 function getCode() {
-  (new URLSearchParams(location.search)).get('content')
-  if (!!code) code = btoa(code)
+  var c = urlParams.get('content')
+  if (!!c) c = btoa(c)
+  return c
 }
 
+var eleVal = urlParams.get('eleval')
 var code = getCode()
 addCode()
 setInterval(addCode, 1)
@@ -42,7 +45,7 @@ function addCode() {
         ELEMENTS[i] = ''
       }
     })
-    document[parent.document.getElementById('eleVal').value].innerHTML = code + needsClose + bodyHTML
+    document[eleVal].innerHTML = code + needsClose + bodyHTML
   }
 }
 
