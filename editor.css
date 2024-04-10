@@ -121,7 +121,7 @@ a#downloader {
   cursor: pointer;
 }
 
-[style='display: none;']:focus {
+[style*='display: none']:focus {
   display: normal;
 }
 
