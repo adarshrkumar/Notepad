@@ -95,7 +95,7 @@ function rename(newName) {
 }
 
 function download() {
-  let input = tinymce.activeEditor.getContent({ format: 'text' });
+  let input = tinymce.activeEditor.getContent({ format: 'html' });
 
   // create a new Blob object with the content you want to assign
   let blob = new Blob([input], {type: "text/plain"});
@@ -221,33 +221,35 @@ function checkHTML(type) {
     ext = title.split('.')[1]
   }
 
+  let value = tinymce.activeEditor.getContent({ format: 'html' });
+  textarea = document.querySelector('textarea')
+
+  let eleVal = 'documentElement'
+  if (value.includes('<html')) {
+    value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
+    if (value.includes('</html>')) {
+      value = value.split('</html>')[0]
+    }
+  }
+  else if (value.includes('<xml')) {
+    value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
+  }
+  else if (value.includes('<?xml')) {
+    value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
+  }
+  if (value.includes('<svg')) {
+    eleVal = 'body'
+  }
+
   var isHTML = false
   htmlExts.forEach(function(g) {
     g.forEach(function(e, i) {
       if (ext == e) {
         setTimeout(function() {
     //      alert(true)
-          let value = tinymce.activeEditor.getContent({ format: 'text' });
-          textarea = document.querySelector('textarea')
           preview.setAttribute('shown', '')
           span.style.display = ''
           textarea.style.borderRight = 'none'
-          let eleVal = 'documentElement'
-          if (value.includes('<html')) {
-            value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
-            if (value.includes('</html>')) {
-              value = value.split('</html>')[0]
-            }
-          }
-          else if (value.includes('<xml')) {
-            value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
-          }
-          else if (value.includes('<?xml')) {
-            value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
-          }
-          if (value.includes('<svg')) {
-            eleVal = 'body'
-          }
           document.getElementById('eleVal').value = eleVal
           currentState = 'preview'
           if (type !== 'image' && !!theAlert === false) {
@@ -333,7 +335,7 @@ function saveFile(info) {
 
 function getShareLink() {
   let fileName = docTitle
-  let fContent = tinymce.activeEditor.getContent({ format: 'text' });
+  let fContent = tinymce.activeEditor.getContent({ format: 'html' });
   fContent = btoa(fContent)
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
   let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
