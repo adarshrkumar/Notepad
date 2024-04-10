@@ -24,7 +24,7 @@ tinymce.init({
   resize: false, 
   plugins: [
     'link', 'image', 'lists', 'anchor', 'media', 'table', 'emoticons',     
-    'preview', 'pagebreak', 'fullscreen', 'template', 
+    'preview', 'pagebreak', 'fullscreen', 
 
     'autolink', 
     'searchreplace', 'wordcount', 
