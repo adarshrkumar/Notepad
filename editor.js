@@ -1,9 +1,14 @@
 var currentState = null
+var docTitle = ''
 
-var menuItems = [
+var custMenuItems = [
+  {
+    name: 'Rename', 
+    func: rename, 
+  }, 
   {
     name: 'Save', 
-    func: saveToLocalStorage, 
+    func: saveFile, 
   }, 
   {
     name: 'Delete', 
@@ -17,6 +22,10 @@ var menuItems = [
     name: 'Download', 
     func: download, 
   }, 
+  {
+    name: 'Share', 
+    func: getShareLink, 
+  }
 ]
 
 tinymce.init({
@@ -34,7 +43,7 @@ tinymce.init({
   ], 
 
   menu: {
-    newFile: { title: 'File', items: 'save delete | upload download | print' }
+    newFile: { title: 'File', items: 'rename save delete | upload download | share print' }
   },
   menubar: 'newFile edit view insert format tools table help',
 
@@ -43,7 +52,8 @@ tinymce.init({
   setup: (editor) => {
     currentState = 'editor'
     editor.on('change', () => {
-      saveToLocalStorage(editor);
+      saveFile(editor);
+      checkHTML()
     });
 
     addMenuItems(editor)
@@ -75,6 +85,10 @@ var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
 
+function rename() {
+  docTitle = prompt("Rename Document", docTitle)
+}
+
 function download() {
   let input = tinymce.activeEditor.getContent({ format: 'text' });
 
@@ -94,27 +108,27 @@ function download() {
 
   let link = document.querySelector('a#downloader');
   link.href = window.URL.createObjectURL(blob);
-  let title = document.getElementById('title').value
+  let docTitle = docTitle
   if (!!title === false) title = 'New Text File'
   link.download = `${title}.tnynpd`;
-  if (!!document.querySelector('textarea').value || !!title) {
+  if (!!title) {
     link.click();
   }
   checkHTML()
 }
 
 function setTitle() {
-  let ftitle = document.querySelector('input#title').value
-  if (ftitle.split('').length <= 0) {
+  let title = docTitle
+  if (title.split('').length <= 0) {
     document.title = dtitle
   }
   else {
     if (ftitle.includes('.')) {
       ext = ''
     }
-    document.title = `${ftitle} | ${dtitle}`
+    document.title = `${title} | ${dtitle}`
   }
-  ext = ftitle.split('.').slice(-1)
+  ext = title.split('.').slice(-1)
   checkHTML()
 }
 
@@ -126,12 +140,12 @@ readfile.onchange = object => {
   if (!file) return 
 
   let filename = file.name
-  let ftitle = ''
+  let title = ''
   if (filename.split('.').slice(-1) === 'txt') {
-    ftitle = filename.split(`.${filename.split('.').slice(-1)}`)[0]
+    title = filename.split(`.${filename.split('.').slice(-1)}`)[0]
   }
   else {
-    ftitle = filename
+    title = filename
   }
 
   currentState = checkImage(object, file, filename, currentState)
@@ -148,17 +162,15 @@ readfile.onchange = object => {
     }
   }
 
-  if (ftitle.split('').length <= 0) {
+  if (title.split('').length <= 0) {
     document.title = dtitle
   }
   else {
-    document.title = `${ftitle} | ${dtitle}`
+    document.title = `${title} | ${dtitle}`
   }
-  document.getElementById('title').value = ftitle
+  docTitle = title
   checkHTML()
 }
-
-textarea.addEventListener('keyup', checkHTML)
 
 function showImage(src) {
   var image = document.querySelector('.image-preview')
@@ -187,7 +199,7 @@ function checkImage(element, file, name, state) {
     var path = reader.result//.replace('data:', '').replace(/^.+,/, "");
     if (currentState === 'image') {
       showImage(path)
-      saveToLocalStorage({type: 'image', content: path})
+      saveFile({type: 'image', content: path})
     }
   }
   reader.readAsDataURL(file);
@@ -198,7 +210,7 @@ function checkImage(element, file, name, state) {
 function checkHTML(type) {
   var preview = container.querySelector('iframe#preview')
   var span = container.querySelector('span')
-  let title = document.getElementById('title').value
+  let title = docTitle
   let ext = ''
   if (title.includes('.')) {
     ext = title.split('.')[1]
@@ -271,7 +283,7 @@ new ResizeObserver(outputsize).observe(textarea)
 
 checkHTML()
 
-function saveToLocalStorage(info) {
+function saveFile(info) {
   let value = tinymce.activeEditor.getContent({ format: 'text' });
   var type = 'text'
   if (!!info) {
@@ -284,7 +296,7 @@ function saveToLocalStorage(info) {
       }
     }
   }
-  let title = document.getElementById('title').value
+  let title = docTitle
   if (title === '' || !!title === false || title === null) return
 
   let author = localStorage.getItem('username')
@@ -314,11 +326,8 @@ function saveToLocalStorage(info) {
   localStorage.setItem('files', JSON.stringify(filesObj))
 }
 
-textarea.addEventListener('keypress', saveToLocalStorage)
-
-
 function getShareLink() {
-  let fileName = document.getElementById('title').value
+  let fileName = docTitle
   let fContent = tinymce.activeEditor.getContent({ format: 'text' });
   fContent = btoa(fContent)
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
@@ -326,145 +335,18 @@ function getShareLink() {
   prompt('This is the link to share!', fLink)
 }
 
-function editFile(fileName=false) {
-  if (!!fileName === false) {
-    fileName = urlParams.get('file')
-  }
-  let disabledEles = []
-
-  let titleEle = document.getElementById('title')
-  disabledEles.push(titleEle)  
-
-  let textAreaEle = document.querySelector('container textarea')
-  disabledEles.push(textAreaEle)
-
-  disabledEles.forEach(function(ele, i) {
-    ele.removeAttribute('disabled', '')  
-    ele.style.cursor = 'auto'
-  })
-
-  let removeEles = [
-    'enableHTML', 
-    'undo', 
-    'redo', 
-    'replacethis', 
-    'withthis', 
-    'replaceThis', 
-    'replaceAll', 
-]
-
-  removeEles.forEach(function(e, i) {
-    let element = document.querySelector(e)
-    if (!!element === false) {
-        element = document.getElementById(e)
-    }
-    if (!!element) {
-        element.parentNode.removeAttribute('hidden')
-    }
-  })
-}
-
 function upload() {
   document.querySelector(`input[type='file']#readfile`).click()
 }
 
 
-var functions = [
-  {
-    id: 'title', 
-    event: 'onkeyup', 
-    function: setTitle, 
-  }, 
-  {
-    id: 'editFile', 
-    event: 'onclick', 
-    function: editFile, 
-  }, 
-  {
-    id: 'upload', 
-    event: 'onclick', 
-    function: upload, 
-  }, 
-  {
-    id: 'download', 
-    event: 'onclick', 
-    function: download, 
-  }, 
-  {
-    id: 'delete',
-    event: 'onclick', 
-    function: deleteFile,  
-  }, 
-  {
-    id: 'makeLink', 
-    event: 'onclick', 
-    function: getShareLink, 
-  }, 
-  {
-    id: 'enableHTML', 
-    event: 'onclick', 
-    function: checkHTML, 
-  }, 
-  {
-    id: 'fs-input', 
-    event: 'onchange', 
-    function: fontSizeChange, 
-  }, 
-  {
-    id: 'fs-slider', 
-    event: 'onchange', 
-    function: fontSizeChange, 
-  }, 
-]
-
-function addEventListeners() {
-  functions.forEach(function(f, i) {
-    let isNeeds = false
-    addListener(f)
-  })
-}
-
-window.addEventListener('DOMContentLoaded', addEventListeners)
-addEventListeners()
-
-function addListener(f) {
-  let id = f.id
-  let event = f.event
-  let method = f.method
-  let func = f.function
-  if (!!event) {
-    if (!!event.startsWith('on') && !!method === false) method = 'none'
-  }
-  if (!!document.getElementById(id)) {
-    if (!!method) {
-      if (event.startsWith('on')) {
-        // document.getElementById(id).setAttribute(event, func)
-        document.getElementById(id)[event] = func
-      }
-      else if (method === 'attribute' || method === 'setAttribute') {
-        document.getElementById(id)[event] = func
-      }
-      else if (method === 'property' || method === 'elementProperty') {
-        document.getElementById(id)[event] = func
-      }
-      else {
-        document.getElementById(id).addEventListener(event, func)
-      }
-    }
-    else {
-      document.getElementById(id).addEventListener(event, func)
-    }
-  }
-}
-
 var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
 if (isUpload) {
-  addEventListener('DOMContentLoaded', function(e) { document.getElementById('upload').click() })
-  // upload()
+  window.addEventListener('DOMContentLoaded', upload)
 }
 
 function deleteFile(e) {
-  var fTitle = document.getElementById('title').value
+  var fTitle = docTitle
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
   let filesObj = localStorage.getItem('files')
@@ -493,31 +375,8 @@ function deleteFile(e) {
   location.href = '/'
 }
 
-fontSizeChange({target: {value: fsDefault}}, fsDefault)
-function fontSizeChange(e, size) {
-  var finput = document.getElementById('fs-input')
-  var slider = document.getElementById('fs-slider')
-
-  if (!!e) {
-    if (!!e.target) {
-      if (!!e.target.value) size = parseInt(e.target.value)
-    }
-  }
-
-  finput.value = size
-  slider.value = size
-
-  setFontSize(size)
-}
-
-function setFontSize(s) {
-  document.querySelector('.fs-unit').textContent = 'pt'
-  textarea.style.fontSize = `${s}${fsUnit}`
-}
-
-// save delete | upload download | print
 function addMenuItems(editor) {
-  menuItems.forEach(function(m, i) {
+  custMenuItems.forEach(function(m, i) {
     var mId = m.name.toLowerCase()
 
     if (mId.includes(' ')) {
@@ -535,6 +394,4 @@ function addMenuItems(editor) {
       onAction: () => m.func()
     });
   })
-
-
 }
