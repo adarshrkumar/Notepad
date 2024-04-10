@@ -53,7 +53,5 @@ else {
 
 function setContent(c) {
     if (c.includes('\n')) c = c.split('\n').join('<br>')
-    setTimeout(function() {
-        tinymce.activeEditor.setContent(c);
-    }, 10000)
+    document.querySelector('textarea').value = c;
 }
