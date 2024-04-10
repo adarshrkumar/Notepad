@@ -55,5 +55,5 @@ function setContent(c) {
     if (c.includes('\n')) c = c.split('\n').join('<br>')
     setTimeout(function() {
         tinymce.activeEditor.setContent(c);
-    }, 1000)
+    }, 10000)
 }
