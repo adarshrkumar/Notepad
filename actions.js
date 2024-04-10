@@ -54,7 +54,7 @@ function getContent() {
     let fContent = urlParams.get('content')
     if (fContent.includes(' ')) fContent = fContent.split(' ').join('+')
     fContent = atob(fContent)
-    return fileContent
+    return fContent
 }
 
 function setContent(c) {
