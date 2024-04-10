@@ -42,13 +42,19 @@ else if (action === 'openfile') {
 }
 else if (action === 'filelink') {
     let fName = urlParams.get('file')
-    let fContent = urlParams.get('content')
-    fContent = atob(fContent)
+    var fContent = getContent()
 
     setContent(fContent)
 }
 else {
     location.href = '/'
+}
+
+function getContent() {
+    let fContent = urlParams.get('content')
+    if (fContent.includes(' ')) fContent = fContent.split(' ').join('+')
+    fContent = atob(fContent)
+    return fileContent
 }
 
 function setContent(c) {
