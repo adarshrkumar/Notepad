@@ -44,9 +44,10 @@ else if (action === 'filelink') {
     let fContent = urlParams.get('content')
     fContent = atob(fContent)
 
-    let textAreaEle = document.querySelector('main textarea')
     if (fContent.includes('\n')) fContent = fContent.split('\n').join('<br>')
-    tinymce.activeEditor.setContent(fContent);
+    setTimeout(function() {
+        tinymce.activeEditor.setContent(fContent);
+    }, 1)
 }
 else {
     location.href = '/'
