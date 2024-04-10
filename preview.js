@@ -6,47 +6,43 @@ function getCode() {
 }
 
 var code = getCode()
-var lastCode = ''
 addCode()
 setInterval(addCode, 1)
 function addCode() {
   code = getCode()
   if (!!code) {
-    if (code !== lastCode) {
-       if (code.endsWith('<')) {
-         needsClose = '/>'
-       }
-       else if (code.endsWith('</')) {
-         needsClose = '>'
-       }
-       else {
-        needsClose = ''
-       }
-      let ELEMENTS = code.split('<')
-      let i = 0
-      ELEMENTS.forEach(e => {
-        if (!!e) {
-          if (e.includes(' ')) {
-            e = e.split(' ')[0]
-          }
-          else {
-            e = e.split('>')[0]
-          }
-          ELEMENTS[i] = e
-          if (code.endsWith(`</${e}`)) {
-            needsClose = '>'
-          }
-          else if (code.endsWith(`<${e}`)) {
-            needsClose = '>'
-          }
+    if (code.endsWith('<')) {
+      needsClose = '/>'
+    }
+    else if (code.endsWith('</')) {
+      needsClose = '>'
+    }
+    else {
+    needsClose = ''
+    }
+    let ELEMENTS = code.split('<')
+    let i = 0
+    ELEMENTS.forEach(e => {
+      if (!!e) {
+        if (e.includes(' ')) {
+          e = e.split(' ')[0]
         }
         else {
-          ELEMENTS[i] = ''
+          e = e.split('>')[0]
         }
-      })
-      document[parent.document.getElementById('eleVal').value].innerHTML = code + needsClose + bodyHTML
-      lastCode = code
-    }
+        ELEMENTS[i] = e
+        if (code.endsWith(`</${e}`)) {
+          needsClose = '>'
+        }
+        else if (code.endsWith(`<${e}`)) {
+          needsClose = '>'
+        }
+      }
+      else {
+        ELEMENTS[i] = ''
+      }
+    })
+    document[parent.document.getElementById('eleVal').value].innerHTML = code + needsClose + bodyHTML
   }
 }
 
