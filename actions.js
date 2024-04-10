@@ -47,7 +47,7 @@ else if (action === 'filelink') {
     if (fContent.includes('\n')) fContent = fContent.split('\n').join('<br>')
     setTimeout(function() {
         tinymce.activeEditor.setContent(fContent);
-    }, 100)
+    }, 1000)
 }
 else {
     location.href = '/'
