@@ -85,8 +85,13 @@ var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
 
-function rename() {
-  docTitle = prompt("Rename Document", docTitle)
+function rename(newName) {
+  if (newName) {
+    docTitle = newName
+  }
+  else {
+    docTitle = prompt("Rename Document", docTitle)
+  }
 }
 
 function download() {

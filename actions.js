@@ -26,7 +26,10 @@ else if (action === 'openfile') {
         fContent = 'File Content Not Found or Corrupted'
     }
 
-    document.getElementById('title').value = fName
+
+    setTimeout(function() {
+        rename(title)
+    }, 1000)
 
     var type = 'text'
     if (!!file.type) type = file.type
@@ -34,9 +37,7 @@ else if (action === 'openfile') {
         showImage(fContent)
     }
     else {
-        var text = fContent
-        if (text.includes('\n')) text = text.split('\n').join('<br>')
-        tinymce.activeEditor.setContent(text);
+        setContent(fContent)
     }
 }
 else if (action === 'filelink') {
@@ -44,11 +45,15 @@ else if (action === 'filelink') {
     let fContent = urlParams.get('content')
     fContent = atob(fContent)
 
-    if (fContent.includes('\n')) fContent = fContent.split('\n').join('<br>')
-    setTimeout(function() {
-        tinymce.activeEditor.setContent(fContent);
-    }, 1000)
+    setContent(fContent)
 }
 else {
     location.href = '/'
+}
+
+function setContent(c) {
+    if (c.includes('\n')) c = c.split('\n').join('<br>')
+    setTimeout(function() {
+        tinymce.activeEditor.setContent(c);
+    }, 1000)
 }
