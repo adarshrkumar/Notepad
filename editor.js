@@ -113,7 +113,7 @@ function download() {
 
   let link = document.querySelector('a#downloader');
   link.href = window.URL.createObjectURL(blob);
-  let docTitle = docTitle
+  let title = docTitle
   if (!!title === false) title = 'New Text File'
   link.download = `${title}.tnynpd`;
   if (!!title) {
