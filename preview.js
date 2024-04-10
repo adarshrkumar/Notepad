@@ -1,12 +1,16 @@
 var bodyHTML = document.body.innerHTML
   
-var code = (new URLSearchParams(location.search)).get('content')
-if (!!code) code = btoa(code)
+function getCode() {
+  (new URLSearchParams(location.search)).get('content')
+  if (!!code) code = btoa(code)
+}
+
+var code = getCode()
 var lastCode = ''
 addCode()
 setInterval(addCode, 1)
 function addCode() {
-  code = tinymce.activeEditor.getContent({ format: 'html' });
+  code = getCode()
   if (!!code) {
     if (code !== lastCode) {
        if (code.endsWith('<')) {
