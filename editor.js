@@ -162,7 +162,6 @@ readfile.onchange = object => {
     // here we tell the reader what to do when it's done reading...
     reader.onload = readerEvent => {
       var text = readerEvent.target.result
-      if (text.includes('\n')) text = text.split('\n').join('<br>')
       tinymce.activeEditor.setContent(text);
     }
   }
@@ -343,7 +342,7 @@ function getShareLink() {
 }
 
 function upload() {
-  document.querySelector(`input[type='file']#readfile`).click()
+  readfile.click()
 }
 
 
