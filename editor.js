@@ -135,9 +135,10 @@ readfile.onchange = object => {
   if (!file) return 
 
   let filename = file.name
+  var ext = filename.split('.').slice(-1).join('.')
   let title = ''
   if (filename.split('.').slice(-1) === 'txt') {
-    title = filename.split(`.${filename.split('.').slice(-1)}`)[0]
+    title = filename.split('.').slice(0, -1).join('.')
   }
   else {
     title = filename
@@ -152,6 +153,13 @@ readfile.onchange = object => {
     // here we tell the reader what to do when it's done reading...
     reader.onload = readerEvent => {
       var text = readerEvent.target.result
+
+      if (ext === 'txt') {
+        if (text.includes('\n')) {
+          text = text.split('\n').join('<br>')
+        }
+      }
+
       tinymce.activeEditor.setContent(text);
     }
   }
