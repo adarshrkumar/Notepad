@@ -32,6 +32,7 @@ var custMenuItems = [
 tinymce.init({
   selector: 'textarea', 
   resize: false, 
+  inline: true, 
   plugins: [
     'link', 'image', 'lists', 'anchor', 'media', 'table', 'emoticons',     
     'preview', 'pagebreak', 'fullscreen', 
