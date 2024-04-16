@@ -58,5 +58,6 @@ function getContent() {
 }
 
 function setContent(c) {
+    if (c.includes('\n')) c = c.split('\n').join('<br>')
     document.querySelector('textarea').value = c;
 }
