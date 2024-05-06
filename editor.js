@@ -72,7 +72,7 @@ var supptdImgExts = [
   ['xbm'], 
 ]
 
-var dtitle = document.title
+var docTitle = document.title
 var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
@@ -116,13 +116,13 @@ function download() {
 function setTitle() {
   let title = docTitle
   if (title.split('').length <= 0) {
-    document.title = dtitle
+    document.title = docTitle
   }
   else {
     if (docTitle.includes('.')) {
       ext = ''
     }
-    document.title = `${title} | ${dtitle}`
+    document.title = `${title} | ${docTitle}`
   }
   ext = title.split('.').slice(-1)
 }
@@ -165,10 +165,10 @@ readfile.onchange = object => {
   }
 
   if (title.split('').length <= 0) {
-    document.title = dtitle
+    document.title = docTitle
   }
   else {
-    document.title = `${title} | ${dtitle}`
+    document.title = `${title} | ${docTitle}`
   }
   docTitle = title
 }
