@@ -119,7 +119,7 @@ function setTitle() {
     document.title = dtitle
   }
   else {
-    if (ftitle.includes('.')) {
+    if (docTitle.includes('.')) {
       ext = ''
     }
     document.title = `${title} | ${dtitle}`
