@@ -307,8 +307,9 @@ if (isUpload) {
   window.addEventListener('DOMContentLoaded', upload)
 }
 
-function deleteFile(e) {
+function deleteFile() {
   var fTitle = docTitle
+  console.log(`\`docTitle\` = "${docTitle}"`)
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
   let filesObj = localStorage.getItem('files')
