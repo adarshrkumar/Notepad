@@ -312,18 +312,15 @@ function deleteFile(e) {
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
   let filesObj = localStorage.getItem('files')
-  filesObj = JSON.parse(filesObj)
   if (!!filesObj === false) {
     filesObj = []
   }
-  let hasFile = false
-  filesObj.forEach(function(f, i) {
-    if (f === fTitle) {
-      hasFile = true
-    }
-  })
-  if (hasFile) {
-    let index = filesObj.indexOf(fTitle)
+  else if (!filesObj.startsWith('[') || !filesObj.endsWith(']')) {
+    filesObj = [filesObj]
+  }
+  else filesObj = JSON.parse(filesObj)
+  let index = filesObj.indexOf(fTitle)
+  if (index <= 0) {
     filesObj.splice(index, 1)
   }
   localStorage.setItem('files', JSON.stringify(filesObj))
