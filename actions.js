@@ -14,10 +14,10 @@ else if (action === 'openfile') {
 
     var fName = String(file.title)
     if (fName.includes('.')) {
-        nFName = fName.split('.')
-        nFName = nFName.slice(-1)
-        if (nFName === 'txt') {
-            fName = fName.slice(-4)
+        var nFName = fName.split('.').slice(-1)
+        nFName = nFName
+        if (nFName === 'tnynpd') {
+            fName = fName.slice(-7)
         }
     }
 
@@ -28,7 +28,7 @@ else if (action === 'openfile') {
 
 
     setTimeout(function() {
-        rename(title)
+        rename(fName)
     }, 1000)
 
     var type = 'text'
