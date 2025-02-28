@@ -72,8 +72,9 @@ filesObj.forEach(function(fileName, i) {
 
 function deleteFile(i) {
   var e = filesEle.querySelectorAll('.grid-item')[i]
-
+  
   var fTitle = e.querySelector('.title').textContent  
+  alert(fTitle)
   localStorage.removeItem(`FILEDATA://${fTitle}`)
 
   let filesObj = localStorage.getItem('files')
