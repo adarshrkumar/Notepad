@@ -12,7 +12,55 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
-    <div id="container"></div>
+    <header class="toolbar">
+      <div style="display: none;">
+        <label for="title">
+          <b>Title: </b>
+        </label>
+      </div>
+      <div>
+        <input id="title" name="title" placeholder="Title">
+      </div>
+      <div hidden>
+        <button id="editFile" style="font-weight: bold;">Edit File</button>
+      </div>
+      <a>
+        <button id="upload">Upload</button>
+      </a>
+      <a>
+        <button id="download">Download</button>
+      </a>
+      <a>
+        <button id="delete">Delete</button>
+      </a>
+<!--      <div>
+        <button id="enableHTML">Enable HTML Preview</button>
+      </div>      -->
+      <div>
+        <button id="makeLink">Generate Link to File</button>
+      </div>
+      <!-- <div>
+        <span>Font Size:&nbsp;</span>
+        <input type="number" id="fs-input"><span class="fs-unit">pt</span>
+        <input type="range" id="fs-slider" min="0" max="100">
+      </div> -->
+    </header>
+    <input id="readfile" type="file" style="opacity: 0; width: 0; height: 0;" name="readfile" accept=".tnynpd, text/*,image/*,.md,html/*,.mht,.svg,.astro,.vue,.js/*,.jsxm,.jsm,.jsxm,ts/*,.ts,.tsx,.tsm,.tsxm,.scss,.sass,json/*,.bat,.cmd,.sh,.yml,.yaml,.🗿">
+    <main class="container">
+      <div id="container"></div>
+      <iframe id="preview" src="  "></iframe>
+      <img class="image-preview" src="null" alt="">
+    </main>
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        resize: false, 
+        content_style: '.toolbar { border-bottom: none; }', 
+      });
+    </script>
+    <a id="downloader"></a>
+    <input id="eleVal" hidden>
     <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
     <script src="codeEditor.js"></script>
     <script src="actions.js"></script>
