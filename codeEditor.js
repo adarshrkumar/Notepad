@@ -11,11 +11,19 @@ let proxy = URL.createObjectURL(new Blob([`
 require(["vs/editor/editor.main"], function () {
     let editor = monaco.editor.create(document.getElementById('container'), {
         value: [
-            'function x() {',
-            '    console.log("Hello world!");',
-            '}'
+            '<!DOCTYPE html>'
+            '<html lang="en">'
+            '    <head>'
+            '        <meta charset="UTF-8">
+            '        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            '        <title>Document</title>
+            '    </head>
+            '    <body>
+            '        '
+            '    </body>
+            '</html>`
         ].join('\n'),
-        language: 'javascript',
+        language: 'html',
         theme: 'vs-dark'
     });
 });
