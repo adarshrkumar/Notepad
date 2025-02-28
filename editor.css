@@ -36,6 +36,21 @@ body {
   flex-direction: column;
 }
 
+.toolbar {
+  /*  min-width: 150px; */
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  gap: 8px;
+  border-bottom: solid 1px gray;
+}
+  
+.toolbar > :is(div, a):not([hidden]) {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+  
 .container {
   flex: 1;
 
