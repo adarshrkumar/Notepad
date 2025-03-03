@@ -67,11 +67,11 @@ tinymce.init({
 function saveContent(info) {
   let value = tinymce.activeEditor.getContent({ format: 'text' });
   var type = 'text'
-  if (!!info) {
-    if (!!info.type) {
+  if (info) {
+    if (info.type) {
       type = info.type
       if (type === 'image') {
-        if (!!info.content) {
+        if (info.content) {
           value = info.content
         }
       }
