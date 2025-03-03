@@ -1,6 +1,49 @@
 require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
 window.MonacoEnvironment = { getWorkerUrl: () => proxy };
 
+var languages = {
+    html: {
+        hasTheme: false,
+        startingCode = 
+`<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+    </body>
+</html>`
+    }, 
+    css: {
+        hasTheme: false,
+    }, 
+    javascript: {
+        hasTheme: false,
+    }, 
+    json: {
+        hasTheme: false,
+    }, 
+    typescript: {
+        hasTheme: false,
+    }, 
+    python: {
+        hasTheme: true,
+    }, 
+    java: {
+        hasTheme: true,
+    },
+    markdown: {
+        hasTheme: true,
+    },
+}
+
+Object.keys(languages).forEach(language => {
+    monaco.languages.setMonarchTokensProvider(language, editorThemes[language]());
+})
+
 var editor
 
 function keyDown(event) {
@@ -17,22 +60,17 @@ let proxy = URL.createObjectURL(new Blob([`
     importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
 `], { type: 'text/javascript' }));
 
+var language = alert(`What language do you want to use? (acceptable values are "${Object.keys(languages).join(', ')}")`)
+if (!language || language == '' || !Object.keys(languages).includes(language)) {
+    alert('Error: Invalid language value entered, defaulting to "html"')
+    language = 'html'
+}
+
 require(["vs/editor/editor.main"], function () {
     editor = monaco.editor.create(document.getElementById('container'), {
-        value: tempCode ?? 
-`<!DOCTYPE html>
-<html lang="en">
-\t<head>
-\t\t<meta charset="UTF-8">
-\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">
-\t\t<title>Document</title>
-\t</head>
-\t<body>
-\t\t
-\t</body>
-</html>`,
-        language: 'html',
-        theme: 'vs-dark'
+        value: tempCode ?? languages[language].startingCode,
+        language: language,
+        theme: languages[language].hasTheme ? language : 'vs-dark'
     });
 
     editor.onKeyDown(keyDown);
