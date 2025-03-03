@@ -26,6 +26,10 @@ var custMenuItems = [
   {
     name: 'Share', 
     func: getShareLink, 
+  },
+  {
+    name: 'Open in Code Editor', 
+    func: openInEditor, 
   }
 ]
 
@@ -53,14 +57,14 @@ tinymce.init({
   setup: (editor) => {
     currentState = 'editor'
     editor.on('change', () => {
-      saveContent(editor)
+      saveContent()
     });
 
     addMenuItems(editor)
   }
 });
 
-function saveContent(editor) {
+function saveContent() {
   let value = tinymce.activeEditor.getContent({ format: 'text' });
   var type = 'text'
   if (!!info) {
@@ -73,7 +77,7 @@ function saveContent(editor) {
       }
     }
   }
-  saveFile(value);
+  return saveFile(value);
 }
 
 var supptdImgExts = [
@@ -290,6 +294,7 @@ function saveFile(value) {
     filesObj.push(title)
   }
   localStorage.setItem('files', JSON.stringify(filesObj))
+  return title
 }
 
 function getShareLink() {
@@ -299,6 +304,11 @@ function getShareLink() {
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
   let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
   prompt('This is the link to share!', fLink)
+}
+
+function openInEditor() {
+  var title = saveContent()
+  location.href = `/codeEditor?action=openfile&file=${title}`
 }
 
 function upload() {
