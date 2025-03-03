@@ -107,7 +107,7 @@ function rename(newName) {
 }
 
 function download() {
-  let input = tinymce.activeEditor.getContent({ format: 'html' });
+  let input = tinymce.activeEditor.getContent({ format: 'raw' });
 
   // create a new Blob object with the content you want to assign
   let blob = new Blob([input], {type: "text/plain"});
@@ -234,7 +234,7 @@ function previewHTML() {
     ext = title.split('.')[1]
   }
 
-  let value = tinymce.activeEditor.getContent({ format: 'html' });
+  let value = tinymce.activeEditor.getContent({ format: 'raw' });
   textarea = document.querySelector('textarea')
 
   let eleVal = 'documentElement'
@@ -299,7 +299,7 @@ function saveFile(value) {
 
 function getShareLink() {
   let fileName = docTitle
-  let fContent = tinymce.activeEditor.getContent({ format: 'html' });
+  let fContent = tinymce.activeEditor.getContent({ format: 'raw' });
   fContent = btoa(fContent)
   let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
   let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
