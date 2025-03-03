@@ -35,10 +35,10 @@ else if (action === 'openfile') {
     if (type === 'image') {
         showImage(fContent)
     }
-    if (type === 'code') {
-        setCode(fContent)
-    }
     else {
+        if (location.pathname === 'codeEditor.html') {
+            setCode(fContent)
+        }
         setContent(fContent)
     }
 }
