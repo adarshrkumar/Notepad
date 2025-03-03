@@ -1,6 +1,15 @@
 require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
 window.MonacoEnvironment = { getWorkerUrl: () => proxy };
 
+var editor
+
+function keyDown(event) {
+    if (event.code) {
+        var value = editor.getValue()
+        saveFile ? saveFile(value) : ''
+    }
+}
+
 let proxy = URL.createObjectURL(new Blob([`
     self.MonacoEnvironment = {
         baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
@@ -9,7 +18,7 @@ let proxy = URL.createObjectURL(new Blob([`
 `], { type: 'text/javascript' }));
 
 require(["vs/editor/editor.main"], function () {
-    let editor = monaco.editor.create(document.getElementById('container'), {
+    editor = monaco.editor.create(document.getElementById('container'), {
         value: tempCode ?? 
 `<!DOCTYPE html>
 <html lang="en">
@@ -25,4 +34,6 @@ require(["vs/editor/editor.main"], function () {
         language: 'html',
         theme: 'vs-dark'
     });
+
+    editor.onKeyDown(keyDown);
 });

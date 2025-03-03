@@ -9,7 +9,7 @@ var custMenuItems = [
   }, 
   {
     name: 'Save', 
-    func: saveFile, 
+    func: saveContent, 
   }, 
   {
     name: 'Delete', 
@@ -53,12 +53,28 @@ tinymce.init({
   setup: (editor) => {
     currentState = 'editor'
     editor.on('change', () => {
-      saveFile(editor);
+      saveContent(editor)
     });
 
     addMenuItems(editor)
   }
 });
+
+function saveContent(editor) {
+  let value = tinymce.activeEditor.getContent({ format: 'text' });
+  var type = 'text'
+  if (!!info) {
+    if (!!info.type) {
+      type = info.type
+      if (type === 'image') {
+        if (!!info.content) {
+          value = info.content
+        }
+      }
+    }
+  }
+  saveFile(value);
+}
 
 var supptdImgExts = [
   ['avif'], 
@@ -199,7 +215,7 @@ function checkImage(element, file, name, state) {
     var path = reader.result//.replace('data:', '').replace(/^.+,/, "");
     if (currentState === 'image') {
       showImage(path)
-      saveFile({type: 'image', content: path})
+      saveContent({type: 'image', content: path})
     }
   }
   reader.readAsDataURL(file);
@@ -245,19 +261,7 @@ outputsize()
  
 new ResizeObserver(outputsize).observe(textarea) 
 
-function saveFile(info) {
-  let value = tinymce.activeEditor.getContent({ format: 'text' });
-  var type = 'text'
-  if (!!info) {
-    if (!!info.type) {
-      type = info.type
-      if (type === 'image') {
-        if (!!info.content) {
-          value = info.content
-        }
-      }
-    }
-  }
+function saveFile(value) {
   let title = docTitle
   if (title === '' || !!title === false || title === null) return
 
