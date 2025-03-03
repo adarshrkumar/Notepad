@@ -39,7 +39,7 @@ else if (action === 'openfile') {
         if (location.pathname === '/codeEditor.html') {
             setCode(fContent)
         }
-        setContent(fContent)
+        else setContent(fContent)
     }
 }
 else if (action === 'filelink') {
