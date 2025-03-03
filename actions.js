@@ -1,6 +1,7 @@
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var action = urlParams.get('action')
+var tempCode = ''
 
 if (action === 'upload' || action === 'new') {
     
@@ -9,8 +10,6 @@ else if (action === 'openfile') {
     var fName = urlParams.get('file')
     var file = localStorage.getItem(`FILEDATA://${fName}`)
     file = JSON.parse(file)
-
-    let textarea = document.querySelector('main textarea')
 
     var fName = String(file.title)
     if (fName.includes('.')) {
@@ -36,6 +35,9 @@ else if (action === 'openfile') {
     if (type === 'image') {
         showImage(fContent)
     }
+    if (type === 'code') {
+        setCode(fContent)
+    }
     else {
         setContent(fContent)
     }
@@ -55,6 +57,10 @@ function getContent() {
     if (fContent.includes(' ')) fContent = fContent.split(' ').join('+')
     fContent = atob(fContent)
     return fContent
+}
+
+function setCode(c) {
+    tempCode = c
 }
 
 function setContent(c) {
