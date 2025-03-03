@@ -29,7 +29,7 @@ var custMenuItems = [
   },
   {
     name: 'Open in Code Editor', 
-    func: openInEditor, 
+    func: openInCodeEditor, 
   }
 ]
 
@@ -306,9 +306,9 @@ function getShareLink() {
   prompt('This is the link to share!', fLink)
 }
 
-function openInEditor() {
+function openInCodeEditor() {
   var title = saveContent()
-  location.href = `/codeEditor?action=openfile&file=${title}`
+  location.href = `/codeEditor.html?action=openfile&file=${title}`
 }
 
 function upload() {
