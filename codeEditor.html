@@ -11,6 +11,9 @@
     <link href="/tinymce.css" rel="stylesheet" type="text/css" />
     <script src="/editorThemes.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script>
+      javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+    </script>
   </head>
   <body>
     <header class="toolbar">
@@ -62,9 +65,6 @@
     </script>
     <a id="downloader"></a>
     <input id="eleVal" hidden>
-    <script>
-      javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
-    </script>
     <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
     <script src="actions.js"></script>
     <script src="codeEditor.js"></script>
