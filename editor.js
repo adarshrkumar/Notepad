@@ -1,4 +1,3 @@
-var previewWindow = null
 var currentState = null
 var docTitle = ''
 
@@ -21,7 +20,7 @@ var custMenuItems = [
   }, 
   {
     name: 'Download', 
-    func: download, 
+    func: downloadFile, 
   }, 
   {
     name: 'Share', 
@@ -48,7 +47,7 @@ tinymce.init({
   ], 
 
   menu: {
-    newFile: { title: 'File', items: 'rename save delete | upload download | share print' }
+    newFile: { title: 'File', items: 'rename save delete | upload download | share print "open in code editor"' }
   },
   menubar: 'newFile edit view insert format tools table help',
 
@@ -97,54 +96,10 @@ var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
 
-function rename(newName) {
-  if (newName) {
-    docTitle = newName
-  }
-  else {
-    docTitle = prompt("Rename Document", docTitle)
-  }
-}
-
-function download() {
+function downloadFile() {
   let input = tinymce.activeEditor.getContent({ format: 'raw' });
 
-  // create a new Blob object with the content you want to assign
-  let blob = new Blob([input], {type: "text/plain"});
-
-  // create a FileReader object
-  let reader = new FileReader();
-
-  // when the read operation is finished, this will be called
-  reader.onloadend = function() {
-    // the result attribute contains the contents of the file
-  }
-
-  // read the file as text
-  reader.readAsText(blob);
-
-  let link = document.querySelector('a#downloader');
-  link.href = window.URL.createObjectURL(blob);
-  let title = docTitle
-  if (!!title === false) title = 'New Text File'
-  link.download = `${title}.tnynpd`;
-  if (!!title) {
-    link.click();
-  }
-}
-
-function setTitle() {
-  let title = docTitle
-  if (title.split('').length <= 0) {
-    document.title = docTitle
-  }
-  else {
-    if (docTitle.includes('.')) {
-      ext = ''
-    }
-    document.title = `${title} | ${docTitle}`
-  }
-  ext = title.split('.').slice(-1)
+  download(input)
 }
 
 var readfile = document.querySelector("input[type='file']#readfile");
@@ -227,35 +182,6 @@ function checkImage(element, file, name, state) {
   return state
 }
 
-function previewHTML() {
-  let title = docTitle
-  let ext = ''
-  if (title.includes('.')) {
-    ext = title.split('.')[1]
-  }
-
-  let value = tinymce.activeEditor.getContent({ format: 'raw' });
-  textarea = document.querySelector('textarea')
-
-  let eleVal = 'documentElement'
-  if (value.includes('<html')) {
-    value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
-    if (value.includes('</html>')) {
-      value = value.split('</html>')[0]
-    }
-  }
-  else if (value.includes('<xml')) {
-    value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
-  }
-  else if (value.includes('<?xml')) {
-    value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
-  }
-  if (value.includes('<svg')) {
-    eleVal = 'body'
-  }
-  previewWindow = open(`/preview.html?eleval=${eleVal}&content=${btoa(value)}`)
-}
-
 function outputsize() {
   if (currentState !== 'image' && document.querySelector('textarea').clientWidth < 150) {
     textarea.style.width = `${150}px`
@@ -265,45 +191,9 @@ outputsize()
  
 new ResizeObserver(outputsize).observe(textarea) 
 
-function saveFile(value) {
-  let title = docTitle
-  if (title === '' || !!title === false || title === null) return
-
-  let author = localStorage.getItem('username')
-  if (!!author === false) author = ''
-  let d = new Date()
-  let json = {
-    title: title, 
-    content: value, 
-    author: author, 
-    dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
-  }
-  localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
-  let filesObj = localStorage.getItem('files')
-  filesObj = JSON.parse(filesObj)
-  if (!!filesObj === false) {
-    filesObj = []
-  }
-  let hasFile = false
-  filesObj.forEach(function(f, i) {
-    if (f === title) {
-      hasFile = true
-    }
-  })
-  if (hasFile === false) {
-    filesObj.push(title)
-  }
-  localStorage.setItem('files', JSON.stringify(filesObj))
-  return title
-}
-
-function getShareLink() {
-  let fileName = docTitle
+function getShareLinkTinyMCE() {
   let fContent = tinymce.activeEditor.getContent({ format: 'raw' });
-  fContent = btoa(fContent)
-  let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
-  let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
-  prompt('This is the link to share!', fLink)
+  getShareLink(fContent)
 }
 
 function openInCodeEditor() {
@@ -315,37 +205,9 @@ function upload() {
   readfile.click()
 }
 
-
 var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
 if (isUpload) {
   window.addEventListener('DOMContentLoaded', upload)
-}
-
-function deleteFile() {
-  var fTitle = docTitle
-  console.log(`\`docTitle\` = "${docTitle}"`)
-  localStorage.removeItem(`FILEDATA://${fTitle}`)
-
-  let filesObj = localStorage.getItem('files')
-  if (!!filesObj === false) {
-    filesObj = []
-  }
-  else if (!filesObj.startsWith('[') || !filesObj.endsWith(']')) {
-    filesObj = [filesObj]
-  }
-  else filesObj = JSON.parse(filesObj)
-  let index = filesObj.indexOf(fTitle)
-  if (index >= 0) {
-    filesObj.splice(index, 1)
-  }
-  localStorage.setItem('files', JSON.stringify(filesObj))
-
-  if (index < 0) {
-    location.href = `${location.pathname}?action=new`
-  }
-
-  history.back();
-  location.href = '/'
 }
 
 function addMenuItems(editor) {

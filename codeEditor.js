@@ -75,3 +75,34 @@ require(["vs/editor/editor.main"], function () {
 
     editor.onKeyDown(keyDown);
 });
+
+var previewWindow = null
+function previewHTML() {
+    let title = docTitle
+    let ext = ''
+    if (title.includes('.')) {
+        ext = title.split('.')[1]
+    }
+
+    let value = tinymce.activeEditor.getContent({ format: 'raw' });
+    textarea = document.querySelector('textarea')
+
+    let eleVal = 'documentElement'
+    if (value.includes('<html')) {
+        value = value.split(`<html${value.split('<html')[1].split('>')[0]}>\n`)[1]
+        if (value.includes('</html>')) {
+            value = value.split('</html>')[0]
+        }
+    }
+    else if (value.includes('<xml')) {
+        value = value.split(`<xml${value.split('<xml')[1].split('>')[0]}>\n`)[1]
+    }
+    else if (value.includes('<?xml')) {
+        value = value.split(`<?xml${value.split('<?xml')[1].split('>')[0]}>\n`)[1]
+    }
+    if (value.includes('<svg')) {
+        eleVal = 'body'
+    }
+    previewWindow = open(`/preview.html?eleval=${eleVal}&content=${btoa(value)}`)
+}
+

@@ -27,7 +27,7 @@ else if (action === 'openfile') {
 
 
     setTimeout(function() {
-        rename(fName)
+        rename ? rename(fName) : ''
     }, 1000)
 
     var type = 'text'
