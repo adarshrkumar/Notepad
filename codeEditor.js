@@ -62,6 +62,11 @@ Object.keys(languages).forEach(language => {
 
 var editor
 
+function getShareLinkCode() {
+    var value = editor.getValue()
+    getShareLink(value)
+}
+
 function keyDown(event) {
     if (event.code) {
         var value = editor.getValue()
