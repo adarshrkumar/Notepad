@@ -40,6 +40,22 @@ var languages = {
     },
 }
 
+var buttons = [
+    'download', 
+    'delete', 
+    {
+        name: 'makeLink',
+        func: 'getShareLinkCode'
+    }, 
+]
+
+buttons.forEach(b => {
+    if (typeof b === 'object') {
+        document.querySelector(`#${b.name}`).onclick = window[b.func]
+    }
+    else document.querySelector(`#${b}`).onclick = window[b]
+})
+
 Object.keys(languages).forEach(language => {
     monaco.languages.setMonarchTokensProvider(language, editorThemes[language]());
 })
