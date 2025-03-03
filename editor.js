@@ -64,7 +64,7 @@ tinymce.init({
   }
 });
 
-function saveContent() {
+function saveContent(info) {
   let value = tinymce.activeEditor.getContent({ format: 'text' });
   var type = 'text'
   if (!!info) {
