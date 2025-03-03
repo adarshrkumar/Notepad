@@ -36,7 +36,7 @@ else if (action === 'openfile') {
         showImage(fContent)
     }
     else {
-        if (location.pathname === 'codeEditor.html') {
+        if (location.pathname === '/codeEditor.html') {
             setCode(fContent)
         }
         setContent(fContent)
