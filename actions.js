@@ -1,7 +1,7 @@
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var action = urlParams.get('action')
-var tempCode = ''
+var codeObj = {}
 
 if (action === 'upload' || action === 'new') {
     
@@ -37,7 +37,7 @@ else if (action === 'openfile') {
     }
     else {
         if (location.pathname === '/codeEditor.html') {
-            setCode(fContent)
+            setCode(fContent, file.extension)
         }
         else setContent(fContent)
     }
@@ -59,11 +59,16 @@ function getContent() {
     return fContent
 }
 
-function setCode(c) {
-    tempCode = c
+function setCode(c, ext) {
+    codeObj = {
+        content: c,
+        ext: ext,
+    }
 }
 
 function setContent(c) {
-    if (c.includes('\n')) c = c.split('\n').join('<br>')
+    // if (c.includes('\n')) c = c.split('\n').join('<br>')
+    // Convert markdown to HTML using marked
+    c = marked.parse(c);
     document.querySelector('textarea').value = c;
 }

@@ -1,3 +1,5 @@
+var docTitle = document.title
+
 function rename(newName) {
     if (newName) {
           docTitle = newName
@@ -9,10 +11,14 @@ function rename(newName) {
 }
 
 function download() {
-    let input = tinymce.activeEditor.getContent({ format: 'raw' });
+    let input = tinymce.activeEditor.getContent({ format: 'html' });
+
+    var turndownService = new TurndownService()
+    var md = turndownService.turndown(input)
+
   
     // create a new Blob object with the content you want to assign
-    let blob = new Blob([input], {type: 'text/plain'});
+    let blob = new Blob([md], {type: 'text/plain'});
   
     // create a FileReader object
     let reader = new FileReader();
@@ -36,6 +42,7 @@ function download() {
 }  
   
 function setTitle() {
+    var ext
     let title = docTitle
     if (title.split('').length <= 0) {
         document.title = docTitle
@@ -53,11 +60,16 @@ function saveFile(value) {
     let title = docTitle
     if (title === '' || !!title === false || title === null) return
   
-    let author = localStorage.getItem('username')
+    var ext = title
+    if (ext.includes('.')) {
+      ext = ext.split('.').slice(-1)
+    }
+      let author = localStorage.getItem('username')
     if (!!author === false) author = ''
     let d = new Date()
     let json = {
       title: title, 
+      extension: ext,
       content: value, 
       author: author, 
       dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`

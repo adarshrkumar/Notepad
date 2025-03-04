@@ -4,9 +4,9 @@ var items = [
         event: 'onchange', 
 
     }, 
-    {
-        id: '', 
-    }, 
+    // {
+    //     id: '', 
+    // }, 
 ]
 
 items.forEach(function(item, i) {

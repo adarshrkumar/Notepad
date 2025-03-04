@@ -1,10 +1,22 @@
 require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
 window.MonacoEnvironment = { getWorkerUrl: () => proxy };
 
+var extentions = {
+    'html': 'html',
+    'css': 'css',
+    'js': 'javascript',
+    'json': 'json',
+    'ts': 'typescript',
+    'md': 'markdown',
+    'txt': 'text',
+    'py': 'python',
+    'java': 'java',
+    'c': 'c',
+}
+
 var languages = {
     html: {
-        hasTheme: false,
-        startingCode = 
+        startingCode: 
 `<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,10 +30,8 @@ var languages = {
 </html>`
     }, 
     css: {
-        hasTheme: false,
     }, 
     javascript: {
-        hasTheme: false,
     }, 
     json: {
         hasTheme: false,
@@ -37,6 +47,8 @@ var languages = {
     },
     markdown: {
         hasTheme: true,
+    },
+    text: {
     },
 }
 
@@ -54,10 +66,6 @@ buttons.forEach(b => {
         document.querySelector(`#${b.name}`).onclick = window[b.func]
     }
     else document.querySelector(`#${b}`).onclick = window[b]
-})
-
-Object.keys(languages).forEach(language => {
-    monaco.languages.setMonarchTokensProvider(language, editorThemes[language]());
 })
 
 var editor
@@ -81,19 +89,34 @@ let proxy = URL.createObjectURL(new Blob([`
     importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
 `], { type: 'text/javascript' }));
 
-var language = alert(`What language do you want to use? (acceptable values are "${Object.keys(languages).join(', ')}")`)
-if (!language || language == '' || !Object.keys(languages).includes(language)) {
-    alert('Error: Invalid language value entered, defaulting to "html"')
-    language = 'html'
+var ext = codeObj.ext
+
+var language
+if (!languages[ext]) {
+    language = prompt(`What language do you want to use? (acceptable values are "${Object.keys(languages).join(', ')}")`)
+    if (!language || language == '' || !Object.keys(languages).includes(language)) {
+        alert('Error: Invalid language value entered, defaulting to "html"')
+        language = 'html'
+    }
+}
+else {
+    language = languages[ext]
 }
 
 require(["vs/editor/editor.main"], function () {
     editor = monaco.editor.create(document.getElementById('container'), {
-        value: tempCode ?? languages[language].startingCode,
+        value: codeObj.content ?? languages[language].startingCode,
         language: language,
-        theme: languages[language].hasTheme ? language : 'vs-dark'
+        theme: !!editorThemes[language] ? language : 'vs-dark'
     });
 
+    
+    Object.keys(languages).forEach(l => {
+        if (!editorThemes[l]) return
+        monaco.languages.setMonarchTokensProvider(l, editorThemes[l]());
+    })
+    
+    
     editor.onKeyDown(keyDown);
 });
 
@@ -105,8 +128,7 @@ function previewHTML() {
         ext = title.split('.')[1]
     }
 
-    let value = tinymce.activeEditor.getContent({ format: 'raw' });
-    textarea = document.querySelector('textarea')
+    var value = editor.getValue()
 
     let eleVal = 'documentElement'
     if (value.includes('<html')) {

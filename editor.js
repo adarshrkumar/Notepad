@@ -1,5 +1,4 @@
 var currentState = null
-var docTitle = ''
 
 var custMenuItems = [
   {
@@ -27,7 +26,7 @@ var custMenuItems = [
     func: getShareLink, 
   },
   {
-    name: 'Open in Code Editor', 
+    name: 'CodeEditor', 
     func: openInCodeEditor, 
   }
 ]
@@ -47,7 +46,7 @@ tinymce.init({
   ], 
 
   menu: {
-    newFile: { title: 'File', items: 'rename save delete | upload download | share print "open in code editor"' }
+    newFile: { title: 'File', items: 'rename save delete | upload download | share print codeeditor' }
   },
   menubar: 'newFile edit view insert format tools table help',
 
@@ -64,7 +63,11 @@ tinymce.init({
 });
 
 function saveContent(info) {
-  let value = tinymce.activeEditor.getContent({ format: 'text' });
+  let value = tinymce.activeEditor.getContent({ format: 'html' });
+
+  var turndownService = new TurndownService()
+  var md = turndownService.turndown(value)
+
   var type = 'text'
   if (info) {
     if (info.type) {
@@ -76,7 +79,7 @@ function saveContent(info) {
       }
     }
   }
-  return saveFile(value);
+  return saveFile(md);
 }
 
 var supptdImgExts = [
@@ -91,15 +94,17 @@ var supptdImgExts = [
   ['xbm'], 
 ]
 
-var docTitle = document.title
 var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
 
 function downloadFile() {
-  let input = tinymce.activeEditor.getContent({ format: 'raw' });
+  let input = tinymce.activeEditor.getContent({ format: 'html' });
 
-  download(input)
+  var turndownService = new TurndownService()
+  var md = turndownService.turndown(input)
+
+  download(md)
 }
 
 var readfile = document.querySelector("input[type='file']#readfile");
@@ -192,8 +197,12 @@ outputsize()
 new ResizeObserver(outputsize).observe(textarea) 
 
 function getShareLinkTinyMCE() {
-  let fContent = tinymce.activeEditor.getContent({ format: 'raw' });
-  getShareLink(fContent)
+  let fContent = tinymce.activeEditor.getContent({ format: 'html' });
+
+  var turndownService = new TurndownService()
+  var md = turndownService.turndown(fContent)
+
+  getShareLink(md)
 }
 
 function openInCodeEditor() {

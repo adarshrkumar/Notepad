@@ -3,6 +3,10 @@
 * Includes image captions using the HTML5 figure element.
 */
 
+.tox-tinymce {
+    border: none !important;
+}
+
 figure.image {
     display: inline-block;
     border: 1px solid gray;

@@ -21,7 +21,7 @@ filesObj.forEach(function(fileName, i) {
 
   let fileElement = document.createElement('a')
   fileElement.classList.add('grid-item')
-  fileElement.href =  `editor?action=openfile&file=${title}`
+  fileElement.href =  `/editor.html?action=openfile&file=${title}`
   fileParent.appendChild(fileElement)
 
   let img = document.createElement('span')
