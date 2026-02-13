@@ -20,7 +20,7 @@ A web-based text and code editor with cloud storage and rich text editing capabi
 
 - `/` - Home page with file actions
 - `/editor.html` - Rich text editor (TinyMCE)
-- `/codeEditor.html` - Code editor with syntax highlighting
+- `/code-editor.html` - Code editor with syntax highlighting
 - `/open.html` - Browse and open existing files
 - `/preview.html` - Preview files
 - `/settings.html` - Editor settings
