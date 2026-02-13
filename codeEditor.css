@@ -1,3 +1,9 @@
+#readfile {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
 #container {
     /* position: absolute;
     left: 0;
