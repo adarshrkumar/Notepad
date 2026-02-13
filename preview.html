@@ -6,15 +6,12 @@
     </head>
     <body>
         <script>
-            addEventListener('DOMContentLoaded', log2Console)
-            function log2Console() {
-                console.log('To re-run the code just type "Run()" in the Eruda JavaScript console.')
-            }
+            addEventListener('DOMContentLoaded', () => console.log('To re-run the code just type "Run()" in the JavaScript console.'))
             function run() {
-                Run()
+                location.reload()
             }
             function Run() {
-                location.reload()
+                run()
             }
         </script>
         <script src="preview.js"></script>
