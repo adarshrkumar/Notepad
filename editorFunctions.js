@@ -2,7 +2,7 @@ var docTitle = document.title
 
 function rename(newName) {
     if (newName) {
-          docTitle = newName
+        docTitle = newName
     }
     else {
         docTitle = prompt('Rename Document', docTitle)
@@ -16,21 +16,20 @@ function download() {
     var turndownService = new TurndownService()
     var md = turndownService.turndown(input)
 
-  
     // create a new Blob object with the content you want to assign
     let blob = new Blob([md], {type: 'text/plain'});
-  
+
     // create a FileReader object
     let reader = new FileReader();
-  
+
     // when the read operation is finished, this will be called
     reader.onloadend = function() {
         // the result attribute contains the contents of the file
     }
-  
+
     // read the file as text
     reader.readAsText(blob);
-  
+
     let link = document.querySelector('a#downloader');
     link.href = window.URL.createObjectURL(blob);
     let title = docTitle
@@ -39,8 +38,8 @@ function download() {
     if (!!title) {
         link.click();
     }
-}  
-  
+}
+
 function setTitle() {
     var ext
     let title = docTitle
@@ -59,35 +58,35 @@ function setTitle() {
 function saveFile(value) {
     let title = docTitle
     if (title === '' || !!title === false || title === null) return
-  
+
     var ext = title
     if (ext.includes('.')) {
-      ext = ext.split('.').slice(-1)
+        ext = ext.split('.').slice(-1)
     }
-      let author = localStorage.getItem('username')
+    let author = localStorage.getItem('username')
     if (!!author === false) author = ''
     let d = new Date()
     let json = {
-      title: title, 
-      extension: ext,
-      content: value, 
-      author: author, 
-      dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
+        title: title,
+        extension: ext,
+        content: value,
+        author: author,
+        dateModofied: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
     }
     localStorage.setItem(`FILEDATA://${title}`, JSON.stringify(json))
     let filesObj = localStorage.getItem('files')
     filesObj = JSON.parse(filesObj)
     if (!!filesObj === false) {
-      filesObj = []
+        filesObj = []
     }
     let hasFile = false
     filesObj.forEach(function(f, i) {
-      if (f === title) {
-        hasFile = true
-      }
+        if (f === title) {
+            hasFile = true
+        }
     })
     if (hasFile === false) {
-      filesObj.push(title)
+        filesObj.push(title)
     }
     localStorage.setItem('files', JSON.stringify(filesObj))
     return title
@@ -105,7 +104,7 @@ function deleteFile() {
     var fTitle = docTitle
     console.log(`\`docTitle\` = "${docTitle}"`)
     localStorage.removeItem(`FILEDATA://${fTitle}`)
-  
+
     let filesObj = localStorage.getItem('files')
     if (!!filesObj === false) {
         filesObj = []
@@ -119,10 +118,10 @@ function deleteFile() {
         filesObj.splice(index, 1)
     }
     localStorage.setItem('files', JSON.stringify(filesObj))
-  
+
     if (index < 0) {
         location.href = `${location.pathname}?action=new`
     }
-  
+
     location.href = '/'
-}  
+}
