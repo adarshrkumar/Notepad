@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Notepad</title>
-    <link href="/main.css" rel="stylesheet" type="text/css" />
-    <link href="/editor.css" rel="stylesheet" type="text/css" />
-    <link href="/codeEditor.css" rel="stylesheet" type="text/css" />
-    <link href="/icons.css" rel="stylesheet" type="text/css" />
-    <link href="/tinymce.css" rel="stylesheet" type="text/css" />
-    <script src="/editorThemes.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  </head>
-  <body>
-    <header class="toolbar">
-      <!-- <div>
-        <label for="title">
-          <b>Title: </b>
-        </label>
-      </div> -->
-      <div>
-        <input id="title" name="title" placeholder="Title">
-      </div>
-      <a>
-        <button id="download">Download</button>
-      </a>
-      <a>
-        <button id="delete">Delete</button>
-      </a>
-<!--      <div>
-        <button id="enableHTML">Enable HTML Preview</button>
-      </div>      -->
-      <div>
-        <button id="makeLink">Generate Link to File</button>
-      </div>
-      <!-- <div>
-        <span>Font Size:&nbsp;</span>
-        <input type="number" id="fs-input"><span class="fs-unit">pt</span>
-        <input type="range" id="fs-slider" min="0" max="100">
-      </div> -->
-    </header>
-    <input id="readfile" type="file" name="readfile" title="File input" accept=".tnynpd, text/*,image/*,.md,html/*,.mht,.svg,.astro,.vue,.js/*,.jsxm,.jsm,.jsxm,ts/*,.ts,.tsx,.tsm,.tsxm,.scss,.sass,json/*,.bat,.cmd,.sh,.yml,.yaml,.🗿">
-    <main class="container">
-      <div id="container"></div>
-      <iframe id="preview" src="  " title="Code Result"></iframe>
-      <img class="image-preview" src="null" alt="">
-    </main>
-    <a id="downloader"></a>
-    <input id="eleVal" hidden>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
-    <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
-    <script src="editorFunctions.js"></script>
-    <script src="actions.js"></script>
-    <script src="codeEditor.js"></script>
-    <script src="sectionWidth.js"></script>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Notepad</title>
+        <link href="/main.css" rel="stylesheet" type="text/css" />
+        <link href="/editor.css" rel="stylesheet" type="text/css" />
+        <link href="/codeEditor.css" rel="stylesheet" type="text/css" />
+        <link href="/icons.css" rel="stylesheet" type="text/css" />
+        <link href="/tinymce.css" rel="stylesheet" type="text/css" />
+        <script src="/editorThemes.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+    <body>
+        <header class="toolbar">
+            <!-- <div>
+                <label for="title">
+                    <b>Title: </b>
+                </label>
+            </div> -->
+            <div>
+                <input id="title" name="title" placeholder="Title">
+            </div>
+            <a>
+                <button id="download">Download</button>
+            </a>
+            <a>
+                <button id="delete">Delete</button>
+            </a>
+<!--        <div>
+                <button id="enableHTML">Enable HTML Preview</button>
+            </div>      -->
+            <div>
+                <button id="makeLink">Generate Link to File</button>
+            </div>
+            <!-- <div>
+                <span>Font Size:&nbsp;</span>
+                <input type="number" id="fs-input"><span class="fs-unit">pt</span>
+                <input type="range" id="fs-slider" min="0" max="100">
+            </div> -->
+        </header>
+        <input id="readfile" type="file" name="readfile" title="File input" accept=".tnynpd, text/*,image/*,.md,html/*,.mht,.svg,.astro,.vue,.js/*,.jsxm,.jsm,.jsxm,ts/*,.ts,.tsx,.tsm,.tsxm,.scss,.sass,json/*,.bat,.cmd,.sh,.yml,.yaml,.🗿">
+        <main class="container">
+            <div id="container"></div>
+            <iframe id="preview" src="  " title="Code Result"></iframe>
+            <img class="image-preview" src="null" alt="">
+        </main>
+        <a id="downloader"></a>
+        <input id="eleVal" hidden>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+        <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
+        <script src="editorFunctions.js"></script>
+        <script src="actions.js"></script>
+        <script src="codeEditor.js"></script>
+        <script src="sectionWidth.js"></script>
+    </body>
 </html>
