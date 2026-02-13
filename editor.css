@@ -1,151 +1,158 @@
 /*  Custom Scrollbar  */
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
 /*  border-radius: 25px;  */
 }
- 
+
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+    background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #999; 
-  border-radius: 25px;
-  transition: background-color 0.5s ease;
+    background: #999;
+    border-radius: 25px;
+    transition: background-color 0.5s ease;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #bbb;
+    background-color: #bbb;
 }
 
 html, body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 body {
-  margin: 0;
-  height: 100%;
-  overflow-y: hidden;
-  display: flex;
-  flex-direction: column;
+    margin: 0;
+    height: 100%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#readfile {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .toolbar {
-  /*  min-width: 150px; */
-  display: flex;
-  flex-direction: row;
-  padding: 8px;
-  gap: 8px;
-  border-bottom: solid 1px gray;
+    /*  min-width: 150px; */
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    gap: 8px;
+    border-bottom: solid 1px gray;
 }
-  
+
 .toolbar > :is(div, a):not([hidden]) {
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
 }
-  
+
 .container {
-  flex: 1;
+    flex: 1;
 
-  display: grid;
-  grid-template-columns: var(--text-area, 1fr) [sidebar-start] var(--sidebar-area, 0) [sidebar-end];
-  align-items: center;
+    display: grid;
+    grid-template-columns: var(--text-area, 1fr) [sidebar-start] var(--sidebar-area, 0) [sidebar-end];
+    align-items: center;
 
-  overflow-y: hidden;
+    overflow-y: hidden;
 }
 
 .container textarea {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  &:not(.code) {
-    resize: none;
-  }
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    &:not(.code) {
+        resize: none;
+    }
 }
 
 .container textarea.code {
-  /* border-right: none; */
-  outline: none;
-  resize: horizontal;
+    /* border-right: none; */
+    outline: none;
+    resize: horizontal;
 }
 
 .container #preview {
-  height: 100%;
-  width: auto;
-  border: solid 0.5px gray;
-  border-left: none;
-  box-sizing: border-box;
-  grid-column: sidebar-area;
-  &:not([shown]) {
-    display: none;
-  }
-  &[shown] {
-    grid-column: sidebar;
-  }
+    height: 100%;
+    width: auto;
+    border: solid 0.5px gray;
+    border-left: none;
+    box-sizing: border-box;
+    grid-column: sidebar-area;
+    &:not([shown]) {
+        display: none;
+    }
+    &[shown] {
+        grid-column: sidebar;
+    }
 }
 
 .container:has(#preview[shown]) {
-  --text-area: 1fr;
-  --sidebar-area: 20%;
+    --text-area: 1fr;
+    --sidebar-area: 20%;
 }
 
 .image-preview {
-  max-height: 100%;
-  max-width: 100%;
-  grid-column: sidebar-area;
-  &:not([shown]) {
-    display: none;
-  }
-  &[shown] {
-    grid-column: sidebar;
-  }
+    max-height: 100%;
+    max-width: 100%;
+    grid-column: sidebar-area;
+    &:not([shown]) {
+        display: none;
+    }
+    &[shown] {
+        grid-column: sidebar;
+    }
 }
 
 .container:has(.image-preview[shown]) {
-  --text-area: 0;
-  --sidebar-area: 1fr;
-  display: flex;
-  flex-direction: column;
-  textarea {
-    display: none;
-    padding-inline: 0;
-    border: none;
-  }
-  .image-preview[shown] {
-    box-sizing: border-box;
-    border: solid 1px black;
-  }
+    --text-area: 0;
+    --sidebar-area: 1fr;
+    display: flex;
+    flex-direction: column;
+    textarea {
+        display: none;
+        padding-inline: 0;
+        border: none;
+    }
+    .image-preview[shown] {
+        box-sizing: border-box;
+        border: solid 1px black;
+    }
 }
 
 a#downloader {
-  display: none;
+    display: none;
 }
 
 #fs-input {
-  min-width: 2ch; width: fit-content;
+    min-width: 2ch;
+    width: fit-content;
 }
 
 [onclick] {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 [style*='display: none']:focus {
-  display: normal;
+    display: normal;
 }
 
 [hidden] {
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  & * {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
     pointer-events: none;
-  }
+    & * {
+        pointer-events: none;
+    }
 }
