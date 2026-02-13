@@ -207,7 +207,7 @@ function getShareLinkTinyMCE() {
 
 function openInCodeEditor() {
     var title = saveContent()
-    location.href = `/codeEditor.html?action=openfile&file=${title}`
+    location.href = `/code-editor.html?action=openfile&file=${title}`
 }
 
 function upload() {
