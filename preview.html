@@ -1,17 +1,22 @@
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Preview</title></html>
-<script>
-  addEventListener('DOMContentLoaded', log2Console)
-  function log2Console() {
-    console.log('To re-run the code just type "Run()" in the Eruda JavaScript console.')
-  }
-  function run() {
-    Run()
-  }
-  function Run() {
-    location.reload()
-  }
-</script>
-<script src="preview.js"></script>
-<script>
-  javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.documentElement.appendChild(script); script.onload = function () { eruda.init() } })();
-</script>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Preview</title>
+    </head>
+    <body>
+        <script>
+            addEventListener('DOMContentLoaded', log2Console)
+            function log2Console() {
+                console.log('To re-run the code just type "Run()" in the Eruda JavaScript console.')
+            }
+            function run() {
+                Run()
+            }
+            function Run() {
+                location.reload()
+            }
+        </script>
+        <script src="preview.js"></script>
+    </body>
+</html>
