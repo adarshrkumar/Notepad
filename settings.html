@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Settings | Notepad</title>
-    <link href="/main.css" rel="stylesheet" type="text/css" />
-    <link href="/settings.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <header></header>
-    <main class="sidebar-content">
-      <sidebar>
-        <nav class="settings">
-          <a href="#user">User Settings</a>
-          <a href="#editor">Editor Settings</a>
-        </nav>
-      </sidebar>
-      <content class="grid-row" class="content">
-        <section id="user" class="grid-area">
-          <div>
-            <label for="username">Your Name (used as author): </label>
-            <input type="text" id="username" name="username">
-          </div>
-        </section>
-        <section id="editor">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Settings | Notepad</title>
+        <link href="/main.css" rel="stylesheet" type="text/css" />
+        <link href="/settings.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <header></header>
+        <main class="sidebar-content">
+            <sidebar>
+                <nav class="settings">
+                    <a href="#user">User Settings</a>
+                    <a href="#editor">Editor Settings</a>
+                </nav>
+            </sidebar>
+            <content class="grid-row" class="content">
+                <section id="user" class="grid-area">
+                    <div>
+                        <label for="username">Your Name (used as author): </label>
+                        <input type="text" id="username" name="username">
+                    </div>
+                </section>
+                <section id="editor">
 
-        </section>
-      </content>
-      <sidebar></sidebar>
-    </main>
-    <footer></footer>
-    <script src="/settings.js"></script>
-    <script>
-      javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
-    </script>
-  </body>
+                </section>
+            </content>
+            <sidebar></sidebar>
+        </main>
+        <footer></footer>
+        <script src="/settings.js"></script>
+        <script>
+            javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+        </script>
+    </body>
 </html>
