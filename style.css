@@ -92,12 +92,13 @@
     width: fit-content;
 
     word-wrap: break-word;
-    text-wrap: balance;
     text-align: center;
 
     text-decoration: underline solid inherit;
 
-    @supports
+    @supports (text-wrap: balance) {
+        text-wrap: balance;
+    }
 }
 
 .option {
