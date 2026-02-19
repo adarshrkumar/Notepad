@@ -1,7 +1,7 @@
-/*
-* For rendering images inserted using the image plugin.
-* Includes image captions using the HTML5 figure element.
-*/
+/* 
+ * For rendering images inserted using the image plugin.
+ * Includes image captions using the HTML5 figure element.
+ */
 
 .tox-tinymce {
     border: none !important;

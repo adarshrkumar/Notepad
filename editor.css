@@ -1,9 +1,7 @@
 /*  Custom Scrollbar  */
-/* width */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-/*  border-radius: 25px;  */
 }
 
 /* Track */
@@ -43,7 +41,6 @@ body {
 }
 
 .toolbar {
-    /*  min-width: 150px; */
     display: flex;
     flex-direction: row;
     padding: 8px;
@@ -76,7 +73,6 @@ body {
     }
 
     textarea.code {
-        /* border-right: none; */
         outline: none;
         resize: horizontal;
     }
