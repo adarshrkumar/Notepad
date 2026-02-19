@@ -7,28 +7,30 @@
     border: none !important;
 }
 
-figure.image {
-    display: inline-block;
-    border: 1px solid gray;
-    margin: 0 2px 0 1px;
-    background: #f5f2f0;
-}
+figure {
+    &.image {
+        display: inline-block;
+        border: 1px solid gray;
+        margin: 0 2px 0 1px;
+        background: #f5f2f0;
 
-figure.align-left {
-    float: left;
-}
+        img {
+            margin: 8px 8px 0 8px;
+        }
 
-figure.align-right {
-    float: right;
-}
+        figcaption {
+            margin: 6px 8px 6px 8px;
+            text-align: center;
+        }
+    }
 
-figure.image img {
-    margin: 8px 8px 0 8px;
-}
+    &.align-left {
+        float: left;
+    }
 
-figure.image figcaption {
-    margin: 6px 8px 6px 8px;
-    text-align: center;
+    &.align-right {
+        float: right;
+    }
 }
 
 /*
@@ -36,12 +38,14 @@ figure.image figcaption {
     check out the "formats" option
 */
 
-img.align-left {
-    float: left;
-}
+img {
+    &.align-left {
+        float: left;
+    }
 
-img.align-right {
-    float: right;
+    &.align-right {
+        float: right;
+    }
 }
 
 /*
@@ -52,34 +56,38 @@ img.align-right {
 
 .mce-toc {
     border: 1px solid gray;
-}
 
-.mce-toc h2 {
-    margin: 4px;
-}
+    h2 {
+        margin: 4px;
+    }
 
-.mce-toc li {
-    list-style-type: none;
+    li {
+        list-style-type: none;
+    }
 }
 
 /* The Checklist Plugin */
 
-.tox-checklist > li:not(.tox-checklist--hidden) {
-    list-style: none;
-    margin: 0.25em 0;
-    position: relative;
-}
-.tox-checklist > li:not(.tox-checklist--hidden)::before {
-    content: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-unchecked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2215%22%20height%3D%2215%22%20x%3D%22.5%22%20y%3D%22.5%22%20fill-rule%3D%22nonzero%22%20stroke%3D%22%234C4C4C%22%20rx%3D%222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A');
-    cursor: pointer;
-    height: 1em;
-    margin-left: -1.5em;
-    margin-top: 0.125em;
-    position: absolute;
-    width: 1em;
-}
-.tox-checklist li:not(.tox-checklist--hidden).tox-checklist--checked::before {
-    content: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-checked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234099FF%22%20fill-rule%3D%22nonzero%22%20rx%3D%222%22%2F%3E%3Cpath%20id%3D%22Path%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22nonzero%22%20d%3D%22M11.5703186%2C3.14417309%20C11.8516238%2C2.73724603%2012.4164781%2C2.62829933%2012.83558%2C2.89774797%20C13.260121%2C3.17069355%2013.3759736%2C3.72932262%2013.0909105%2C4.14168582%20L7.7580587%2C11.8560195%20C7.43776896%2C12.3193404%206.76483983%2C12.3852142%206.35607322%2C11.9948725%20L3.02491697%2C8.8138662%20C2.66090143%2C8.46625845%202.65798871%2C7.89594698%203.01850234%2C7.54483354%20C3.373942%2C7.19866177%203.94940006%2C7.19592841%204.30829608%2C7.5386474%20L6.85276923%2C9.9684299%20L11.5703186%2C3.14417309%20Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A');
+.tox-checklist {
+    > li:not(.tox-checklist--hidden) {
+        list-style: none;
+        margin: 0.25em 0;
+        position: relative;
+
+        &::before {
+            content: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-unchecked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2215%22%20height%3D%2215%22%20x%3D%22.5%22%20y%3D%22.5%22%20fill-rule%3D%22nonzero%22%20stroke%3D%22%234C4C4C%22%20rx%3D%222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A');
+            cursor: pointer;
+            height: 1em;
+            margin-left: -1.5em;
+            margin-top: 0.125em;
+            position: absolute;
+            width: 1em;
+        }
+    }
+
+    li:not(.tox-checklist--hidden).tox-checklist--checked::before {
+        content: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-checked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234099FF%22%20fill-rule%3D%22nonzero%22%20rx%3D%222%22%2F%3E%3Cpath%20id%3D%22Path%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22nonzero%22%20d%3D%22M11.5703186%2C3.14417309%20C11.8516238%2C2.73724603%2012.4164781%2C2.62829933%2012.83558%2C2.89774797%20C13.260121%2C3.17069355%2013.3759736%2C3.72932262%2013.0909105%2C4.14168582%20L7.7580587%2C11.8560195%20C7.43776896%2C12.3193404%206.76483983%2C12.3852142%206.35607322%2C11.9948725%20L3.02491697%2C8.8138662%20C2.66090143%2C8.46625845%202.65798871%2C7.89594698%203.01850234%2C7.54483354%20C3.373942%2C7.19866177%203.94940006%2C7.19592841%204.30829608%2C7.5386474%20L6.85276923%2C9.9684299%20L11.5703186%2C3.14417309%20Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A');
+    }
 }
 
 /* The Page Embed plugin */
@@ -93,6 +101,15 @@ img.align-right {
     padding: 0;
     position: relative;
     width: 100%;
+
+    iframe {
+        border: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
 }
 
 .tiny-pageembed--21by9 {
@@ -111,18 +128,6 @@ img.align-right {
     padding-top: 100%;
 }
 
-.tiny-pageembed--21by9 iframe,
-.tiny-pageembed--16by9 iframe,
-.tiny-pageembed--4by3 iframe,
-.tiny-pageembed--1by1 iframe {
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
 /* The Media Embed plugin */
 
 .ephox-summary-card {
@@ -131,15 +136,15 @@ img.align-right {
     padding: 10px;
     overflow: hidden;
     margin-bottom: 1em;
-}
 
-.ephox-summary-card a {
-    text-decoration: none;
-    color: inherit;
-}
+    a {
+        text-decoration: none;
+        color: inherit;
 
-.ephox-summary-card a:visited {
-    color: inherit;
+        &:visited {
+            color: inherit;
+        }
+    }
 }
 
 .ephox-summary-card-title {
@@ -173,26 +178,32 @@ img.align-right {
 
 /* The Footnotes plugin */
 
-div.mce-footnotes hr {
-    margin-inline-end: auto;
-    margin-inline-start: 0;
-    width: 25%;
-}
+div.mce-footnotes {
+    hr {
+        margin-inline-end: auto;
+        margin-inline-start: 0;
+        width: 25%;
+    }
 
-div.mce-footnotes li > a.mce-footnotes-backlink {
-    text-decoration: none;
+    li > a.mce-footnotes-backlink {
+        text-decoration: none;
+    }
 }
 
 @media print {
-    sup.mce-footnote a {
-        color: black;
-        text-decoration: none;
+    sup.mce-footnote {
+        a {
+            color: black;
+            text-decoration: none;
+        }
     }
+
     div.mce-footnotes {
         break-inside: avoid;
         width: 100%;
-    }
-    div.mce-footnotes li > a.mce-footnotes-backlink {
-        display: none;
+
+        li > a.mce-footnotes-backlink {
+            display: none;
+        }
     }
 }

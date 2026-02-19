@@ -42,6 +42,24 @@ body {
     &:hover, &:focus-within {
         --rad: calc(var(--grid-gap)/2.5);
     }
+
+    .options {
+        --mar: 0.5rem;
+        position: absolute;
+        top: var(--mar);
+        right: var(--mar);
+
+        /* margin: var(--mar); */
+        height: 1.5rem;
+
+        display: flex;
+        gap: var(--mar);
+
+        .option {
+            aspect-ratio: 1;
+            border-radius: calc(var(--rad)/var(--mar));
+        }
+    }
 }
 
 .grid-item {
@@ -58,35 +76,32 @@ body {
 
     overflow: hidden;
     transition: inherit;
-}
 
-.grid-parent .options {
-    --mar: 0.5rem;
-    position: absolute;
-    top: var(--mar);
-    right: var(--mar);
-    
-    /* margin: var(--mar); */
-    height: 1.5rem;
+    :is(img, .img) {
+        width: 64px;
+        aspect-ratio: 1;
+    }
 
-    display: flex;
-    gap:var(--mar);
-}
+    .img {
+        font-size: 3.45lh;
+        color: initial;
+    }
 
-.grid-parent .options .option {
-    aspect-ratio: 1;
-    border-radius: calc(var(--rad)/var(--mar));
-}
+    .title {
+        margin-inline: auto;
+        margin-block: 0;
 
+        width: fit-content;
 
-.grid-item :is(img, .img) {
-    width: 64px;
-    aspect-ratio: 1;
-}
+        word-wrap: break-word;
+        text-align: center;
 
-.grid-item .img {
-    font-size: 3.45lh;
-    color: initial;
+        text-decoration: underline solid inherit;
+
+        @supports (text-wrap: balance) {
+            text-wrap: balance;
+        }
+    }
 }
 
 .title-parent {
@@ -95,22 +110,6 @@ body {
 
     display: grid;
     place-items: center;
-}
-
-.grid-item .title {
-    margin-inline: auto;
-    margin-block: 0;
-
-    width: fit-content;
-
-    word-wrap: break-word;
-    text-align: center;
-
-    text-decoration: underline solid inherit;
-
-    @supports (text-wrap: balance) {
-        text-wrap: balance;
-    }
 }
 
 .option {
