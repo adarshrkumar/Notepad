@@ -10,32 +10,39 @@ function rename(newName) {
     setTitle()
 }
 
-function download() {
-    let input = tinymce.activeEditor.getContent({ format: 'html' });
+function downloadFile(ext = 'tnynpd') {
+    let content;
 
-    var turndownService = new TurndownService()
-    var md = turndownService.turndown(input)
-
-    // create a new Blob object with the content you want to assign
-    let blob = new Blob([md], {type: 'text/plain'});
-
-    // create a FileReader object
-    let reader = new FileReader();
-
-    // when the read operation is finished, this will be called
-    reader.onloadend = function() {
-        // the result attribute contains the contents of the file
+    if (ext === 'tnynpd') {
+        let input = tinymce.activeEditor.getContent({ format: 'html' });
+        let turndownService = new TurndownService();
+        content = turndownService.turndown(input);
+    }
+    else if (ext === 'html') {
+        content = tinymce.activeEditor.getContent({ format: 'html' });
+    }
+    else if (ext === 'md') {
+        let html = tinymce.activeEditor.getContent({ format: 'html' });
+        let turndownService = new TurndownService();
+        content = turndownService.turndown(html);
+    }
+    else if (ext === 'txt') {
+        let html = tinymce.activeEditor.getContent({ format: 'html' });
+        let div = document.createElement('div');
+        div.innerHTML = html;
+        content = div.textContent || div.innerText || '';
     }
 
-    // read the file as text
+    let blob = new Blob([content], {type: 'text/plain'});
+    let reader = new FileReader();
     reader.readAsText(blob);
 
     let link = document.querySelector('a#downloader');
     link.href = window.URL.createObjectURL(blob);
-    let title = docTitle
-    if (!!title === false) title = 'New Text File'
-    link.download = `${title}.tnynpd`;
-    if (!!title) {
+    let title = docTitle;
+    if (!title) title = 'New Text File';
+    link.download = `${title}.${ext}`;
+    if (title) {
         link.click();
     }
 }
@@ -98,6 +105,19 @@ function getShareLink(fContent) {
     let lHostPathName = `${location.host}/${location.pathname}`.replace('//', '/')
     let fLink = `${location.protocol}//${lHostPathName}?action=filelink&file=${fileName}&content=${fContent}`
     prompt('This is the link to share!', fLink)
+}
+
+function exportFile() {
+    let format = prompt('Export as:\nhtml\nmd\ntxt', 'md');
+    if (!format) return;
+
+    format = format.toLowerCase().trim();
+    if (!['html', 'md', 'txt'].includes(format)) {
+        alert('Invalid format. Choose: html, md, or txt');
+        return;
+    }
+
+    downloadFile(format);
 }
 
 function deleteFile() {

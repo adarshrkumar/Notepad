@@ -14,12 +14,16 @@ var custMenuItems = [
         func: deleteFile,
     },
     {
-        name: 'Upload',
+        name: 'Import',
         func: upload,
     },
     {
-        name: 'Download',
+        name: 'Backup',
         func: downloadFile,
+    },
+    {
+        name: 'Export',
+        func: exportFile,
     },
     {
         name: 'Share',
@@ -46,7 +50,7 @@ tinymce.init({
     ],
 
     menu: {
-        newFile: { title: 'File', items: 'rename save delete | upload download | share print codeeditor' }
+        newFile: { title: 'File', items: 'rename save delete | import backup export | share print codeeditor' }
     },
     menubar: 'newFile edit view insert format tools table help',
 
