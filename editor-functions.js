@@ -10,13 +10,20 @@ function rename(newName) {
     setTitle()
 }
 
-function downloadFile(ext = 'tnynpd') {
+function exportBackup(ext = 'tnynpd') {
     let content;
 
     if (ext === 'tnynpd') {
         let input = tinymce.activeEditor.getContent({ format: 'html' });
         let turndownService = new TurndownService();
-        content = turndownService.turndown(input);
+        let markdown = turndownService.turndown(input);
+
+        let author = localStorage.getItem('username') || '';
+        let d = new Date();
+        let dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+        let frontmatter = `---\ntitle: ${docTitle}\nauthor: ${author}\ndate: ${dateStr}\n---\n\n`;
+        content = frontmatter + markdown;
     }
     else if (ext === 'html') {
         content = tinymce.activeEditor.getContent({ format: 'html' });
@@ -107,6 +114,23 @@ function getShareLink(fContent) {
     prompt('This is the link to share!', fLink)
 }
 
+function importFile(ext) {
+    let readfile = document.querySelector("input[type='file']#readfile");
+    if (ext) {
+        readfile.accept = `.${ext}`;
+        readfile.dataset.expectedExt = ext;
+    }
+    else {
+        readfile.accept = '';
+        readfile.dataset.expectedExt = '';
+    }
+    readfile.click();
+}
+
+function importBackup() {
+    importFile('tnynpd');
+}
+
 function exportFile() {
     let format = prompt('Export as:\nhtml\nmd\ntxt', 'md');
     if (!format) return;
@@ -117,7 +141,7 @@ function exportFile() {
         return;
     }
 
-    downloadFile(format);
+    exportBackup(format);
 }
 
 function deleteFile() {

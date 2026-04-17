@@ -15,11 +15,15 @@ var custMenuItems = [
     },
     {
         name: 'Import',
-        func: upload,
+        func: importFile,
     },
     {
-        name: 'Backup',
-        func: downloadFile,
+        name: 'Import Backup',
+        func: importBackup,
+    },
+    {
+        name: 'Export Backup',
+        func: exportBackup,
     },
     {
         name: 'Export',
@@ -50,7 +54,7 @@ tinymce.init({
     ],
 
     menu: {
-        newFile: { title: 'File', items: 'rename save delete | import backup export | share print codeeditor' }
+        newFile: { title: 'File', items: 'rename save delete | import importBackup exportBackup export | share print codeeditor' }
     },
     menubar: 'newFile edit view insert format tools table help',
 
@@ -102,14 +106,6 @@ var theAlert = false
 var container = document.querySelector('.container')
 var textarea = container.querySelector('textarea')
 
-function downloadFile() {
-    let input = tinymce.activeEditor.getContent({ format: 'html' });
-
-    var turndownService = new TurndownService()
-    var md = turndownService.turndown(input)
-
-    download(md)
-}
 
 var readfile = document.querySelector("input[type='file']#readfile");
 
@@ -120,6 +116,7 @@ readfile.onchange = object => {
 
     let filename = file.name
     var ext = filename.split('.').slice(-1).join('.')
+    let expectedExt = readfile.dataset.expectedExt || ext;
     let title = ''
     if (filename.split('.').slice(-1) === 'txt') {
         title = filename.split('.').slice(0, -1).join('.')
@@ -138,13 +135,49 @@ readfile.onchange = object => {
         reader.onload = readerEvent => {
             var text = readerEvent.target.result
 
-            if (ext === 'txt') {
+            if (expectedExt === 'html') {
+                tinymce.activeEditor.setContent(text);
+            }
+            else if (expectedExt === 'tnynpd') {
+                let contentText = text;
+                if (text.startsWith('---')) {
+                    let endIdx = text.indexOf('---', 3);
+                    if (endIdx !== -1) {
+                        let frontmatter = text.substring(3, endIdx).trim();
+                        contentText = text.substring(endIdx + 3).trim();
+
+                        let lines = frontmatter.split('\n');
+                        lines.forEach(line => {
+                            if (line.startsWith('title:')) {
+                                docTitle = line.replace('title:', '').trim();
+                            }
+                            if (line.startsWith('author:')) {
+                                let author = line.replace('author:', '').trim();
+                                if (author) localStorage.setItem('username', author);
+                            }
+                        });
+                    }
+                }
+
+                if (contentText.includes('\n')) {
+                    contentText = contentText.split('\n').join('<br>')
+                }
+                tinymce.activeEditor.setContent(contentText);
+            }
+            else if (expectedExt === 'md') {
+                let turndownService = new TurndownService();
+                let html = turndownService.turndown(text);
+                tinymce.activeEditor.setContent(html);
+            }
+            else if (expectedExt === 'txt') {
                 if (text.includes('\n')) {
                     text = text.split('\n').join('<br>')
                 }
+                tinymce.activeEditor.setContent(text);
             }
-
-            tinymce.activeEditor.setContent(text);
+            else {
+                tinymce.activeEditor.setContent(text);
+            }
         }
     }
 
@@ -214,9 +247,6 @@ function openInCodeEditor() {
     location.href = `/code-editor.html?action=openfile&file=${title}`
 }
 
-function upload() {
-    readfile.click()
-}
 
 var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
 if (isUpload) {
