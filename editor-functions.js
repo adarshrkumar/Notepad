@@ -147,7 +147,8 @@ function exportFile() {
 
     if (originalExt && originalExt !== APP_BACKUP_FILE_EXT) {
         exportBackup(originalExt);
-    } else {
+    }
+    else {
         const formats = ['html', 'md', 'txt'];
         let format = prompt(`Export as:\n${formats.join('\n')}`, 'md');
         if (!format) return;
