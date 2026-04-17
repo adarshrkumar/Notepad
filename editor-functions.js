@@ -1,3 +1,4 @@
+const APP_BACKUP_FILE_EXT = 'tnynpd';
 var docTitle = document.title
 
 function rename(newName) {
@@ -10,10 +11,10 @@ function rename(newName) {
     setTitle()
 }
 
-function exportBackup(ext = 'tnynpd') {
+function exportBackup(ext = APP_BACKUP_FILE_EXT) {
     let content;
 
-    if (ext === 'tnynpd') {
+    if (ext === APP_BACKUP_FILE_EXT) {
         let input = tinymce.activeEditor.getContent({ format: 'html' });
         let turndownService = new TurndownService();
         let markdown = turndownService.turndown(input);
@@ -128,21 +129,37 @@ function importFile(ext) {
 }
 
 function importBackup() {
-    importFile('tnynpd');
+    importFile(APP_BACKUP_FILE_EXT);
 }
 
 function exportFile() {
-    const formats = ['html', 'md', 'txt'];
-    let format = prompt(`Export as:\n${formats.join('\n')}`, 'md');
-    if (!format) return;
+    let fileData = localStorage.getItem(`FILEDATA://${docTitle}`);
+    let originalExt = null;
 
-    format = format.toLowerCase().trim();
-    if (!formats.includes(format)) {
-        alert(`Invalid format. Choose: ${formats.slice(0, -1).join(', ')}, or ${formats.slice(-1)}`);
-        return;
+    if (fileData) {
+        try {
+            let json = JSON.parse(fileData);
+            originalExt = json.extension;
+        } catch (e) {
+            // Failed to parse, continue without extension
+        }
     }
 
-    exportBackup(format);
+    if (originalExt && originalExt !== APP_BACKUP_FILE_EXT) {
+        exportBackup(originalExt);
+    } else {
+        const formats = ['html', 'md', 'txt'];
+        let format = prompt(`Export as:\n${formats.join('\n')}`, 'md');
+        if (!format) return;
+
+        format = format.toLowerCase().trim();
+        if (!formats.includes(format)) {
+            alert(`Invalid format. Choose: ${formats.slice(0, -1).join(', ')}, or ${formats.slice(-1)}`);
+            return;
+        }
+
+        exportBackup(format);
+    }
 }
 
 function deleteFile() {
