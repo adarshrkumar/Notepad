@@ -132,12 +132,13 @@ function importBackup() {
 }
 
 function exportFile() {
-    let format = prompt('Export as:\nhtml\nmd\ntxt', 'md');
+    const formats = ['html', 'md', 'txt'];
+    let format = prompt(`Export as:\n${formats.join('\n')}`, 'md');
     if (!format) return;
 
     format = format.toLowerCase().trim();
-    if (!['html', 'md', 'txt'].includes(format)) {
-        alert('Invalid format. Choose: html, md, or txt');
+    if (!formats.includes(format)) {
+        alert(`Invalid format. Choose: ${formats.slice(0, -1).join(', ')}, or ${formats.slice(-1)}`);
         return;
     }
 
