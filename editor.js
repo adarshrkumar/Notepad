@@ -248,8 +248,7 @@ function openInCodeEditor() {
 }
 
 
-var isUpload = (new URLSearchParams(location.search)).get('action') === 'upload'
-if (isUpload) {
+if ((new URLSearchParams(location.search)).get('action') === 'upload') {
     window.addEventListener('DOMContentLoaded', upload)
 }
 
